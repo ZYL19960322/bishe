@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>2019@ZYL.BS</title>
+	<meta charset="utf-8"/>
+	<meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1"/>
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+	<link rel="stylesheet" href="admin/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="admin/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="admin/css/styles.css"/>
+	<link rel="stylesheet" href="admin/css/styles-responsive.css"/>
+	<link rel="stylesheet" href="admin/css/plugins.css"/>
+	<link rel="stylesheet" href="admin/css/perfect-scrollbar.css"/>
+	<link rel="stylesheet" href="admin/css/theme-default.css" type="text/css" id="skin_color"/>
+	<link rel="stylesheet" href="admin/css/print.css" type="text/css" media="print"/>
+	<link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<body>
+<!-- start: SLIDING BAR (SB) -->
+<div class="main-wrapper">
+	<!-- start: TOPBAR -->
+	<header class="topbar navbar navbar-inverse navbar-fixed-top inner">
+		<!-- start: TOPBAR CONTAINER -->
+		<div class="container">
+			<div class="navbar-header">
+				<a class="sb-toggle-left hidden-md hidden-lg" href="#main-navbar">
+					<i class="fa fa-bars"></i>
+				</a>
+				<!-- start: LOGO -->
+				<a class="navbar-brand" href="index.html">
+					<img src="admin/images/logo.png" alt="Rapido"/>
+				</a>
+				<!-- end: LOGO -->
+			</div>
+		</div>
+		<!-- end: TOPBAR CONTAINER -->
+	</header>
+	<div class="main-container inner">
+		<!-- start: PAGE -->
+		<div class="main-content">
+			<div class="container" style="position: relative">
+				<nav id="pageslide-left" class="pageslide inner">
+					<div class="navbar-content" style="height: 790px">
+						<!-- start: SIDEBAR -->
+						<div class="main-navigation left-wrapper transition-left">
+							<div class="user-profile border-top padding-horizontal-10 block">
+								<div class="inline-block">
+									<img src="admin/images/avatar-1.jpg" style="width: 50px;height: 50px"/>
+								</div>
+								<div class="inline-block">
+									<h5 class="no-margin">欢迎您来到</h5>
+									<h4 class="no-margin">报名管理系统</h4>
+								</div>
+							</div>
+							<!-- start: MAIN NAVIGATION MENU -->
+							<ul class="main-navigation-menu">
+								<li class="active">
+									<a href="toAdminIndexPage"><i class="fa fa-home"></i> <span class="title">系统首页</span> </a>
+								</li>
+
+								<li>
+									<a href="javascript:void(0)"><i class="fa fa-th-large"></i> <span class="title"> 学生管理 </span><i
+											class="icon-arrow"></i> </a>
+									<ul class="sub-menu">
+										<li>
+											<a href="adStudentInfo">
+												<span class="title">学生信息</span>
+											</a>
+										</li>
+										<li>
+											<a href="cancelStudent">
+												<span class="title">注销学生</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> <span
+											class="title">活动管理</span><i class="icon-arrow"></i> </a>
+									<ul class="sub-menu">
+										<li>
+											<a href="selectActivityListByStatusId?statusId=2">
+												<span class="title">活动报名中</span>
+											</a>
+										</li>
+										<li>
+											<a href="selectActivityListByStatusId?statusId=3">
+												<span class="title">活动筹办中</span>
+											</a>
+										</li>
+										<li>
+											<a href="selectActivityListByStatusId?statusId=4">
+												<span class="title">活动举办中</span>
+											</a>
+										</li>
+										<li>
+											<a href="selectActivityListByStatusId?statusId=5">
+												<span class="title">活动已结束</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="javascript:void(0)"><i class="fa fa-cubes"></i> <span
+											class="title">消息管理</span><i class="icon-arrow"></i> </a>
+									<ul class="sub-menu">
+										<li  >
+											<a href="selectCheckingActivityByAdminId">
+												<span class="title">新审核消息</span>
+											</a>
+										</li>
+										<li >
+											<a href="selectCheckAgainActivityByAdminId">
+												<span class="title">再审核消息</span>
+											</a>
+										</li>
+										<li>
+											<a href="selectAllRemindMessage">
+												<span class="title">提醒型消息</span>
+											</a>
+										</li>
+										<li  >
+											<a href="selectUndealMessageByAdminId">
+												<span class="title">未处理消息</span>
+											</a>
+										</li>
+										<li>
+											<a href="selectFinishedMessageByAdminId">
+												<span class="title">已完成消息</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="slide-tools">
+						<div class="col-xs-6 text-left no-padding">
+						</div>
+						<div class="col-xs-6 text-right no-padding">
+							<a class="btn btn-sm log-out text-right" href="adminLoginOut">
+								<i class="fa fa-power-off"></i> Log Out
+							</a>
+						</div>
+					</div>
+				</nav>
+				<div class="toolbar row">
+					<div class="col-sm-6 hidden-xs">
+						<div class="page-header" style="margin-top: 10px;margin-bottom: 5px">
+							<h2>报名系统首页</h2>
+						</div>
+					</div>
+				</div>
+				<!-- end: PAGE CONTENT-->
+			<div class="row" style="margin-top: 12px">
+				<div class="col-md-12" style="padding-right: 10px;padding-left: 5px" >
+
+					<div class="panel panel-white">
+						<div style="width: 100%;height: 100%;font-size: 3rem;color: white;text-align: center;padding-top: 1rem;padding-bottom: 45%;background: url('admin/images/mybg.jpg');background-size: 100% 100%;width: 100%;height: 100%">
+							系统首页
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="subviews">
+				<div class="subviews-container"></div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<footer class="inner">
+		<div class="footer-inner">
+			<div class="pull-left">
+				2019 @ ZYL.BS
+			</div>
+			<div class="pull-right">
+				<span class="go-top"><i class="fa fa-chevron-up"></i></span>
+			</div>
+		</div>
+	</footer>
+</div>
+<script type="text/javascript" src="admin/js/jquery-1.11.1.min.js"></script>
+<script src="admin/js/jquery-2.1.1.min.js"></script>
+<script src="admin/js/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="admin/js/bootstrap.min.js"></script>
+<!--有用的-->
+<script src="admin/js/perfect-scrollbar.js"></script>
+<script src="admin/js/jquery.scrollTo.min.js"></script>
+<script src="admin/js/main.js"></script>
+<script src="admin/js/index.js"></script>
+
+<script src="layer/layer.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        Main.init();
+        SVExamples.init();
+        TableExport.init();
+    });
+</script>
+</body>
+<!-- end: BODY -->
+</html>

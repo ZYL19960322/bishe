@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width,initical-scale=1"/>
+	<!--<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />-->
+	<title>修改个人信息</title>
+	<link rel="stylesheet" href="front/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="front/css/style.css"/>
+	<script src="front/js/fontSize.js"></script>
+</head>
+
+
+<body>
+<header class="shead"><a href="javascript:history.go(-1)" class="fl"> <span class="glyphicon glyphicon-chevron-left"></span></a>修改个人信息</header>
+
+
+<form id="infofrom" role="form" enctype="multipart/form-data">
+
+	<div class="userbg" style="width: 104%" >
+		<div class="userimg">
+			<input type="file"   onchange="changeStudentImage()"  accept="image/*"  multiple="multiple"  style="display: none" id="file" name="file"  />
+			<label for="file"><img th:for="file"  id="studImagePath" name="studImagePath"  th:src="${student.studImagePath}" alt="" onerror="this.src='../front/img/face2.png;this.onerror=null'"/>
+			</label>
+		</div>
+	</div>
+</form>
+<form>
+	<div class="usercont" >
+		<ul class="userul">
+			<li class="item">
+				<label style="display:flex; align-items: center;">
+					<span class="title-wrap" style="width: 12%">姓名:</span>
+					<input type="text" size="30" class="myinput1"
+						   onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5]/g,'')" maxlength="4"
+						   id="studEnrollName" name="studEnrollName" th:value="${student.studEnrollName}"/>
+				</label>
+			</li>
+			<li class="item">
+				<label style="display:flex; align-items: center;">
+					<span class="title-wrap" style="width: 12%">学号:</span>
+					<input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')"
+						   onafterpaste="this.value=this.value.replace(/\D/g,'')" size="30" class="myinput1"
+						   maxlength="13" id="studNumber" name="studNumber" th:value="${student.studNumber}"/>
+				</label>
+			</li>
+			<li class="item ">
+				<span class="title-wrap" style="width: 12%" >班级:</span>
+				<input type="text" id="studGradeId" th:value="${studentClassInfo.studGradeId}" style="display: none" />
+				<input type="text" id="studGradeName" th:value="${studentClassInfo.studGradeName}" style="display: none" />
+				<select name="grade" id="grade" style="border-radius: 0.1rem;margin-left:5%;padding: 0.06rem 0"
+						onchange="selectDepartment()">
+					<!--<option value="">年级选择1</option>-->
+					<option   th:value="${studentClassInfo.studGradeId}" th:text="${studentClassInfo.studGradeName}"></option>
+					<option   th:each="grade:${gradeList}"
+							  th:text="${grade.className}"
+							  th:value="${grade.classId}">
+					</option>
+				</select>
+
+				<input type="text" id="studDepartmentId"   th:value="${studentClassInfo.studDepartmentId}" style="display: none" />
+				<input type="text" id="studDepartmentName"   th:value="${studentClassInfo.studDepartmentName}" style="display: none" />
+				<select name="department" id="department" style="border-radius: 0.1rem;padding: 0.06rem 0"
+						onchange="selectClass()">
+					<option     th:value="${studentClassInfo.studDepartmentId}" th:text="${studentClassInfo.studDepartmentName}"></option>
+				</select>
+
+				<input type="text" id="studClassId"   th:value="${studentClassInfo.studClassId}" style="display: none" />
+				<input type="text" id="studClassName"   th:value="${studentClassInfo.studClassName}" style="display: none" />
+				<select name="studClassID" id="classId" style="border-radius: 0.1rem;padding: 0.06rem 0">
+					<option th:value="${studentClassInfo.studClassId}" th:text="${studentClassInfo.studClassName}"></option>
+				</select>
+
+			</li>
+			<li class="item">
+				<label style="display:flex; align-items: center;">
+					<span class="title-wrap" style="width: 12%">电话:</span>
+					<input type="text" style="text-align: justify" class="myinput1"
+						   onkeyup="this.value=this.value.replace(/\D/g,'')"
+						   onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="11"
+						   name="studPhone" id="studPhone" th:value="${student.studPhone}"/>
+				</label>
+			</li>
+		</ul>
+
+		<div class="form-group row">
+			<div class="col-xs-5 col-xs-offset-1">
+				<button type="reset"  class=" col-xs-12 btn btn-info">重置信息</button>
+			</div>
+			<div class="col-xs-5">
+				<button type="button" class=" col-xs-12 btn btn-warning" onclick="changeStudentInfo()" >确定修改</button>
+			</div>
+		</div>
+	</div>
+
+</form>
+<script src="front/js/jquery-3.3.1.min.js"></script>
+<script src="front/js/bootstrap.min.js"></script>
+</body>
+<script>
+    // 头像预览
+    $("#file").change(function () {
+        // 获取上传文件对象
+        var file = $(this)[0].files[0];
+        // 读取文件URL
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        // 阅读文件完成后触发的事件
+        reader.onload = function () {
+            // 读取的URL结果：this.result
+            $("#studImagePath").attr("src", this.result);
+        }
+    });
+</script>
+<script>
+    function selectDepartment() {
+        var studDepartmentId= $("#studDepartmentId").val();
+        var studDepartmentName= $("#studDepartmentName").val();
+        //alert("ID="+studDepartmentId+"===名字=="+studDepartmentName);
+        var studClassId= $("#studClassId").val();
+        var studClassName= $("#studClassName").val();
+        //alert("ID="+studClassId+"===名字=="+studClassName);
+        var parentId = $("#grade").val();
+        $("#department").empty();
+        $("#department").html('<option  value="'+studDepartmentId+'">' + studDepartmentName +'</option>');
+
+        $("#classId").empty();
+        $("#classId").html('<option value="'+ studClassId+'">' + studClassName + '</option>');
+        $.ajax(
+            {
+                url: "/selectDepartment",
+                type: 'GET',
+                data: {parentId: parentId},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (departmentList) {
+                    // alert("院系搜查成功");
+                    var html = '';
+                    $.each(departmentList, function (index) {
+                        html += '<option value="' + departmentList[index].classId + '">' + departmentList[index].className + '</option>'
+                    })
+                    $("#department").append(html);
+                },
+                error: function () {
+                    alert("department查询失败了");
+                }
+            }
+        );
+    }
+</script>
+<script>
+    <!--专业班级查询与学院查询的原理是一样的故用重用后台的方法-->
+    function selectClass() {
+        var studClassId= $("#studClassId").val();
+        var studClassName= $("#studClassName").val();
+        //alert("ID="+studClassId+"===名字=="+studClassName);
+        var parentId = $("#department").val();
+        $("#classId").empty();
+        $.ajax(
+            {
+                url: "/selectDepartment",
+                type: 'GET',
+                data: {parentId: parentId},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (departmentList) {
+                    // alert("班级搜查成功");
+                    var html = '';
+                    $.each(departmentList, function (index) {
+                        html += '<option value="' + departmentList[index].classId + '">' + departmentList[index].className + '</option>'
+                    })
+                    $("#classId").append(html);
+                },
+                error: function () {
+                    alert("class查询失败了");
+                }
+            }
+        );
+    }
+</script>
+<script >
+    function changeStudentImage() {
+        var formData = new FormData($("#infofrom")[0]);
+        $.ajax({
+            url: "/changeStudentImage",
+            type: 'POST',
+            data: formData,
+            cache: false,
+            enctype: 'multipart/form-data',
+            //async: false,		 //默认为true即异步，设置为false时为同步
+            dataType: "json",    //改成text才能正确运行，为json时一直执行error,不执行success
+            processData: false,  //必须false才会避开jQuery对 formdata 的默认处理
+            contentType: false,  //必须false才会自动加上正确的Content-Type
+            //前端提交到后台的数据满足基本要求时则返回执行success:的函数
+            success: function (data) {
+                if(data===true){
+                    //success为true时，执行下面的程序
+                    //alert("修改头像成功");
+                }
+                if(data===false){
+                    alert("修改头像失败");
+                }
+            },
+            //前端提交到后台的数据不满足基本要求时则返回执行error:的函数
+            error: function (data) {
+                alert("修改头像发生异常");
+            }
+        });
+    }
+</script>
+<script>
+
+    function changeStudentInfo() {
+        var Student = {}
+        Student.studNumber = $("#studNumber").val();
+        Student.studEnrollName = $("#studEnrollName").val();
+        Student.studClassID = $("#classId").val();
+        Student.studPhone = $("#studPhone").val();
+        $.ajax(
+            {
+                url: "/changeStudentInfo",
+                type: 'post',
+                data: Student,
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    if(data.status==1){
+                        alert("修改个人信息成功,回到首页！");
+                        window.location.href=("/toIndexPage");
+                    }
+                    if(data.status!=1){
+                        alert(data.statusDesc+",请检查");
+                    }
+
+                },
+                error: function () {
+                    alert("确定报名失败了");
+                }
+            }
+        );
+    }
+</script>
+</html>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.dao.StudentClassDao">
+    <select id="selectGrades" resultType="com.bishe.pojo.StudentClass">
+        SELECT parent_id,class_id,class_name FROM student_class WHERE parent_id=1;
+    </select>
+
+
+    <select id="selectDepartmentByParentId" resultType="com.bishe.pojo.StudentClass" parameterType="java.lang.String">
+        SELECT parent_id,class_id,class_name FROM student_class WHERE parent_id=#{parentId};
+    </select>
+
+    <!-- 根据最后的子节点查询同一张表三次-->
+    <select id="selectStudentClassInfo" resultType="com.bishe.dto.StudentClassInfo" parameterType="java.lang.Integer">
+        SELECT t1.class_name AS studClassName, t1.class_id AS studClassId,t2.class_name AS studDepartmentName, t2.class_id AS studDepartmentId,t3.class_name AS studGradeName, t3.class_id AS studGradeId
+FROM student_class AS t1
+LEFT JOIN student_class AS t2 ON t2.class_id = t1.parent_id
+LEFT JOIN student_class AS t3 ON t3.class_id = t2.parent_id WHERE t1.class_id=#{classId} ;
+    </select>
+
+
+    <select id="selectStudentListByGradeId" resultType="com.bishe.pojo.Student" parameterType="java.lang.String">
+        SELECT *
+        FROM student AS t1
+        LEFT JOIN student_class AS t2 ON t2.class_id = t1.stud_class_id
+        LEFT JOIN student_class AS t3 ON t3.class_id = t2.parent_id
+        LEFT JOIN student_class AS t4 ON t4.class_id=t3.parent_id
+        WHERE t4.class_id=#{gradeId} ORDER BY t4.class_id,t3.class_id,t2.class_id DESC
+    </select>
+
+    <select id="selectStudentListByDepartmentId" resultType="com.bishe.pojo.Student" parameterType="java.lang.String">
+    SELECT *
+    FROM student AS t1
+    LEFT JOIN student_class AS t2 ON t2.class_id = t1.stud_class_id
+    LEFT JOIN student_class AS t3 ON t3.class_id = t2.parent_id
+    LEFT JOIN student_class AS t4 ON t4.class_id=t3.parent_id
+    WHERE  t3.class_id=#{departmentId} ORDER BY t4.class_id,t3.class_id,t2.class_id DESC
+</select>
+
+
+    <select id="selectExcelStudentByGradeId" resultType="com.bishe.pojo.Student" parameterType="java.lang.String">
+        SELECT *
+        FROM student AS t1
+        LEFT JOIN student_class AS t2 ON t2.class_id = t1.stud_class_id
+        LEFT JOIN student_class AS t3 ON t3.class_id = t2.parent_id
+        LEFT JOIN student_class AS t4 ON t4.class_id=t3.parent_id
+        WHERE  t4.class_id=#{gradeId} AND t1.stud_id IN  (SELECT data_stud_id FROM data_info as t5 WHERE t5.data_acti_id=#{actiId}) ORDER BY t4.class_id,t3.class_id,t2.class_id DESC
+    </select>
+
+
+    <select id="selectExcelStudentByDepartmentId" resultType="com.bishe.pojo.Student" parameterType="java.lang.String">
+        SELECT *
+        FROM student AS t1
+        LEFT JOIN student_class AS t2 ON t2.class_id = t1.stud_class_id
+        LEFT JOIN student_class AS t3 ON t3.class_id = t2.parent_id
+        LEFT JOIN student_class AS t4 ON t4.class_id=t3.parent_id
+        WHERE  t3.class_id=#{departmentId} AND t1.stud_id IN  (SELECT data_stud_id FROM data_info as t5 WHERE t5.data_acti_id=#{actiId}) ORDER BY t4.class_id,t3.class_id,t2.class_id DESC
+    </select>
+
+    <select id="selectExcelStudentByClassId" resultType="com.bishe.pojo.Student" parameterType="java.lang.String">
+        SELECT *
+        FROM student AS t1
+        LEFT JOIN student_class AS t2 ON t2.class_id = t1.stud_class_id
+        WHERE  t2.class_id=#{classId} AND t1.stud_id IN  (SELECT data_stud_id FROM data_info as t3 WHERE t3.data_acti_id=#{actiId}) ORDER BY t2.class_id DESC
+    </select>
+
+
+    <select id="selectExcelStudentByPage" resultType="com.bishe.pojo.Student" parameterType="java.lang.String">
+        SELECT *
+        FROM student AS t1
+        LEFT JOIN student_class AS t2 ON t2.class_id = t1.stud_class_id
+        LEFT JOIN student_class AS t3 ON t3.class_id = t2.parent_id
+        LEFT JOIN student_class AS t4 ON t4.class_id=t3.parent_id
+        <where>
+            <!-- 写like语句的时候 一般都会写成 like '% %' 在mybatis里面写就是应该是 like '%${name} %' 而不是
+                '%#{name} %' ${name} 是不带单引号的，而#{name} 是带单引号的 -->
+
+            <if test="gradeId!=''">
+                and t4.class_id = #{gradeId}
+            </if>
+            <if test="departmentId!=''">
+                and t3.class_id= #{departmentId}
+            </if>
+            <if test="classId!=''" >
+                and t2.class_id = #{classId}
+            </if>
+            <if test="1!=null">
+                and t1.stud_id IN (SELECT data_stud_id FROM data_info as t5 WHERE t5.data_acti_id=#{actiId})
+            </if>
+        </where>
+        ORDER BY t4.class_id,t3.class_id,t2.class_id DESC
+
+    </select>
+    <select id="selectExcelPresentStudent" resultType="com.bishe.pojo.Student" parameterType="java.lang.String">
+        SELECT *
+        FROM student AS t1
+        LEFT JOIN student_class AS t2 ON t2.class_id = t1.stud_class_id
+        LEFT JOIN student_class AS t3 ON t3.class_id = t2.parent_id
+        LEFT JOIN student_class AS t4 ON t4.class_id=t3.parent_id
+        <where>
+            <!--
+             与selectExcelStudentByPage方法的区别是这里传来的参数是字符串对象，selectExcelStudentByPage传来的参数是字符串-->
+
+            <if test="gradeId!=null">
+                and t4.class_id = #{gradeId}
+            </if>
+            <if test="departmentId!=null">
+                and t3.class_id= #{departmentId}
+            </if>
+            <if test="classId!=null" >
+                and t2.class_id = #{classId}
+            </if>
+            <if test="1!=null">
+                and t1.stud_id IN (SELECT data_stud_id FROM data_info as t5 WHERE t5.data_acti_id=#{actiId})
+            </if>
+        </where>
+        ORDER BY t4.class_id,t3.class_id,t2.class_id DESC
+
+    </select>
+
+
+
+</mapper>

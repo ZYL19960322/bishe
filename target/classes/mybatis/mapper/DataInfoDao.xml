@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.dao.DataInfoDao">
+    <insert id="addDataInfo" parameterType="com.bishe.pojo.DataInfo">
+        INSERT INTO data_info (data_id,data_acti_id,data_stud_id,data_createtime,data_relation_id) VALUES (#{dataId},#{dataActiId},#{dataStudId},#{dataCreateTime},#{dataRelationId})
+
+
+    </insert>
+
+
+    <select id="selectStudIdListByActiId" parameterType="java.lang.String" resultType="java.lang.String" >
+        SELECT data_stud_id FROM data_info WHERE data_acti_id=#{actiId}
+    </select>
+
+
+
+    <select id="selectCheckCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(*)
+        FROM data_info as t1 LEFT JOIN activity as t2 ON t1.data_acti_id=t2.acti_id WHERE t1.data_stud_id=#{studId} AND t2.acti_status_id=1;
+    </select>
+    <select id="selectEnrolledCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(*)
+        FROM data_info as t1 LEFT JOIN activity as t2 ON t1.data_acti_id=t2.acti_id WHERE t1.data_stud_id=#{studId} AND t2.acti_status_id=2;
+    </select>
+    <select id="selectDuringCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(*)
+        FROM data_info as t1 LEFT JOIN activity as t2 ON t1.data_acti_id=t2.acti_id WHERE t1.data_stud_id=#{studId} AND t2.acti_status_id IN (3,4);
+    </select>
+
+
+    <select id="selectEndCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(*)
+        FROM data_info as t1 LEFT JOIN activity as t2 ON t1.data_acti_id=t2.acti_id WHERE t1.data_stud_id=#{studId} AND t2.acti_status_id=5;
+    </select>
+
+
+<delete id="deleteEnroll" parameterType="java.lang.String" >
+     DELETE FROM data_info WHERE data_acti_id=#{actiId} and data_stud_id=#{studId};
+
+</delete>
+
+
+
+</mapper>

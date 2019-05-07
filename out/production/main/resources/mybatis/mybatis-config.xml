@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!-- userId 与use_id 开启大小写对应关系 ( 使用驼峰命名法转换字段)-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 允许JDBC 生成主键。需要驱动器支持。如果设为了true，这个设置将强制使用被生成的主键 default:false -->
+        <setting name="useGeneratedKeys" value="true"/>
+
+    </settings>
+</configuration>

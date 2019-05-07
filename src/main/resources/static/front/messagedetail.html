@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initical-scale=1"/>
+    <title>消息详情</title>
+    <script src="front/js/fontSize.js"></script>
+    <link rel="stylesheet" href="front/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="front/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="front/css/style.css"/>
+</head>
+<body>
+<header class="shead">
+    <a href="javascript:history.go(-1)" class="fl"> <span class="glyphicon glyphicon-chevron-left"></span></a>消息详情
+</header>
+<div class="releasediv pb1 container">
+
+    <!-- boot form表单 -->
+    <!-- onsubmit="return false" -->
+    <!-- 在form表单中设置 onsubmit =”return false”否则会出现提交之后，action也会跳转-->
+    <form method="post" class="mt04" role="form" enctype="multipart/form-data" id="myfrom">
+        <div class="hdimg" style="margin-top: 0">
+            <input type="file" accept="image/*" multiple="multiple" style="display: none" id="file" name="file"/>
+            <img src="front/img/25.jpg" alt="" class="imgUrl" style="width: 100%;height: 60%" id="actiThemeImage"
+                 name="actiThemeImage" th:src="${activity.actiThemeImage}"/>
+        </div>
+
+        <div class="form-group" style="margin-top: 0.3rem">
+            <label>活动主题</label>
+            <!--readonly有默认样式，为保持input标签的原有样式颜色故style="background-color: white"-->
+            <input type="text" class="form-control" id="actiTheme" name="actiTheme" readonly="ture"
+                   style="background-color: white" th:value="${activity.actiTheme}"/>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-6">
+                    <label>活动可报名人数</label>
+                    <input type="text" class="form-control" id="actiMaxEnroll" name="actiMaxEnroll"
+                           readonly="ture" style="background-color: white" th:value="${activity.actiMaxEnroll}"/>
+                </div>
+                <div class="col-xs-6">
+                    <label>活动类型</label>
+                    <input class="form-control" name="actiCategoryId" id="actiCategoryId" readonly="ture"
+                           style="background-color: white"
+                           th:value="${activity.actiCategoryName}"/>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top: 0.3rem">
+                <label>活动举办方</label>
+                <input type="text" class="form-control" name="actiHolder" id="actiHolder" readonly="ture"
+                       style="background-color: white"
+                       th:value="${activity.actiHolder}"/>
+            </div>
+            <div class="form-group clearfix">
+                <div class="row">
+                    <label class="col-xs-6" for="actiStartTime">活动开始时间</label>
+                    <label class="col-xs-6" for="actiStartTime">报名截止时间</label>
+                </div>
+                <!-- boot 日期插件 -->
+                <div class="row">
+                    <div class="col-xs-6 ">
+                        <div class="input-group date ">
+                            <input type="text" style="border-radius: 4px;background-color: white" class="form-control"
+                                   name="actiStartTime"
+                                   id="actiStartTime" readonly="ture" th:value="${activity.actiStartTime}"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="input-group date">
+                            <input type="text" style="border-radius: 4px;background-color: white" class="form-control"
+                                   name="actiEndrollTime"
+                                   id="actiEndrollTime" readonly="ture" th:value="${activity.actiEndrollTime}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>活动地点</label>
+                <input type="text" class="form-control" name="actiAddress" id="actiAddress"
+                       readonly="ture" style="background-color: white" th:value="${activity.actiAddress}"/>
+            </div>
+            <div class="form-group">
+                <label>联系电话</label>
+                <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" class="form-control"
+                       name="actiPhone" id="actiPhone" readonly="ture" style="background-color: white"
+                       th:value="${activity.actiPhone}"/>
+            </div>
+            <div class="form-group">
+                <label>备注</label>
+                <input type="text" class="form-control" name="actiComment" id="actiComment" readonly="ture"
+                       style="background-color: white"
+                       th:value="${activity.actiComment}"/>
+            </div>
+            <div class="form-group">
+                <label>简介</label>
+                <textarea cols="30" rows="7" class="form-control" name="actiDesc" id="actiDesc" readonly="ture"
+                          style="background-color: white"
+                          th:text="${activity.actiDesc}"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="front/js/jquery-3.3.1.min.js"></script>
+<script src="front/js/bootstrap.min.js"></script>
+<script src="front/js/bootstrap-datetimepicker.min.js"></script>
+<script src="front/js/bootstrap-datetimepicker.zh-CN.js"></script>
+</body>
+</html>

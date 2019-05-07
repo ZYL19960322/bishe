@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initical-scale=1">
+    <title>登录注册</title>
+    <link rel="stylesheet" href="front/css/bootstrap.min.css">
+    <link rel="stylesheet" href="front/css/style.css">
+    <script src="front/js/fontSize.js"></script>
+</head>
+
+<body>
+<header class="shead">
+    <a href="javascript:history.go(-1)" class="fl"> <span class="glyphicon glyphicon-chevron-left"></span></a>用户登录
+</header>
+<div class="mt1">
+    <form id="loginForm" method="post">
+        <div class="ta-c fs-04">用户登录</div>
+
+        <!-- 使用boot栅格 -->
+        <div class="container">
+            <div class="row " style="margin-top: 0.1rem">
+                <div class="col-xs-6 col-xs-offset-3 pd0 color-r fs-02 ta-c"><label style="font-size: 0.1rem" id="loginInfo"></label></div>
+            </div>
+
+            <div class="row " style="margin-top: 0.1rem">
+                <div class="col-xs-3 col-xs-offset-1 pd0 ta-r"><label for="name">用户名：</label></div>
+                <div class="col-xs-5 pd0"><input type="text" maxlength="4" onclick="clearInfo()" class="form-control" id="studName" name="studName"></div>
+                <div class="col-xs-3 pd0 color-r fs-02 ta-c" id="name"></div>
+            </div>
+            <div class="row mt04">
+                <div class="col-xs-3 col-xs-offset-1 pd0 ta-r"><label for="name">密码：</label></div>
+                <div class="col-xs-5 pd0"><input type="text" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="12" onclick="clearInfo()" class="form-control" id="studPassword" name="studPassword">
+                </div>
+                <div class="col-xs-3 pd0 color-r fs-02 ta-c" id="password"></div>
+            </div>
+            <div class="row mt04">
+                <div class="col-xs-3 col-xs-offset-1 pd0 ta-r"><label for="name">验证码：</label></div>
+                <div class="col-xs-2 pd0"><input type="text" onclick="clearInfo()" id="myCheckCode"   class="form-control"></div>
+                <div class="col-xs-3 pd0 ta-r"><img id="checkCode"  title="点击更换" alt="点击更换" class="img"   onclick="changeVerifyCode(this)" src="../getKaptchaImage"  /></div>
+                <div class="col-xs-3 pd0 color-r fs-02 ta-c" id="check"></div>
+            </div>
+            <div class="col-xs-12 mt04">
+                <button type="button" class="btn btn-info btn-block" onclick="login()">登录</button>
+            </div>
+            <div class="ta-r"><a href="register" class="fs-02">没有账号？去注册</a></div>
+        </div>
+    </form>
+</div>
+<script src="front/js/jquery-3.3.1.min.js"></script>
+<script src="front/js/bootstrap.min.js"></script>
+<script>
+    function changeVerifyCode(img) {
+        img.src = "../getKaptchaImage?" + Math.floor(Math.random() * 100);}
+
+</script>
+<script>
+    function login() {
+        var studName = $("#studName").val();
+        var studPassword = $("#studPassword").val();
+        var checkCode =$("#myCheckCode").val();
+        $.ajax({
+            url: "/studLogin",
+            type: 'POST',
+            data: {studName: studName, studPassword: studPassword,checkCode:checkCode},
+            dataType: 'JSON',
+            cathe: false,
+            success: function (studentInfoResponse) {
+                //根据返回数据来给用户显示错误信息或登录成功
+                if (studentInfoResponse.status == 10) {
+                    $("#check").text(studentInfoResponse.statusDesc);
+                }
+                if (studentInfoResponse.status == 19) {
+                    alert("登录成功");
+                    window.location.href = ("/toIndexPage");
+                }
+                if (studentInfoResponse.status == 11 || studentInfoResponse.status == 12 || studentInfoResponse.status == 17) {
+                    $("#loginInfo").text(studentInfoResponse.statusDesc);
+                }
+            }
+        });
+    }
+</script>
+<script>
+  function clearInfo() {
+      $("#check").text("");
+      $("#loginInfo").text("")
+  }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rapido - Responsive Admin Template</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="admin/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="admin/css/styles.css"/>
+    <link rel="stylesheet" href="admin/css/styles-responsive.css"/>
+    <link rel="stylesheet" href="admin/css/plugins.css"/>
+    <link rel="stylesheet" href="admin/css/theme-default.css" type="text/css" id="skin_color"/>
+    <link rel="stylesheet" href="admin/css/print.css" type="text/css" media="print"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<body>
+<!-- start: SLIDING BAR (SB) -->
+<div class="main-wrapper">
+    <!-- start: TOPBAR -->
+    <header class="topbar navbar navbar-inverse navbar-fixed-top inner">
+        <!-- start: TOPBAR CONTAINER -->
+        <div class="container">
+            <div class="navbar-header">
+                <a class="sb-toggle-left hidden-md hidden-lg" href="#main-navbar">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a class="navbar-brand" href="index.html">
+                    <img src="admin/images/logo.png" alt="Rapido"/>
+                </a>
+            </div>
+        </div>
+    </header>
+    <nav id="pageslide-left" class="pageslide inner">
+        <div class="navbar-content">
+            <div class="main-navigation left-wrapper transition-left">
+                <div class="user-profile border-top padding-horizontal-10 block">
+                    <div class="inline-block">
+                        <img src="admin/images/avatar-1.jpg"/>
+                    </div>
+                    <div class="inline-block">
+                        <h5 class="no-margin"> Welcome </h5>
+                        <h4 class="no-margin"> Peter Clark </h4>
+                    </div>
+                </div>
+                <ul class="main-navigation-menu">
+                    <li>
+                        <a href="index.html"><i class="fa fa-home"></i> <span class="title"> Dashboard </span><span
+                                class="label label-default pull-right ">LABEL</span> </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-th-large"></i> <span class="title"> 学生管理 </span><i
+                                class="icon-arrow"></i> </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="adStudentInfo">
+                                    <span class="title">学生信息</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="table_responsive.html">
+                                    <span class="title">注销学生</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="active open">
+                        <a href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> <span
+                                class="title">活动管理</span><i class="icon-arrow"></i> </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="activityEnrolling">
+                                    <span class="title">活动报名中</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="form_wizard.html">
+                                    <span class="title">活动筹办中</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="form_validation.html">
+                                    <span class="title">活动举办中</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="form_inline.html">
+                                    <span class="title">活动已结束</span>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a>
+                                    <span class="title">导出报名表</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> <span
+                                class="title">消息管理</span><i class="icon-arrow"></i> </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="form_elements.html">
+                                    <span class="title">新消息</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="form_wizard.html">
+                                    <span class="title">待处理消息</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="form_validation.html">
+                                    <span class="title">等等等</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="form_inline.html">
+                                    <span class="title">等等等</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- end: MAIN NAVIGATION MENU -->
+            </div>
+        </div>
+        <div class="slide-tools">
+            <div class="col-xs-6 text-left no-padding">
+                <a class="btn btn-sm status" href="#">
+                    Status <i class="fa fa-dot-circle-o text-green"></i> <span>Online</span>
+                </a>
+            </div>
+            <div class="col-xs-6 text-right no-padding">
+                <a class="btn btn-sm log-out text-right" href="login_login.html">
+                    <i class="fa fa-power-off"></i> Log Out
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container inner">
+        <!-- start: PAGE -->
+        <div class="main-content">
+            <div class="container">
+                <div class="toolbar row">
+                    <div class="col-sm-6 hidden-xs">
+                        <div class="page-header" style="margin-top: 10px;margin-bottom: 5px">
+                            <h2 th:text="${activity.actiTheme}+报名信息"></h2>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12" style="margin-top: 25px;margin-bottom: 5px;text-align: center">
+                        <div class="item" style="text-align: center">
+                            <select name="grade" id="grade"
+                                    style="border-radius: 0.1rem;margin-left: 0.8rem;padding: 0.06rem 0"
+                                    onchange="selectExcelStudentByGradeId()">
+                                <option value="">年级筛选</option>
+                                <!--<option   th:value="${studentClassInfo.studGradeId}" th:text="${studentClassInfo.studGradeName}"></option>-->
+                                <option th:each="grade:${gradeList}"
+                                        th:text="${grade.className}"
+                                        th:value="${grade.classId}">
+                                </option>
+                            </select>
+
+                            <select name="department" id="department" style="border-radius: 0.1rem;padding: 0.06rem 0"
+                                    onclick="selectExcelStudentByDepartmentId()">
+                                <option value="">院系筛选</option>
+                            </select>
+                            <select name="studClassID" id="classId" style="border-radius: 0.1rem;padding: 0.06rem 0"
+                                    onchange="selectExcelStudentByClassId()">
+                                <option value="">专业班级筛选</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 12px">
+                    <div class="col-md-12" style="padding-right: 10px;padding-left: 5px">
+                        <!-- start: EXPORT DATA TABLE PANEL  -->
+                        <div class="panel panel-white">
+                            <div class="panel-heading" style="padding-top: 0px">
+                                <div class="panel-tools">
+                                    <div class="dropdown">
+                                        <a data-toggle="dropdown"
+                                           class="btn btn-xs dropdown-toggle btn-transparent-grey">
+                                            <i class="fa fa-cog"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-light pull-right" role="menu">
+                                            <li>
+                                                <a class="panel-collapse collapses" href="#"><i
+                                                        class="fa fa-angle-up"></i> <span>Collapse</span> </a>
+                                            </li>
+                                            <li>
+                                                <a class="panel-refresh" href="#">
+                                                    <i class="fa fa-refresh"></i> <span>Refresh</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="panel-expand" href="#">
+                                                    <i class="fa fa-expand"></i> <span>Fullscreen</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <a class="btn btn-xs btn-link panel-close" href="#">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-hover" id="sample-table-1">
+                                    <thead>
+                                    <tr class="row">
+                                        <th class=" col-md-3">班级</th>
+                                        <th class="col-md-2">报名姓名</th>
+
+                                        <th class="col-md-3">学号</th>
+
+                                        <th class="col-md-2">电话</th>
+                                        <th class=" col-md-2">用户名</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="studentInfo" name="studentInfo">
+                                    <tr class="row" th:each="student:${pageInfo.list}">
+                                        <!--th:value="${student.studentClassInfo.studGradeName} '&eq;' null '?' ${student.studentClassInfo.studGradeName}+${student.studentClassInfo.studClassName} ':' 无"-->
+                                        <!--<td class="col-md-2" disabled="true" th:text="${student?.studentClassInfo?.studGradeName}+${student?.studentClassInfo?.studClassName}" ></td>-->
+                                        <td class="col-md-3"
+                                            th:text="${student.studentClassInfo.studGradeName}+${student.studentClassInfo.studClassName}"></td>
+                                        <td class="col-md-2" th:text="${student.studEnrollName}">钟玉林</td>
+
+                                        <td class="col-md-3" th:text="${student.studNumber}">jerry</td>
+
+                                        <td class="col-md-2" th:text="${student.studPhone}">
+                                            13794587900
+                                        </td>
+                                        <td class="col-md-2" th:text="${student.studName}">jerry</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <div class="btn-group pull-right">
+
+
+                                        <a th:href="@{/exportPresentStudentsToExcel(actiId=${activity.actiId})}">
+                                            <button type="button"
+                                                    class="btn btn-warning">
+                                                Export Present
+                                            </button>
+                                        </a>
+                                        <a th:href="@{/exportStudentsToExcel(actiId=${activity.actiId})}">
+                                            <button type="button" style="margin-left: 8px"
+                                                    class="btn btn-green">
+                                                Export All
+                                            </button>
+                                        </a>
+
+                                        <input type="hidden" th:value="${activity.actiId}" id="actiId"/>
+                                    </div>
+                                </div>
+                                <div class="row" id="page" name="page">
+                                    <div class="col-md-4">
+                                        <ul class="pagination pagination-green margin-bottom-10">
+                                            <li th:id="${pageInfo.prePage}" onclick="pageShow(this)"
+                                                th:value="${pageInfo.prePage}">
+                                                <a href="#"><i class="fa fa-chevron-left"></i></a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="pagination pagination-green margin-bottom-10"
+                                            th:each="pageNum:${pageInfo.navigatepageNums}">
+                                            <li th:id="${pageNum}" th:class="${pageNum == pageInfo.pageNum}? 'active'"
+                                                th:value="${pageNum}" onclick="pageShow(this)">
+                                                <a href="#" th:text="${pageNum}">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <ul class="pagination pagination-green margin-bottom-10">
+                                            <li th:id="${pageInfo.nextPage}" onclick="pageShow(this)"
+                                                th:value="${pageInfo.nextPage}">
+                                                <a href="#"><i class="fa fa-chevron-right"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="show_page_info" class="col-md-4 col-md-offset-1">
+                                        <span th:text="'当前第'+${pageInfo.pageNum}+'页'"></span>
+                                        <span th:text="'总共'+${pageInfo.pages}+'页'"></span>
+                                        <span th:text="'总共'+${pageInfo.total}+'条记录'"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="inner">
+        <div class="footer-inner">
+            <div class="pull-left">
+                2019 @ bs BY ZYL.
+            </div>
+        </div>
+    </footer>
+</div>
+<script type="text/javascript" src="admin/js/jquery-1.11.1.min.js"></script>
+<script src="admin/js/jquery-2.1.1.min.js"></script>
+<script src="admin/js/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="admin/js/bootstrap.min.js"></script>
+<!--有用的-->
+<script src="admin/js/perfect-scrollbar.js"></script>
+<script src="admin/js/jquery.scrollTo.min.js"></script>
+<script src="admin/js/main.js"></script>
+<script src="admin/js/index.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        Main.init();
+        SVExamples.init();
+        TableExport.init();
+    });
+</script>
+
+
+
+<script>
+ document.getElementById(ExportPresent).onclick{
+     var actiId = $("#actiId").val();
+     var departmentId = $("#department").val();
+     var gradeId = $("#grade").val();
+     var classId = $("#classId").val();
+     alert(gradeId+"=="+departmentId+"=="+classId+"=="+actiId);
+     //  window.location.href = ("/exportPresentStudentsToExcel?actiId=?") + $("#actiId").val();
+    // location.href= 'exportPresentStudentsToExcel?gradeId=' + gradeId + ';departmentId=' + departmentId+';classId;=' + classId+';actiId=' + actiId;
+   //  window.location.href = ("/studentInfo(gradeId=gradeId,departmentId=departmentId,classId=classId,actiId=actiId");
+   //  th:href="@{/Controller/behavior(param1=1,param2=${person.id})}"
+    // window.location.href = "@('exportPresentStudentsToExcel?gradeId=gradeId&amp;departmentId=departmentId&amp;classId=classId&amp;actiId=actiId')";
+ }
+
+
+</script>
+
+<script>
+
+    function exportPresentStudentsToExcel() {
+
+        var actiId = $("#actiId").val();
+        var departmentId = $("#department").val();
+        var gradeId = $("#grade").val();
+        var classId = $("#classId").val();
+        $.ajax(
+            {
+                url: "/exportPresentText",
+                type: 'GET',
+                data: {
+                    gradeId: gradeId,
+                    departmentId: departmentId,
+                    classId: classId,
+                    actiId: actiId
+                },
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (exportStudentShow) {
+                    alert("父急急急")
+                },
+
+                error:function () {
+                    window.location.href=""
+
+                },
+
+            });
+    }
+</script>
+
+<script>
+    //已成功
+    function selectExcelStudentByGradeId() {
+        var gradeId = $("#grade").val();
+        var departmentId = $("#department").val();
+        var classId = $("#classId").val();
+        var actiId = $("#actiId").val();
+        $("#department").empty();
+        $("#department").html('<option  value="' + '' + '">' + '院系筛选' + '</option>');
+        $("#classId").empty();
+        $("#classId").html('<option value="' + '' + '">' + '专业班级筛选' + '</option>');
+        $.ajax(
+            {
+                url: "/selectExcelStudentByGradeId",
+                type: 'POST',
+                data: {gradeId: gradeId, actiId: actiId},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (exportStudentShow) {
+                    // alert("院系搜查成功");
+                    var html = '';
+                    var html1 = '';
+                    $.each(exportStudentShow.studentClassList, function (index) {
+                        html += '<option value="' + exportStudentShow.studentClassList[index].classId + '">' + exportStudentShow.studentClassList[index].className + '</option>'
+                    })
+                    $("#department").append(html);
+                    $("#studentInfo").empty();
+                    var html = '';
+                    $.each(exportStudentShow.pageInfo.list, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-3" value="' + exportStudentShow.pageInfo.list[index].studentClassInfo.studGradeName + exportStudentShow.pageInfo.list[index].studentClassInfo.studClassName + '">' + exportStudentShow.pageInfo.list[index].studentClassInfo.studGradeName + exportStudentShow.pageInfo.list[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + exportStudentShow.pageInfo.list[index].studEnrollName + '</td>' +
+                            '<td class="col-md-3" value="' + exportStudentShow.pageInfo.list[index].studNumber + '">' + exportStudentShow.pageInfo.list[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + exportStudentShow.pageInfo.list[index].studPhone + '">' + exportStudentShow.pageInfo.list[index].studPhone + '</td>' +
+                            '<td class="col-md-2" value="' + exportStudentShow.pageInfo.list[index].studName + '">' + exportStudentShow.pageInfo.list[index].studName + '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").html(html);
+                    //拼接分页的页码和数据，将id设置为当前的value值，目的是为了根据id将其页码标签的class设置active;每个标签的onclick都为同一个方法，目的是精简高效使用代码
+                    $("#page").empty();
+                    html1 += '<div class="row" id="page"  name="page">' +
+                        '<div id="show_page_nav" class="col-md-4" style="margin-left: 15px" >' +
+                        '<ul  class="pagination pagination-green margin-bottom-10">' +
+                        '<li   id="' + exportStudentShow.pageInfo.prePage + '" onclick="pageShow(this)" value="' + exportStudentShow.pageInfo.prePage + '" >' +
+                        '<a   style="margin-right: 4px"  href="#"><i class="fa fa-chevron-left">' + '</i>' + '</a>' + '</li>' +
+                        '</ul>'
+                    $.each(exportStudentShow.pageInfo.navigatepageNums, function (index) {
+                        html1 += '<ul  class="pagination pagination-green margin-bottom-10"  >' +
+                            '<li id="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" value="' + exportStudentShow.pageInfo.navigatepageNums[index] + '"  text="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" onclick="pageShow(this)">' +
+                            '<a href="#"  value="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" style="margin-right: 4px"> ' + exportStudentShow.pageInfo.navigatepageNums[index] + '</a>' +
+                            '</li>' +
+                            '</ul>'
+                    }),
+                        html1 += '<ul  class="pagination pagination-green margin-bottom-10">' +
+                            '<li id="' + exportStudentShow.pageInfo.nextPage + '" onclick="pageShow(this)" value="' + exportStudentShow.pageInfo.nextPage + '" >' +
+                            '<a href="#"><i class="fa fa-chevron-right">' + '</i>' + '</a>' +
+                            '</li>' +
+                            '</ul>' +
+                            '</div>' +
+                            '<div id="show_page_info" class="col-md-4 col-md-offset-1">' +
+                            '<span>当前第' + exportStudentShow.pageInfo.pageNum + '页</span>' +
+                            '<span>总共' + exportStudentShow.pageInfo.pages + '页</span>' +
+                            '<span>总共' + exportStudentShow.pageInfo.total + '条记录</span>' +
+                            '</div>' +
+                            '</div>'
+                    $("#page").html(html1);
+                    //让第一页的页码显亮
+                    var id = exportStudentShow.pageInfo.navigatepageNums[0];
+                    if (id == 1) {
+                        $("#1").addClass("active");
+                    }
+                },
+            }
+        );
+    }
+</script>
+
+<script>
+    function selectExcelStudentByDepartmentId() {
+
+        var gradeId = $("#grade").val();
+        var departmentId = $("#department").val();
+        var classId = $("#classId").val();
+        var actiId = $("#actiId").val();
+        var studClassId = $("#studClassId").val();
+        var studClassName = $("#studClassName").val();
+        //alert("ID="+studClassId+"===名字=="+studClassName);
+        //var gradeId = $("#grade").val();
+        $("#classId").empty();
+        //$("#classId").html('<option value="'+studClassId+'">' + studClassName + '</option>');
+        $("#classId").html('<option value="' + '' + '">' + "专业班级筛选" + '</option>');
+        // alert("前端班级父级Id" + parentId);
+        $.ajax(
+            {
+                url: "/selectExcelStudentByDepartmentId",
+                type: 'POST',
+                data: {gradeId: gradeId, departmentId: departmentId, actiId: actiId},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (exportStudentShow) {
+                    var html = '';
+                    var html1 = '';
+                    $.each(exportStudentShow.studentClassList, function (index) {
+                        html += '<option value="' + exportStudentShow.studentClassList[index].classId + '">' + exportStudentShow.studentClassList[index].className + '</option>'
+                    })
+                    $("#classId").append(html);
+
+                    var html = '';
+                    $.each(exportStudentShow.pageInfo.list, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-3" value="' + exportStudentShow.pageInfo.list[index].studentClassInfo.studGradeName + exportStudentShow.pageInfo.list[index].studentClassInfo.studClassName + '">' + exportStudentShow.pageInfo.list[index].studentClassInfo.studGradeName + exportStudentShow.pageInfo.list[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + exportStudentShow.pageInfo.list[index].studEnrollName + '</td>' +
+                            '<td class="col-md-2" value="' + exportStudentShow.pageInfo.list[index].studNumber + '">' + exportStudentShow.pageInfo.list[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + exportStudentShow.pageInfo.list[index].studPhone + '">' + exportStudentShow.pageInfo.list[index].studPhone + '</td>' +
+                            '<td class="col-md-2" value="' + exportStudentShow.pageInfo.list[index].studName + '">' + exportStudentShow.pageInfo.list[index].studName + '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").empty();
+                    $("#studentInfo").html(html);
+                    //拼接分页的页码和数据，将id设置为当前的value值，目的是为了根据id将其页码标签的class设置active;每个标签的onclick都为同一个方法，目的是精简高效使用代码
+                    $("#page").empty();
+                    html1 += '<div class="row" id="page" name="page">' +
+                        '<div id="show_page_nav" class="col-md-4" style="margin-left: 15px">' +
+                        '<ul  class="pagination pagination-green margin-bottom-10">' +
+                        '<li   id="' + exportStudentShow.pageInfo.prePage + '" onclick="pageShow(this)" value="' + exportStudentShow.pageInfo.prePage + '">' +
+                        '<a   style="margin-right: 4px"  href="#"><i class="fa fa-chevron-left">' + '</i>' + '</a>' + '</li>' +
+                        '</ul>'
+                    $.each(exportStudentShow.pageInfo.navigatepageNums, function (index) {
+                        html1 += '<ul  class="pagination pagination-green margin-bottom-10" >' +
+                            '<li id="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" value="' + exportStudentShow.pageInfo.navigatepageNums[index] + '"  text="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" onclick="pageShow(this)">' +
+                            '<a href="#"  value="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" style="margin-right: 4px"> ' + exportStudentShow.pageInfo.navigatepageNums[index] + '</a>' +
+                            '</li>' +
+                            '</ul>'
+                    }),
+                        html1 += '<ul  class="pagination pagination-green margin-bottom-10">' +
+                            '<li id="' + exportStudentShow.pageInfo.nextPage + '" onclick="pageShow(this)" value="' + exportStudentShow.pageInfo.nextPage + '" >' +
+                            '<a href="#"><i class="fa fa-chevron-right">' + '</i>' + '</a>' +
+                            '</li>' +
+                            '</ul>' +
+                            '</div>' +
+                            '<div id="show_page_info" class="col-md-4 col-md-offset-1">' +
+                            '<span>当前第' + exportStudentShow.pageInfo.pageNum + '页</span>' +
+                            '<span>总共' + exportStudentShow.pageInfo.pages + '页</span>' +
+                            '<span>总共' + exportStudentShow.pageInfo.total + '条记录</span>' +
+                            '</div>' +
+                            '</div>'
+                    $("#page").html(html1);
+                    //让第一页的页码显亮
+                    var id = exportStudentShow.pageInfo.navigatepageNums[0];
+                    if (id == 1) {
+                        $("#1").addClass("active");
+                    }
+                },
+            }
+        );
+    }
+</script>
+
+
+<script>
+    function selectExcelStudentByClassId() {
+        var gradeId = $("#grade").val();
+        var departmentId = $("#department").val();
+        var classId = $("#classId").val();
+
+        var actiId = $("#actiId").val();
+        $.ajax(
+            {
+                url: "/selectExcelStudentByClassId",
+                type: 'POST',
+                data: {departmentId: departmentId, classId: classId, actiId: actiId},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (exportStudentShow) {
+                    $("#studentInfo").empty();
+                    var html = '';
+                    var html1 = '';
+                    $.each(exportStudentShow.pageInfo.list, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-3" value="' + exportStudentShow.pageInfo.list[index].studentClassInfo.studGradeName + exportStudentShow.pageInfo.list[index].studentClassInfo.studClassName + '">' + exportStudentShow.pageInfo.list[index].studentClassInfo.studGradeName + exportStudentShow.pageInfo.list[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + exportStudentShow.pageInfo.list[index].studEnrollName + '</td>' +
+                            '<td class="col-md-2" value="' + exportStudentShow.pageInfo.list[index].studNumber + '">' + exportStudentShow.pageInfo.list[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + exportStudentShow.pageInfo.list[index].studPhone + '">' + exportStudentShow.pageInfo.list[index].studPhone + '</td>' +
+                            '<td class="col-md-2" value="' + exportStudentShow.pageInfo.list[index].studName + '">' + exportStudentShow.pageInfo.list[index].studName + '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").empty();
+                    $("#studentInfo").html(html);
+                    //拼接分页的页码和数据，将id设置为当前的value值，目的是为了根据id将其页码标签的class设置active;每个标签的onclick都为同一个方法，目的是精简高效使用代码
+                    $("#page").empty();
+                    html1 += '<div class="row" id="page" name="page">' +
+                        '<div id="show_page_nav" class="col-md-4" style="margin-left: 15px">' +
+                        '<ul  class="pagination pagination-green margin-bottom-10">' +
+                        '<li   id="' + exportStudentShow.pageInfo.prePage + '" onclick="pageShow(this)" value="' + exportStudentShow.pageInfo.prePage + '">' +
+                        '<a   style="margin-right: 4px"  href="#"><i class="fa fa-chevron-left">' + '</i>' + '</a>' + '</li>' +
+                        '</ul>'
+                    $.each(exportStudentShow.pageInfo.navigatepageNums, function (index) {
+                        html1 += '<ul  class="pagination pagination-green margin-bottom-10" >' +
+                            '<li id="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" value="' + exportStudentShow.pageInfo.navigatepageNums[index] + '"  text="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" onclick="pageShow(this)">' +
+                            '<a href="#"  value="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" style="margin-right: 4px"> ' + exportStudentShow.pageInfo.navigatepageNums[index] + '</a>' +
+                            '</li>' +
+                            '</ul>'
+                    }),
+                        html1 += '<ul  class="pagination pagination-green margin-bottom-10">' +
+                            '<li id="' + exportStudentShow.pageInfo.nextPage + '" onclick="pageShow(this)" value="' + exportStudentShow.pageInfo.nextPage + '" >' +
+                            '<a href="#"><i class="fa fa-chevron-right">' + '</i>' + '</a>' +
+                            '</li>' +
+                            '</ul>' +
+                            '</div>' +
+                            '<div id="show_page_info" class="col-md-4 col-md-offset-1">' +
+                            '<span>当前第' + exportStudentShow.pageInfo.pageNum + '页</span>' +
+                            '<span>总共' + exportStudentShow.pageInfo.pages + '页</span>' +
+                            '<span>总共' + exportStudentShow.pageInfo.total + '条记录</span>' +
+                            '</div>' +
+                            '</div>'
+                    $("#page").html(html1);
+                    //第一页页码的id为1,让第一页的页码显亮
+                    var id = exportStudentShow.pageInfo.navigatepageNums[0];
+                    if (id == 1) {
+                        $("#1").addClass("active");
+                    }
+                },
+            }
+        );
+    }
+</script>
+<script>
+
+
+    function pageShow(a) {
+        var pageNum = a.value;
+        //alert(a.value);获取当前标签的值
+        var pageId = a.id;//获取当前标签的id值
+        var actiId = $("#actiId").val();
+        var departmentId = $("#department").val();
+        var gradeId = $("#grade").val();
+        var classId = $("#classId").val();
+        $.ajax(
+            {
+                url: "/exportStudentPageShow",
+                type: 'POST',
+                data: {
+                    gradeId: gradeId,
+                    departmentId: departmentId,
+                    classId: classId,
+                    pageNum: pageNum,
+                    actiId: actiId
+                },
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (exportStudentShow) {
+                    var html = '';
+                    var html1 = '';
+                    $("#studentInfo").empty(); //先将之前的数据清空，然后用返回的数据拼接新的html
+                    $.each(exportStudentShow.pageInfo.list, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-3" value="' + exportStudentShow.pageInfo.list[index].studentClassInfo.studGradeName + exportStudentShow.pageInfo.list[index].studentClassInfo.studClassName + '">' + exportStudentShow.pageInfo.list[index].studentClassInfo.studGradeName + exportStudentShow.pageInfo.list[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + exportStudentShow.pageInfo.list[index].studEnrollName + '</td>' +
+                            '<td class="col-md-3" value="' + exportStudentShow.pageInfo.list[index].studNumber + '">' + exportStudentShow.pageInfo.list[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + exportStudentShow.pageInfo.list[index].studPhone + '">' + exportStudentShow.pageInfo.list[index].studPhone + '</td>' +
+                            '<td class="col-md-2" value="' + exportStudentShow.pageInfo.list[index].studName + '">' + exportStudentShow.pageInfo.list[index].studName + '</td>' +
+                            '</tr>'
+                    }),
+                        $("#studentInfo").html(html); //将拼接好的html显示在指定的id上
+
+                    //拼接分页的页码和数据，将id设置为当前的value值，目的是为了根据id将其页码标签的class设置active;每个标签的onclick都为同一个方法，目的是精简高效使用代码
+                    $("#page").empty();
+                    html1 += '<div class="row"  name="page">' +
+                        '<div id="show_page_nav" class="col-md-4" style="margin-left: 15px">' +
+                        '<ul  class="pagination pagination-green margin-bottom-10">' +
+                        '<li   id="' + exportStudentShow.pageInfo.prePage + '" onclick="pageShow(this)" value="' + exportStudentShow.pageInfo.prePage + '">' +
+                        '<a   style="margin-right: 4px"  href="#"><i class="fa fa-chevron-left">' + '</i>' + '</a>' + '</li>' +
+                        '</ul>'
+
+                    $.each(exportStudentShow.pageInfo.navigatepageNums, function (index) {
+                        html1 += '<ul  class="pagination pagination-green margin-bottom-10" >' +
+                            '<li id="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" value="' + exportStudentShow.pageInfo.navigatepageNums[index] + '"  text="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" onclick="pageShow(this)">' +
+                            '<a href="#"  value="' + exportStudentShow.pageInfo.navigatepageNums[index] + '" style="margin-right: 4px"> ' + exportStudentShow.pageInfo.navigatepageNums[index] + '</a>' +
+                            '</li>' +
+                            '</ul>'
+                    }),
+
+                        html1 += '<ul  class="pagination pagination-green margin-bottom-10">' +
+                            '<li id="' + exportStudentShow.pageInfo.nextPage + '" onclick="pageShow(this)" value="' + exportStudentShow.pageInfo.nextPage + '" >' +
+                            '<a href="#"><i class="fa fa-chevron-right">' + '</i>' + '</a>' +
+                            '</li>' +
+                            '</ul>' +
+                            '</div>' +
+                            '<div id="show_page_info" class="col-md-4 col-md-offset-1">' +
+                            '<span>当前第' + exportStudentShow.pageInfo.pageNum + '页</span>' +
+                            '<span>总共' + exportStudentShow.pageInfo.pages + '页</span>' +
+                            '<span>总共' + exportStudentShow.pageInfo.total + '条记录</span>' +
+                            '</div>' +
+                            '</div>'
+                    $("#page").html(html1);
+                    //当到了最后一页时，如果点击下一页，页码pageNum会为0,但实际情况是pageHelper插件会当到了最后一页时，再点击下一页，会显示第一页的数据
+                    if (pageId != 0) {
+                        document.getElementById(pageId).className = "active"
+                    } else {
+                        document.getElementById(1).className = "active"
+                    }
+                },
+            }
+        );
+    }
+
+</script>
+</body>
+</html>

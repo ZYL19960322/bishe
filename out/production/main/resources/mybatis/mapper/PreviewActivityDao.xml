@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.dao.PreviewActivityDao">
+    <insert id="storePreviewActivity" parameterType="com.bishe.pojo.Activity"  >
+        INSERT INTO activity_preview (acti_id,acti_builder_id,acti_theme,acti_desc,acti_address,acti_extra_info,acti_comment,acti_category_id,acti_phone,
+        acti_theme_image,acti_holder,acti_start_time,acti_build_time,acti_endroll_time,acti_max_enroll,acti_now_enroll)
+        VALUES
+        (#{activity.actiId},#{activity.actiBuilderId},#{activity.actiTheme},#{activity.actiDesc},#{activity.actiAddress},#{activity.actiExtraInfo},#{activity.actiComment},#{activity.actiCategoryId},#{activity.actiPhone},#{activity.actiThemeImage},#{activity.actiHolder},#{activity.actiStartTime},#{activity.actiBuildTime},#{activity.actiEndrollTime},#{activity.actiMaxEnroll},#{activity.actiNowEnroll})
+    </insert>
+    <select id="selectPreviewActivityByStudId" parameterType="java.lang.String" resultType="com.bishe.pojo.Activity">
+        SELECT * FROM activity_preview WHERE acti_builder_id=#{studId};
+    </select>
+
+    <delete id="deletePreviewActivityByStudId">
+        DELETE FROM activity_preview WHERE acti_builder_id=#{studId};
+    </delete>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bishe.dao.MessageDao">
+    <insert id="addAMessage" parameterType="com.bishe.pojo.Message">
+        insert INTO message (message_id,message_acti_id,message_builder_id,message_create_time,message_acti_status) VALUES (#{messageId},#{messageActiId},#{messageBuilderId},#{messageCreateTime},#{messageActiStatus})
+    </insert>
+    <select id="selectMessageByActiId" parameterType="java.lang.String" resultType="com.bishe.pojo.Message">
+        SELECT * FROM message WHERE message_acti_id=#{actiId}
+    </select>
+    <update id="changeMessageByMessageId" parameterType="com.bishe.pojo.Message">
+        UPDATE message <set>
+         message_create_time=#{messageCreateTime},
+         message_acti_status=#{messageActiStatus}
+    </set>
+        WHERE message_id=#{messageId}
+    </update>
+
+    <select id="selectMessageByRemindId" parameterType="java.lang.String" resultType="com.bishe.pojo.Message">
+        SELECT * FROM message WHERE  message_id=(select message_id FROM remind WHERE remind_id=#{remindId})
+    </select>
+</mapper>

@@ -1,0 +1,28 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.bishe.component.FileUploadProperties",
+      "name": "file",
+      "type": "com.bishe.component.FileUploadProperties"
+    },
+    {
+      "sourceType": "com.bishe.config.MyDruid",
+      "name": "spring.datasource",
+      "sourceMethod": "druid()",
+      "type": "javax.sql.DataSource"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.bishe.component.FileUploadProperties",
+      "name": "file.static-access-path",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.bishe.component.FileUploadProperties",
+      "name": "file.upload-folder",
+      "type": "java.lang.String"
+    }
+  ]
+}

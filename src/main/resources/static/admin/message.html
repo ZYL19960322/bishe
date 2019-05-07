@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>2019@ZYL.BS</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="admin/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="admin/css/styles.css"/>
+    <link rel="stylesheet" href="admin/css/styles-responsive.css"/>
+    <link rel="stylesheet" href="admin/css/plugins.css"/>
+    <link rel="stylesheet" href="admin/css/perfect-scrollbar.css"/>
+    <link rel="stylesheet" href="admin/css/theme-default.css" type="text/css" id="skin_color"/>
+    <link rel="stylesheet" href="admin/css/print.css" type="text/css" media="print"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<body>
+<!-- start: SLIDING BAR (SB) -->
+<div class="main-wrapper">
+    <!-- start: TOPBAR -->
+    <header class="topbar navbar navbar-inverse navbar-fixed-top inner">
+        <!-- start: TOPBAR CONTAINER -->
+        <div class="container">
+            <div class="navbar-header">
+                <a class="sb-toggle-left hidden-md hidden-lg" href="#main-navbar">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <!-- start: LOGO -->
+                <a class="navbar-brand" href="index.html">
+                    <img src="admin/images/logo.png" alt="Rapido"/>
+                </a>
+                <!-- end: LOGO -->
+            </div>
+            <div class="topbar-tools">
+                <!-- start: TOP NAVIGATION MENU -->
+                <ul class="nav navbar-right">
+                    <!-- start: USER DROPDOWN -->
+                    <li class="dropdown current-user">
+                        <a class="dropdown-toggle" href="#">
+                           <span class="username hidden-xs">新审核消息<span class="notifications-count badge badge-default"
+                                                                         id="msg"></span></span>
+                        </a>
+                    </li>
+                    <!-- end: USER DROPDOWN -->
+                </ul>
+                <!-- end: TOP NAVIGATION MENU -->
+            </div>
+        </div>
+        <!-- end: TOPBAR CONTAINER -->
+    </header>
+    <div class="main-container inner">
+        <!-- start: PAGE -->
+        <div class="main-content">
+            <div class="container" style="position: relative">
+                <nav id="pageslide-left" class="pageslide inner">
+                    <div class="navbar-content">
+                        <!-- start: SIDEBAR -->
+                        <div class="main-navigation left-wrapper transition-left">
+                            <div class="user-profile border-top padding-horizontal-10 block">
+                                <div class="inline-block">
+                                    <img src="admin/images/avatar-1.jpg" style="width: 50px;height: 50px"/>
+                                </div>
+                                <div class="inline-block">
+                                    <h5 class="no-margin">欢迎您来到</h5>
+                                    <h4 class="no-margin">报名管理系统</h4>
+                                </div>
+                            </div>
+                            <!-- start: MAIN NAVIGATION MENU -->
+                            <ul class="main-navigation-menu">
+                                <li>
+                                    <a href="toAdminIndexPage"><i class="fa fa-home"></i> <span
+                                            class="title">系统首页</span> </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><i class="fa fa-th-large"></i> <span class="title"> 学生管理 </span><i
+                                            class="icon-arrow"></i> </a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a href="adStudentInfo">
+                                                <span class="title">学生信息</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="cancelStudent">
+                                                <span class="title">注销学生</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> <span
+                                            class="title">活动管理</span><i class="icon-arrow"></i> </a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a href="selectActivityListByStatusId?statusId=2">
+                                                <span class="title">活动报名中</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="selectActivityListByStatusId?statusId=3">
+                                                <span class="title">活动筹办中</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="selectActivityListByStatusId?statusId=4">
+                                                <span class="title">活动举办中</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="selectActivityListByStatusId?statusId=5">
+                                                <span class="title">活动已结束</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="active open">
+                                    <a href="javascript:void(0)"><i class="fa fa-cubes"></i> <span
+                                            class="title">消息管理</span><i class="icon-arrow"></i> </a>
+                                    <ul class="sub-menu">
+                                        <li class="active">
+                                            <a href="selectCheckingActivityByAdminId">
+                                                <span class="title">新审核消息</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="selectCheckAgainActivityByAdminId">
+                                                <span class="title">再审核消息</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="selectAllRemindMessage">
+                                                <span class="title">提醒型消息</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="selectUndealMessageByAdminId">
+                                                <span class="title">未处理消息</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="selectFinishedMessageByAdminId">
+                                                <span class="title">已完成消息</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="slide-tools">
+                        <div class="col-xs-6 text-left no-padding">
+                        </div>
+                        <div class="col-xs-6 text-right no-padding">
+                            <a class="btn btn-sm log-out text-right" href="adminLoginOut">
+                                <i class="fa fa-power-off"></i> Log Out
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+                <div class="toolbar row">
+                    <div class="col-sm-6 hidden-xs">
+                        <div class="page-header" style="margin-top: 10px;margin-bottom: 5px">
+                            <h2>新审核消息</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 12px">
+                    <div class="col-md-12" style="padding-right: 10px;padding-left: 5px">
+                        <!-- start: EXPORT DATA TABLE PANEL  -->
+                        <div class="panel panel-white">
+                            <div class="panel-body">
+                                <div id="timeline" class="demo1">
+                                    <div class="timeline">
+                                        <div class="spine"></div>
+                                        <div class="date_separator" id="november" data-appear-top-offset="-200">
+                                            <span>新审核列表</span>
+                                        </div>
+                                        <div class="my"
+                                             style="display: none;opacity: 1;z-index: 99;float: right;position: absolute;top: 0px;right: 0px;left:0px; bottom: 0px;background-color: palegreen;margin-right: 10%;margin-top: 6%;margin-left: 10%;margin-bottom: 5%;overflow:scroll">
+                                            <div>
+                                                <div class="col-sm-12 panel panel-white">
+                                                    <div class="tabbable">
+                                                        <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue"
+                                                            id="myTab4">
+                                                            <!--这里只是为了页面显示出上边框（起占位作用）-->
+                                                            <li><a></a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <div id="panel_overview" class="tab-pane fade in active">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--自己的-->
+                                        <ul class="columns" style="padding: 0;margin: 0rem">
+                                            <li th:each="activity:${checkAgainActivityList}">
+                                                <div class="timeline_element partition-white">
+                                                    <div class="timeline_content">
+                                                        <div class="row">
+                                                            <div class="col-md-5 col-xs-6" style="padding-right: 0"><img
+                                                                    src="admin/images/photodune-4043508-3d-modern-office-room-l.jpg"
+                                                                    th:src="${activity.actiThemeImage}"
+                                                                    style="width: 200px;height: 125px" alt="offce"
+                                                                    class="img-responsive"/>
+                                                            </div>
+                                                            <div class="col-md-7 col-xs-6"
+                                                                 style="padding-left: 10px;position: relative;float: left;display: block;font-size: 11px">
+                                                                <div>
+                                                                    <b>活动主题:</b>
+                                                                    <td id="theme" th:text="${activity.actiTheme}">
+                                                                        大学生创业大赛
+                                                                    </td>
+                                                                </div>
+                                                                <div>
+                                                                    <b>活动类型:</b>
+                                                                    <td id="category"
+                                                                        th:text="${activity.actiCategoryName}">科技比赛
+                                                                    </td>
+                                                                </div>
+                                                                <div>
+                                                                    <b>活动地点</b>
+                                                                    <td id="address" th:text="${activity.actiAddress}">
+                                                                        惠州市惠州学院五号楼304
+                                                                    </td>
+                                                                </div>
+                                                                <div>
+                                                                    <b>联系电话</b>
+                                                                    <td id="phone" th:text="${activity.actiPhone}">
+                                                                        13794587900
+                                                                    </td>
+                                                                </div>
+                                                                <div>
+                                                                    <b>报名情况</b>
+                                                                    <td id="enroll"
+                                                                        th:text="${activity.actiNowEnroll}+'/'+${activity.actiMaxEnroll}">
+                                                                        0/36
+                                                                    </td>
+                                                                </div>
+                                                                <div>
+                                                                    <b>活动举办方:</b>
+                                                                    <td id="holder" th:text="${activity.actiHolder}">
+                                                                        大学生创业指导中心
+                                                                    </td>
+                                                                </div>
+                                                                <div>
+                                                                    <b>活动开始时间</b>
+                                                                    <td id="startTime"
+                                                                        th:text="${activity.actiStartTime}">
+                                                                        2019-02-15-14:35
+                                                                    </td>
+                                                                </div>
+
+                                                                <div>
+                                                                    <b>报名截止时间</b>
+                                                                    <td id="endEnrollTime"
+                                                                        th:text="${activity.actiEndrollTime}">
+                                                                        2019-02-15-14:35
+                                                                    </td>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="rows">
+                                                        <b>活动简介</b>
+                                                        <p class="ps-scrollbar-y-rail"
+                                                           style="overflow: auto;height: 135px;width: 100%;text-indent: 3rem"
+                                                           th:text="${activity.actiDesc}">
+                                                            魔方，也称鲁比克方块，台湾称为魔术方块，香港称为扭计骰，英文名字是：Rubik's
+                                                            Cube。三阶魔方是由富有弹性的硬塑料制成的6面正方体。核心是一个轴，并由26个小正方体组成。包括中心方块有6个，固定不动，只有一面有颜色。边角方块（角块）有8个(3面有色)可转动。边缘方块（棱块）12个(2面有色）亦可转动。
+                                                            此外除三阶魔方外还有二阶、四阶至十七阶，近代新发明的魔方越来越多，它们造型不尽相同，但都是趣味无穷。玩具在出售时，小立方体的排列使大立方体的每一面都具有相同的颜色。当大立方体的某一面平动旋转时，其相邻的各面单一颜色便被破坏，而组成新图案立方体，再转再变化，形成每一面都由不同颜色的小方块拼成。据专家估计三阶魔方所有可能的图案构成约为4.3×10^19。玩法是将打乱的立方体通过转动尽快恢复成六面成单一颜色。
+                                                            当初厄尔诺·鲁比克(Ern.Rubik
+                                                            )教授发明魔方，仅仅是作为一种帮助学生增强空间思维能力的教学工具。但要使那些小方块可以随意转动而不散开，不仅是个机械难题，这牵涉到木制的轴心，座和榫头等。直到魔方在手时，他将魔方转了几下后，才发现如何把混乱的颜色方块复原竟是个有趣而且困难的问题。鲁比克就决心大量生产这种玩具。魔方发明后不久就风靡世界，人们发现这个小方块组成的玩意实在是奥妙无穷。
+                                                        </p>
+                                                        <b>备注</b>
+                                                        <p th:text="${activity.actiComment}">
+                                                            有讲座章可以盖
+                                                        </p>
+                                                        <b>附加信息</b>
+                                                        <p th:text="${activity.actiExtraInfo}">
+                                                            希望管理员尽快通过
+                                                        </p>
+                                                    </div>
+                                                    <div class="readmore">
+                                                        <button type="button" onclick="checkPass(this)"
+                                                                th:id="${activity.adminMessageId}"
+                                                                style="margin-left: 3.5%"
+                                                                class="col-md-3  btn btn-success">
+                                                            审核通过
+                                                        </button>
+                                                        <button href="#"
+                                                                class="col-md-3 col-md-offset-1 btn btn-light-blue"
+                                                                th:id="${activity.adminMessageId}"
+                                                                onclick="setMessageHasReaded(this)">
+                                                            已读消息
+                                                        </button>
+                                                        <input style="display: none;z-index: 99;left: 10px;top: 10px;color: red"
+                                                               th:id="${activity.actiTheme}" type="text"/>
+                                                        <button type="button" th:id="${activity.adminMessageId}"
+                                                                onclick="backMessage(this)"
+                                                                class="col-md-3 col-md-offset-1 btn btn-warning">
+                                                            回复消息
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end: TIMELINE PANEL -->
+                    </div>
+                </div>
+                <!-- end: PAGE CONTENT-->
+            </div>
+            <div class="subviews">
+                <div class="subviews-container"></div>
+            </div>
+        </div>
+    </div>
+    <footer class="inner">
+        <div class="footer-inner">
+            <div class="pull-left">
+                2019 @ ZYL.BS
+            </div>
+            <div class="pull-right">
+                <span class="go-top"><i class="fa fa-chevron-up"></i></span>
+            </div>
+        </div>
+    </footer>
+</div>
+<script src="admin/js/jquery-1.11.1.min.js"></script>
+<script src="admin/js/jquery-2.1.1.min.js"></script>
+<script src="admin/js/bootstrap.min.js"></script>
+<script src="admin/js/jquery.mousewheel.js"></script>
+<script src="admin/js/perfect-scrollbar.js"></script>
+<script src="admin/js/index.js"></script>
+<script src="admin/js/main.js"></script>
+<script src="admin/js/jquery.validate.min.js"></script>
+<script src="admin/js/adminlogin.js"></script>
+<script src="admin/js/jquery.scrollTo.min.js"></script>
+<script src="layer/layer.js"></script>
+<script>
+    function setMessageHasReaded(a) {
+        var adminMessageId = a.id;
+        $.ajax({
+            url: "/setMessageHasReaded",
+            type: 'POST',
+            data: {adminMessageId: adminMessageId},
+            dataType: 'json',
+            cathe: false,
+            success: function (result) {
+                if (result == true) {
+                    layer.msg('消息设为已读成功', {icon: 1, time: 1000});
+                    window.location.reload();
+                }
+                if (result == false) {
+                    layer.msg('消息设为已读失败');
+                }
+            },
+            error: function () {
+                layer.msg('消息设为已读出错');
+            }
+        });
+    }
+</script>
+
+<script>
+    function backMessage(a) {
+        var adminMessageId = a.id;
+        layer.prompt({title: '请输入您的审核意见', formType: 3}, function (text, index) {
+            layer.close(index);
+            $.ajax({
+                url: "/backMessage",
+                type: 'POST',
+                data: {adminMessageId: adminMessageId, messageContent: text},
+                dataType: 'json',
+                cathe: false,
+                success: function (result) {
+                    if (result == true) {
+                        layer.msg('审核消息成功', {icon: 1, time: 1000});
+                        window.location.reload();
+                    }
+                    if (result == false) {
+                        layer.msg('审核消息失败');
+                    }
+                },
+                error: function () {
+                    layer.msg('审核消息出错');
+                }
+            })
+            layer.msg('您输入的是' + text);
+        });
+    }
+</script>
+<script>
+    jQuery(document).ready(function () {
+        Main.init();
+        SVExamples.init();
+        Timeline.init();
+    });
+</script>
+<script>
+    function reCall(a) {
+        var reCall = a.class;
+        alert(reCall);
+        $("#reCall").show();
+        alert("执行看");
+    }
+</script>
+<script>
+    function checkPass(a) {
+        var adminMessageId = a.id;
+        $.ajax(
+            {
+                url: "/adminCheckActivityPass",
+                type: 'POST',
+                data: {adminMessageId: adminMessageId},
+                async: false,
+                dataType: 'json',
+                success: function (result) {
+                    if (result == true) {
+                        alert("审核通过成功");
+                    }
+                    //刷新页面
+                    window.location.reload();
+                },
+                error: function () {
+                    alert("审核通过失败了");
+                }
+            }
+        );
+    }
+</script>
+<script type="text/javascript">
+    var websocket = null;
+    //判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+        //这个url只能是window.location.host不能是localhost：8080或127.0.0.1:8080,详细原因参看https://blog.csdn.net/csu_passer/article/details/78536060(超级大坑)
+        var host = window.location.host;
+        websocket = new WebSocket("ws://" + host + "/admin/webSocket/1");
+    }
+    else {
+        alert("对不起！你的浏览器不支持webSocket")
+    }
+    //连接发生错误的回调方法
+    websocket.onerror = function () {
+        setMessageInnerHTML();
+    };
+    //连接成功建立的回调方法
+    websocket.onopen = function (event) {
+        // setMessageInnerHTML(event.data);
+    };
+    //接收到消息的回调方法
+    websocket.onmessage = function (event) {
+        setMessageInnerHTML(event.data);
+        //window.location.reload();
+    };
+    //连接关闭的回调方法
+    websocket.onclose = function () {
+        setMessageInnerHTML();
+    };
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，
+    // 防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function () {
+        var is = confirm("确定关闭窗口？");
+        if (is) {
+            websocket.close();
+        }
+    };
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+        $("#msg").text(innerHTML)
+    };
+    //关闭连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+    //发送消息
+    function send() {
+        var message = $("#text").val();
+        websocket.send(message);
+        $("#text").val("");
+    }
+</script>
+</body>
+<!-- end: BODY -->
+</html>

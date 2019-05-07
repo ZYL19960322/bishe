@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.dao.RemindDao">
+    <insert id="addARemind" parameterType="com.bishe.pojo.Remind">
+        INSERT INTO remind (remind_id,remind_admin_id,remind_acti_id,message_id,remind_comment,remind_create_time,remind_if_deal) VALUES(#{remindId},#{remindAdminId},#{remindActiId},#{messageId},#{remindComment},#{remindCreateTime},#{remindIfDeal})
+    </insert>
+
+    <select id="selectRemindByActiId" parameterType="java.lang.String" resultType="com.bishe.pojo.Remind">
+        SELECT * FROM remind WHERE remind_acti_id=#{actiId} limit 0,1
+    </select>
+    <delete id="deleteRemindByActiId" parameterType="java.lang.String">
+        DELETE FROM remind WHERE remind_acti_id=#{actiId}
+    </delete>
+    <select id="selectAllRemindByAdminId" parameterType="java.lang.String" resultType="com.bishe.pojo.Remind">
+        SELECT * FROM remind WHERE remind_admin_id=#{adminId} ORDER BY remind_create_time DESC
+    </select>
+    <delete id="deleteRemindByRemindId" parameterType="java.lang.String">
+        DELETE FROM remind WHERE remind_id=#{remindId}
+    </delete>
+    <update id="updateRemindStatusByMessageId" parameterType="java.lang.String">
+        UPDATE remind <set> remind_if_deal=1 </set> WHERE message_id=#{#messageId}
+    </update>
+</mapper>

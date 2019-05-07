@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initical-scale=1"/>
+    <title>首页</title>
+    <script src="front/js/fontSize.js"></script>
+    <link rel="stylesheet" href="front/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="front/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="front/css/style.css"/>
+    <script src="front/js/jquery-3.3.1.min.js"></script>
+    <script src="front/js/bootstrap.min.js"></script>
+    <script src="front/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="front/js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+</head>
+<body>
+<header class="shead">首页</header>
+<div class="indexdiv container" id="myDiv">
+    <!-- boot form表单 -->
+    <form action="" class="mt04" role="form">
+        <div class="form-group row">
+            <div class="col-xs-7"><input type="text" id="searchCondition" class="form-control"
+                                         placeholder="请输入您需要搜索的活动"/></div>
+            <div class="col-xs-3 fr " onclick="shaixuan()">
+                <button type="button" class="btn btn-info btn-block">筛选</button>
+            </div>
+            <div class="col-xs-2 fr pd0 " onclick="mysearch()">
+                <button type="button" class="btn btn-info btn-block">搜索</button>
+            </div>
+        </div>
+    </form>
+    <div class="row indexnav">
+        <div class="col-xs-4 active" id="quanbu">全部</div>
+        <div class="col-xs-4" id="recommend">推荐</div>
+        <div class="col-xs-4" id="hot">热门活动</div>
+    </div>
+</div>
+<div class="index-cont" id="myList">
+    <ul class="">
+        <!--添加a标签，当点击活动时，跳转到活动详情页面，由于a标签有默认颜色，为了不使用a标签的默认颜色故
+         添加style="color: inherit"-->
+        <li class="cont-item">
+            <a style="color: inherit">
+                <div class="fl">
+                    <img src="front/img/24.jpg" alt="" th:src="${activity.actiThemeImage}"/></div>
+                <div class="fr">
+                    <div class="zt" th:text="${activity.actiTheme}">2018年考研经验交流会很符合健康健康</div>
+                    <div class="jj" th:text="${activity.actiDesc}">
+                        简介简介简介简介简介简介简介简介简介简介简介简介简介简介哥哥哥哥哥哈哈哈简介简介简介简介简介简介简介简介简介简
+                    </div>
+                    <div class="bot">
+                        <span class="num">已报名/可报名:</span>
+                        <span class="num1" th:text="${activity.actiNowEnroll}+'/'+${activity.actiMaxEnroll}"></span>
+                        <span class="tit" >审核中</span><br/>
+                        <span class="end">报名截止时间:</span>
+                        <span class="time" th:text="${activity.actiEndrollTime}"></span>
+                    </div>
+                </div>
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="form-group row">
+        <!--取消发布不能操作什么，直接重新回到发布页面-->
+            <div class="col-xs-5 col-xs-offset-1">
+                <button type="button" class=" col-xs-12 btn btn-info" onclick="deletePublishPreview()">取消发布</button>
+            </div>
+        <div class="col-xs-5">
+            <button type="button" class=" col-xs-12 btn btn-warning" onclick="previewToPublish()">确定发布</button>
+        </div>
+    </div>
+</div>
+<footer class="sfooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3">
+                <a class="active">
+                    <span class="glyphicon glyphicon-home"></span>
+                    <span class="">首页</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a>
+                    <span class="glyphicon glyphicon-edit"></span>
+                    <span class="">发布</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a>
+                    <span class="glyphicon glyphicon-bell"></span>
+                    <span class="">消息</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a>
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span class="">我的</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    function previewToPublish() {
+        $.ajax({
+            url: "/previewToPublish",
+            type: 'get',
+            cache: false,
+            //async: false,		 //默认为true即异步，设置为false时为同步
+            dataType: "json",
+            // 前端提交到后台的数据满足基本要求时则返回执行success:的函数
+            success: function (data) {
+                if (data === true) {
+                    alert("发布成功");
+                    window.location.href = ("/toPublishPage");
+                }
+                if (data === false) {
+                    alert("发布失败");
+                }
+            },
+                //前端提交到后台的数据不满足基本要求时则返回执行error:的函数
+            error: function (data) {
+                alert("发布出错了");
+            }
+        });
+    }
+</script>
+<script>
+    function deletePublishPreview() {
+       var result= confirm("确定取消发布吗?");
+       if(result==true){
+           window.location.href = ("/toPublishPage");
+       }
+       //否则什么也不做
+    }
+
+</script>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initical-scale=1"/>
+    <title>个人中心</title>
+    <link rel="stylesheet" href="front/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="front/css/style.css"/>
+    <script src="front/js/fontSize.js"></script>
+</head>
+<body>
+<header class="shead">个人中心</header>
+<div class="userbg">
+    <!--th:if="${userResponse.student.studImagePath!=null}" th:src="${userResponse.student.studImagePath}"   th:src="${userResponse.student.studImagePath!=null}? ${../front/img/face2.png}  src="../front/img/face2.png" -->
+    <div class="userimg"><img id="studImagePath" th:src="${userResponse.student.studImagePath}" alt=""
+                              onerror="this.src='../front/img/face2.png;this.onerror=null'"/></div>
+</div>
+<div class="usercont">
+    <ul class="userul">
+        <li class="item clearfix">
+            <span class="glyphicon glyphicon-user "></span>
+            个人信息
+            <a href="userInfo" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+        </li>
+        <li class="item clearfix">
+            <span class="glyphicon glyphicon-align-justify"></span>
+            审核中活动 <span class="badge" id="checking" th:value="${userResponse.checkCount}"
+                        th:text="${userResponse.checkCount}">2</span>
+            <a th:href="@{/selectUserActivityListBySign(sign=8)}" class="fr"><span
+                    class="glyphicon glyphicon-chevron-right "></span></a>
+        </li>
+
+        <li class="item clearfix">
+            <span class="glyphicon glyphicon-check"></span>
+            已报名活动 <span class="badge" id="enrolling" th:value="${userResponse.enrolledCount}"
+                        th:text="${userResponse.enrolledCount}">2</span>
+            <a th:href="@{/selectUserActivityListBySign(sign=0)}" class="fr"><span
+                    class="glyphicon glyphicon-chevron-right "></span></a>
+        </li>
+        <li class="item clearfix">
+            <span class="glyphicon glyphicon-send"></span>
+            进行中活动 <span class="badge" id="during"  th:value="${userResponse.duringCount}"   th:text="${userResponse.duringCount}">6</span>
+            <a th:href="@{/selectUserActivityListBySign(sign=1)}" class="fr"><span
+                    class="glyphicon glyphicon-chevron-right "></span></a>
+        </li>
+        <li class="item clearfix">
+            <span class="glyphicon glyphicon-ok"></span>
+            已结束活动 <span class="badge" id="end"  th:value="${userResponse.endCount}" th:text="${userResponse.endCount}">7</span>
+            <a th:href="@{/selectUserActivityListBySign(sign=2)}" class="fr"><span
+                    class="glyphicon glyphicon-chevron-right "></span></a>
+        </li>
+        <li class="item clearfix" onclick="loginOut()">
+            <span class="glyphicon glyphicon-off"></span>
+            退出登录
+            <label class="fr" style="color: #337ab7;">
+                <span class=" glyphicon glyphicon-chevron-right"></span></label>
+        </li>
+    </ul>
+</div>
+<footer class="sfooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3">
+                <a th:href="@{/toIndexPage}">
+                    <span class="glyphicon glyphicon-home"></span>
+                    <span class="">首页</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a th:href="@{/toPublishPage}">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    <span class="">发布</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a th:href="@{/toMessagePage}">
+                    <span class="messagespan1" id="msg"></span>
+                    <span class="glyphicon glyphicon-bell"></span>
+                    <span class="">消息</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a th:href="@{/toUserPage}" class="active">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span class="">我的</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="front/js/jquery-3.3.1.min.js"></script>
+<script src="front/js/bootstrap.min.js"></script>
+<script src="layer/layer.js"></script>
+
+
+<script>
+    jQuery(document).ready(function () {
+        var count1 = $("#checking").text();
+        if (count1 == 0) {
+            document.getElementById("checking").style.display="none";
+        }
+
+        var count2 = $("#enrolling").text();
+        if (count2 == 0) {
+            document.getElementById("enrolling").style.display="none";
+        }
+
+        var  count4 = $("#during").text();
+        if (count4 == 0) {
+            document.getElementById("during").style.display="none";
+        }
+
+        var count5 = $("#end").text();
+        if (count5 == 0) {
+            document.getElementById("end").style.display="none";
+        }
+    });
+</script>
+<script>
+    function loginOut() {
+        layer.open({
+            content: '您确定退出登录吗？'
+            , btn: ['是的', '不要']
+            , title: false
+            , yes: function (index) {
+                window.location.href = ("/loginOut");
+                layer.close(index);
+            }
+        })
+    };
+
+</script>
+<script type="text/javascript">
+    var websocket = null;
+    //判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+        //这个url只能是window.location.host不能是localhost：8080或127.0.0.1:8080,详细原因参看https://blog.csdn.net/csu_passer/article/details/78536060(超级大坑)
+        var host = window.location.host;
+        websocket = new WebSocket("ws://" + host + "/student/webSocket");
+    }
+    else {
+        alert("对不起！你的浏览器不支持webSocket")
+    }
+    //连接发生错误的回调方法
+    websocket.onerror = function () {
+        setMessageInnerHTML();
+    };
+    //连接成功建立的回调方法
+    websocket.onopen = function (event) {
+    };
+    //接收到消息的回调方法
+    websocket.onmessage = function (event) {
+        setMessageInnerHTML(event.data);
+    };
+    //连接关闭的回调方法
+    websocket.onclose = function () {
+        setMessageInnerHTML();
+    };
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，
+    // 防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function () {
+        var is = confirm("确定关闭窗口？");
+        if (is) {
+            websocket.close();
+        }
+    };
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+        $("#msg").text(innerHTML)
+    };
+
+    //关闭连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+</script>
+</body>
+
+</html>

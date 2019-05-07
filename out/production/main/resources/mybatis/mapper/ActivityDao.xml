@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.dao.ActivityDao">
+
+    <insert id="studPublishActivity" parameterType="com.bishe.pojo.Activity" useGeneratedKeys="true" keyColumn="acti_id"
+            keyProperty="actiId">
+
+
+        INSERT INTO activity (acti_id,acti_builder_id,acti_theme,acti_desc,acti_address,acti_extra_info,acti_comment,acti_category_id,acti_phone,
+        acti_theme_image,acti_holder,acti_start_time,acti_build_time,acti_endroll_time,acti_max_enroll,acti_now_enroll)
+        VALUES
+        (#{activity.actiId},#{activity.actiBuilderId},#{activity.actiTheme},#{activity.actiDesc},#{activity.actiAddress},#{activity.actiExtraInfo},#{activity.actiComment},#{activity.actiCategoryId},#{activity.actiPhone},#{activity.actiThemeImage},#{activity.actiHolder},#{activity.actiStartTime},#{activity.actiBuildTime},#{activity.actiEndrollTime},#{activity.actiMaxEnroll},#{activity.actiNowEnroll})
+    </insert>
+
+
+    <select id="findAllActivity" resultType="com.bishe.pojo.Activity">
+        SELECT acti_id,acti_builder_id,acti_level,acti_theme,acti_desc,acti_address,acti_extra_info,acti_comment,
+         acti_category_id,a.acti_status_id,acti_phone,acti_theme_image,acti_holder,acti_end_time,acti_start_time,
+         acti_build_time,acti_endroll_time,acti_max_enroll,acti_now_enroll,acti_change_time ,b.acti_status_name FROM activity a LEFT JOIN  activity_status b ON a.acti_status_id=b.acti_status_id ORDER BY acti_build_time DESC ;
+    </select>
+
+    <select id="indexSelect" resultType="com.bishe.pojo.Activity" parameterType="com.bishe.dto.IndexRequest">
+        SELECT acti_id,acti_builder_id,acti_level,acti_theme,acti_desc,acti_address,acti_extra_info,acti_comment,
+        acti_category_id,a.acti_status_id,acti_phone,acti_theme_image,acti_holder,acti_end_time,acti_start_time,
+        acti_build_time,acti_endroll_time,acti_max_enroll,acti_now_enroll,acti_change_time ,b.acti_status_name FROM
+        activity a LEFT JOIN
+        activity_status b ON a.acti_status_id=b.acti_status_id
+        <where>
+            <if test="indexRequest.actiCategory!=null">
+                and acti_category_id = #{indexRequest.actiCategory}
+            </if>
+            <if test="indexRequest.actiStatus!=null">
+                and a.acti_status_id = #{indexRequest.actiStatus}
+            </if>
+            <if test="indexRequest.actiStartEnrollTime!=null">
+                and acti_endroll_time &gt;= #{indexRequest.actiStartEnrollTime}
+            </if>
+            <if test="indexRequest.actiEndEnrollTime!=null">
+                and acti_endroll_time &lt;= #{indexRequest.actiEndEnrollTime}
+            </if>
+        </where>
+        ORDER BY acti_build_time DESC ;
+    </select>
+
+    <select id="indexSearch" parameterType="java.lang.String" resultType="com.bishe.pojo.Activity">
+        SELECT acti_id,acti_builder_id,acti_level,acti_theme,acti_desc,acti_address,acti_extra_info,acti_comment,
+        acti_category_id,a.acti_status_id,acti_phone,acti_theme_image,acti_holder,acti_end_time,acti_start_time,
+        acti_build_time,acti_endroll_time,acti_max_enroll,acti_now_enroll,acti_change_time ,b.acti_status_name FROM
+        activity a LEFT JOIN
+        activity_status b ON a.acti_status_id=b.acti_status_id
+        <where>
+            <if test="searchCondition!=null">
+                and acti_theme like '%${searchCondition}%'
+            </if>
+        </where>
+        ORDER BY acti_build_time DESC ;
+    </select>
+
+    <select id="indexRecommend" resultType="com.bishe.pojo.Activity">
+        SELECT acti_id,acti_builder_id,acti_level,acti_theme,acti_desc,acti_address,acti_extra_info,acti_comment,
+        acti_category_id,a.acti_status_id,acti_phone,acti_theme_image,acti_holder,acti_end_time,acti_start_time,
+        acti_build_time,acti_endroll_time,acti_max_enroll,acti_now_enroll ,acti_change_time,b.acti_status_name FROM activity a LEFT JOIN  activity_status b ON a.acti_status_id=b.acti_status_id
+        WHERE acti_level > 1
+        ORDER BY acti_level DESC ;
+    </select>
+
+    <select id="indexHot" resultType="com.bishe.pojo.Activity">
+        SELECT acti_id,acti_builder_id,acti_level,acti_theme,acti_desc,acti_address,acti_extra_info,acti_comment,
+        acti_category_id,a.acti_status_id,acti_phone,acti_theme_image,acti_holder,acti_end_time,acti_start_time,
+        acti_build_time,acti_endroll_time,acti_max_enroll,acti_now_enroll ,acti_change_time,b.acti_status_name FROM activity a LEFT JOIN  activity_status b ON a.acti_status_id=b.acti_status_id
+        ORDER BY acti_now_enroll DESC ;
+    </select>
+
+    <select id="selectActivityById" resultType="com.bishe.pojo.Activity" parameterType="java.lang.String">
+        SELECT acti_id,acti_builder_id,acti_level,acti_theme,acti_desc,acti_address,acti_extra_info,acti_comment,
+        d.acti_category_id,a.acti_status_id,acti_phone,acti_theme_image,acti_holder,acti_end_time,acti_start_time,
+        acti_build_time,acti_endroll_time,acti_max_enroll,acti_now_enroll,acti_change_time ,b.acti_status_name ,d.acti_category_name FROM activity a LEFT JOIN  activity_status b ON a.acti_status_id=b.acti_status_id LEFT JOIN activity_category d ON a.acti_category_id=d.acti_category_id WHERE acti_id=#{actiId} ;
+    </select>
+
+
+    <update id="addEnrollStudent" parameterType="java.lang.String">
+        UPDATE activity set acti_now_enroll=acti_now_enroll+1  WHERE acti_id=#{actiId};
+    </update>
+
+
+    <select id="selectEnrollingActivityList" resultType="com.bishe.pojo.Activity" parameterType="java.lang.String">
+        SELECT t2.acti_id,t2.acti_builder_id,t2.acti_level,t2.acti_theme,t2.acti_desc,t2.acti_address,t2.acti_extra_info,t2.acti_comment,
+        t2.acti_category_id,t2.acti_status_id,t2.acti_phone,t2.acti_theme_image,t2.acti_holder,t2.acti_end_time,t2.acti_start_time,
+        t2.acti_build_time,t2.acti_endroll_time,t2.acti_max_enroll,t2.acti_now_enroll ,t2.acti_change_time,t3.acti_status_name
+        FROM data_info as t1 LEFT JOIN activity as t2 ON t1.data_acti_id=t2.acti_id LEFT JOIN activity_status as t3 ON t2.acti_status_id=t3.acti_status_id WHERE t1.data_stud_id=#{studId} AND t2.acti_status_id=2;
+    </select>
+
+
+    <select id="selectDuringActivityList" resultType="com.bishe.pojo.Activity" parameterType="java.lang.String">
+        SELECT t2.acti_id,t2.acti_builder_id,t2.acti_level,t2.acti_theme,t2.acti_desc,t2.acti_address,t2.acti_extra_info,t2.acti_comment,
+        t2.acti_category_id,t2.acti_status_id,t2.acti_phone,t2.acti_theme_image,t2.acti_holder,t2.acti_end_time,t2.acti_start_time,
+        t2.acti_build_time,t2.acti_endroll_time,t2.acti_max_enroll,t2.acti_now_enroll,t2.acti_change_time ,t3.acti_status_name
+        FROM data_info as t1 LEFT JOIN activity as t2 ON t1.data_acti_id=t2.acti_id LEFT JOIN activity_status as t3 ON t2.acti_status_id=t3.acti_status_id WHERE t1.data_stud_id=#{studId} AND t3.acti_status_id IN (3,4);
+    </select>
+
+    <select id="selectEndActivityList" resultType="com.bishe.pojo.Activity" parameterType="java.lang.String">
+        SELECT t2.acti_id,t2.acti_builder_id,t2.acti_level,t2.acti_theme,t2.acti_desc,t2.acti_address,t2.acti_extra_info,t2.acti_comment,
+        t2.acti_category_id,t2.acti_status_id,t2.acti_phone,t2.acti_theme_image,t2.acti_holder,t2.acti_end_time,t2.acti_start_time,
+        t2.acti_build_time,t2.acti_endroll_time,t2.acti_max_enroll,t2.acti_now_enroll,t2.acti_change_time ,t3.acti_status_name
+        FROM data_info as t1 LEFT JOIN activity as t2 ON t1.data_acti_id=t2.acti_id LEFT JOIN activity_status as t3 ON t2.acti_status_id=t3.acti_status_id WHERE t1.data_stud_id=#{studId} AND t3.acti_status_id =5;
+    </select>
+
+
+    <select id="selectActivityCountByStatus" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM activity WHERE acti_builder_id=#{studId} AND acti_status_id =#{statusId};
+    </select>
+
+    <select id="selectActivityListByStatus" resultType="com.bishe.pojo.Activity">
+        SELECT acti_id,acti_builder_id,acti_level,acti_theme,acti_desc,acti_address,acti_extra_info,acti_comment,
+        acti_category_id,a.acti_status_id,acti_phone,acti_theme_image,acti_holder,acti_end_time,acti_start_time,
+        acti_build_time,acti_endroll_time,acti_max_enroll,acti_now_enroll,acti_change_time ,b.acti_status_name FROM activity a LEFT JOIN  activity_status b ON a.acti_status_id=b.acti_status_id WHERE a.acti_status_id=#{statusId} AND a.acti_builder_id=#{studId} ORDER BY acti_build_time DESC ;
+    </select>
+
+    <delete id="deletePublishById" parameterType="java.lang.String">
+        DELETE FROM activity WHERE acti_id=#{actiId};
+    </delete>
+
+
+    <update id="changeActivityThemeImage" parameterType="java.lang.String">
+        UPDATE activity <set>acti_theme_image=#{actiThemeImage},acti_change_time=#{changeTime}</set> WHERE
+        acti_id=#{actiId};
+    </update>
+
+    <update id="changeActivityInfo" parameterType="com.bishe.pojo.Activity">
+        UPDATE activity
+        <set>
+            acti_theme=#{actiTheme},
+            acti_desc=#{actiDesc},
+            acti_address=#{actiAddress},
+            acti_extra_info=#{actiExtraInfo},
+            acti_comment=#{actiComment},
+            acti_category_id=#{actiCategoryId},
+            acti_phone=#{actiPhone},
+            acti_holder=#{actiHolder},
+            acti_start_time=#{actiStartTime},
+            acti_endroll_time=#{actiEndrollTime},
+            acti_change_time=#{actiChangeTime},
+            acti_max_enroll=#{actiMaxEnroll},
+            acti_level=#{actiLevel},
+            acti_status_id=#{actiStatusId},
+            acti_end_time=#{actiEndTime},
+            acti_start_time=#{actiStartTime},
+            acti_endroll_time=#{actiEndrollTime},
+            acti_max_enroll=#{actiMaxEnroll},
+            acti_now_enroll=#{actiNowEnroll},
+        </set> WHERE acti_id=#{actiId};
+    </update>
+
+
+
+
+
+
+    <select id="selectEnrollingActivity" resultType="com.bishe.pojo.Activity">
+        SELECT *
+        FROM activity WHERE  acti_status_id =2
+    </select>
+
+
+</mapper>

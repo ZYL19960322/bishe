@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>2019@ZYL.BS</title>
+	<meta charset="utf-8"/>
+	<meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1"/>
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/styles.css"/>
+	<link rel="stylesheet" href="css/styles-responsive.css"/>
+	<link rel="stylesheet" href="css/plugins.css"/>
+	<link rel="stylesheet" href="css/perfect-scrollbar.css"/>
+	<link rel="stylesheet" href="css/theme-default.css" type="text/css" id="skin_color"/>
+	<link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>
+	<link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<!-- end: HEAD -->
+<!-- start: BODY -->
+<body class="login">
+<div class="row">
+	<div class="main-login col-xs-10 col-xs-offset-1  col-sm-8 col-sm-offset-2  col-md-4  col-md-offset-4">
+		<div class="logo">
+			<img src="images/logo.png" />
+		</div>
+		<!-- start: LOGIN BOX -->
+		<div class="box-login">
+			<h3>管理员登录</h3><h6 id="loginInfo" style="text-align: center;color: red"></h6>
+			<form class="form-login" id="loginForm"   >
+				<div class="errorHandler alert alert-danger no-display">
+					<i class="fa fa-remove-sign"></i> 您的信息有错误,请检查！
+				</div>
+				<fieldset>
+					<div class="form-group">
+								<span class="input-icon">
+									<input type="text" class="form-control" id="loginName" name="username"  maxlength="6" placeholder="Username" />
+									<i class="fa fa-user"></i> </span>
+					</div>
+					<div class="form-group form-actions">
+								<span class="input-icon">
+									<input type="password" class="form-control password" id="loginPassword" name="password" maxlength="12" placeholder="Password"/>
+									<i class="fa fa-lock"></i>
+								</span>
+					</div>
+					<div class="form-actions" style="margin-top: 0;padding-top: 0" >
+						<button type="button" onclick="toLogin()" class="btn btn-green pull-right">
+							登录 <i class="fa fa-arrow-circle-right"></i>
+						</button>
+					</div>
+					<div class="new-account">
+						没有账号?
+						<a href="#" class="register">
+							去注册
+						</a>
+					</div>
+				</fieldset>
+			</form>
+			<!-- start: COPYRIGHT -->
+			<div class="copyright">
+				2019 @ ZYL.BS
+			</div>
+			<!-- end: COPYRIGHT -->
+		</div>
+		<!-- end: LOGIN BOX -->
+		<!-- end: FORGOT BOX -->
+		<!-- start: REGISTER BOX -->
+		<div class="box-register">
+			<h3>管理员注册</h3><h6 id="registerInfo" style="text-align: center;color: red"></h6>
+			<form class="form-register" id="registerForm" >
+				<div class="errorHandler alert alert-danger no-display">
+					<i class="fa fa-remove-sign"></i> 您的信息有错误，请检查！
+				</div>
+				<fieldset>
+
+					<div class="form-group">
+								<span class="input-icon">
+									<input type="text" class="form-control" id="name" maxlength="6" name="full_name" placeholder="Username"/>
+									<i class="fa fa-user"></i> </span>
+					</div>
+					<div class="form-group">
+								<span class="input-icon">
+									<input type="password" class="form-control" id="password" maxlength="12" name="password" placeholder="Password" />
+									<i class="fa fa-lock"></i> </span>
+					</div>
+					<div class="form-group">
+								<span class="input-icon">
+									<input type="password" class="form-control" id="passwordAgain" name="password_again" maxlength="12" placeholder="Password Again" />
+									<i class="fa fa-lock"></i> </span>
+					</div>
+
+					<div class="form-actions">
+						已有账号?
+						<a href="/admin/come" class="go-back">
+							去登陆
+						</a>
+						<button type="button" onclick="toRegister()"  class="btn btn-green pull-right">
+							注册 <i class="fa fa-arrow-circle-right"></i>
+						</button>
+					</div>
+				</fieldset>
+			</form>
+			<!-- start: COPYRIGHT -->
+			<div class="copyright">
+				2019 @ ZYL.BS
+			</div>
+			<!-- end: COPYRIGHT -->
+		</div>
+		<!-- end: REGISTER BOX -->
+	</div>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.mousewheel.js"></script>
+<script src="js/perfect-scrollbar.js"></script>
+<script src="js/index.js"></script>
+<script src="js/main.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/adminlogin.js"></script>
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="/layer/layer.js"></script>
+<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+<script>
+    jQuery(document).ready(function() {
+        Main.init();
+        Login.init();
+    });
+</script>
+<script>
+	function toRegister() {
+	    var name = $("#name").val();
+        var password = $("#password").val();
+        $.ajax({
+            url: "/admin/register",
+            type: 'POST',
+            data: {adminName: name,adminPassword: password},
+            dataType: 'JSON',
+            cathe: false,
+            success: function (studentInfoResponse) {
+                //根据返回数据来给用户显示错误信息或登录成功
+                //账号已被注册
+                if (studentInfoResponse.status == 16 ) {
+                    $("#registerInfo").text(studentInfoResponse.statusDesc);
+                }
+                //注册成功
+                if (studentInfoResponse.status == 18) {
+                    $("#registerInfo").text(studentInfoResponse.statusDesc);
+                }
+                $("#registerForm").trigger("reset");
+            },
+        });
+    }
+</script>
+<script>
+    function toLogin() {
+        var name = $("#loginName").val();
+        var password = $("#loginPassword").val();
+        $.ajax({
+            url: "/admin/login",
+            type: 'POST',
+            data: {adminName: name,adminPassword: password},
+            dataType: 'JSON',
+            cathe: false,
+            success: function (studentInfoResponse) {
+                //根据返回数据来给用户显示错误信息或登录成功
+                if (studentInfoResponse.status == 19) {
+                    layer.msg("登录成功", {icon: 1, time: 3000});
+                    window.location.href = ("/toAdminIndexPage");
+                }
+                if (studentInfoResponse.status == 11 || studentInfoResponse.status == 17) {
+                    $("#loginInfo").text(studentInfoResponse.statusDesc);
+                }
+                $("#loginForm").trigger("reset");
+            },
+        });
+    }
+</script>
+</body>
+
+<!-- end: BODY -->
+</html>

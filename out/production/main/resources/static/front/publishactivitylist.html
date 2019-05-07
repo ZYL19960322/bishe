@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initical-scale=1"/>
+    <title>发布活动列表</title>
+    <script src="front/js/fontSize.js"></script>
+    <link rel="stylesheet" href="front/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="front/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="front/css/style.css"/>
+    <script src="front/js/jquery-3.3.1.min.js"></script>
+    <script src="front/js/bootstrap.min.js"></script>
+    <script src="front/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="front/js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+</head>
+<body>
+
+<header class="shead"><a href="javascript:history.go(-1)" class="fl"> <span class="glyphicon glyphicon-chevron-left"></span></a>发布活动列表</header>
+<div class="indexdiv container" id="myDiv">
+
+    <div class="row indexnav">
+
+    </div>
+</div>
+<div class="index-cont" id="myList">
+    <ul class="" th:each="activity:${indexResponse.activityList}">
+        <!--添加a标签，当点击活动时，跳转到活动详情页面，由于a标签有默认颜色，为了不使用a标签的默认颜色故
+         添加style="color: inherit"-->
+        <li class="cont-item">
+            <a  style="color: inherit" th:href="@{/publishActivityMessage(actiId=${activity.actiId})}" >
+            <div class="fl">
+                <img src="front/img/24.jpg" alt="" th:src="${activity.actiThemeImage}"/></div>
+            <div class="fr" th:href="@{/publishActivityMessage/}+${activity.actiId}" >
+                <div class="zt" th:text="${activity.actiTheme}">2018年考研经验交流会很符合健康健康</div>
+                <div class="jj" th:text="${activity.actiDesc}">
+                    简介简介简介简介简介简介简介简介简介简介简介简介简介简介哥哥哥哥哥哈哈哈简介简介简介简介简介简介简介简介简介简
+                </div>
+                <div class="bot">
+                    <span class="num">已报名/可报名:</span>
+                    <span class="num1" th:text="${activity.actiNowEnroll}+'/'+${activity.actiMaxEnroll}"></span>
+                    <span class="tit" th:text="${activity.actiStatusName}">报名中</span><br/>
+                    <span class="end">报名截止时间:</span>
+                    <span class="time" th:text="${activity.actiEndrollTime}"></span>
+                </div>
+            </div>
+            </a>
+        </li>
+
+    </ul>
+</div>
+
+<script>
+    $(function () {
+
+        $("#actiStartEnrollTime").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            minView: 'month',
+            language: 'zh-CN',
+            //选择板所在输入框位置
+            pickerPosition: "bottom-right",
+            autoclose: true,
+            startDate: new Date() - 60 * 60 * 24 * 150,
+        }).on("click", function () {
+            $("#actiStartEnrollTime").datetimepicker("setEndDate", $("#actiEndEnrollTime").val())
+        })
+        $("#actiEndEnrollTime").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            minView: 'month',
+            language: 'zh-CN',
+            //选择板所在输入框位置
+            pickerPosition: "bottom-right",
+            autoclose: true,
+
+            startDate: new Date()
+        }).on("click", function () {
+            $("#actiEndEnrollTime").datetimepicker("setEndDate", $("#actiStartEnrollTime").val())
+        })
+    })
+    function shaixuan() {
+        console.log("筛选开始了");
+        $(".sxDiv").show();
+        console.log("筛选快快快");
+
+    }
+    function shaixuanclose() {
+        $(".sxDiv").hide();
+        var IndexRequest = {};
+        IndexRequest.actiCategory = $('#actiCategory').val();
+        IndexRequest.actiStatus = $('#actiStatus').val();
+        IndexRequest.actiStartEnrollTime = $('#actiStartEnrollTime').val();
+        IndexRequest.actiEndEnrollTime = $('#actiEndEnrollTime').val();
+
+        $.ajax(
+            {
+                url: "/indexRequest",
+                type: 'POST',
+                data: IndexRequest,
+                //cache: false,
+                async: false,
+                dataType: 'json',
+                //processData: false,  //必须false才会避开jQuery对 formdata 的默认处理
+                //contentType: false,  //必须false才会自动加上正确的Content-Type
+                success: function (indexResponse) {
+                    console.log("ajax返回了");
+                    console.log("返回的数据"+indexResponse.activityList.length);
+                    $("#myList").text("");
+                    //$("#myList").hide();
+                    // for (var i = 0; i &lt; data.activityList.length; i++) {
+                    /* $.each(indexResponse.activityList,function(index){
+                     html += '<input value="' + indexResponse.activityList[index].actiDesc + '"/>'
+                     });*/
+                    //html += "<li class="cont-item">" +
+                    // "<div class="fl">" +
+                    // html += '<input    value="' + indexResponse.activityList[1].actiDesc + '">' + '</input>' + '</div>' + '</li>';
+                    var html ='';
+                    $.each(indexResponse.activityList,function(index){
+                        // html += '<input value="' + indexResponse.activityList[index].actiDesc + '"/>'
+                        html +='<div class="index-cont" >'+
+                            '<ul class="">'+
+                            '<li class="cont-item">'+
+                            '<a  style="color: inherit" href="publishActivityMessage?actiId='+indexResponse.activityList[index].actiId+'" >'+
+                            '<div class="fl">'+
+                            '<img  alt="" src="'+indexResponse.activityList[index].actiThemeImage +'" />'+'</div>'+
+                            '<div class="fr">'+
+                            '<div class="zt"  >'+indexResponse.activityList[index].actiTheme +'</div>'+
+                            '<div class="jj" >'+indexResponse.activityList[index].actiDesc +'</div>'+
+                            '<div class="bot">'+
+                            '<span class="num">'+"已报名/可报名:" +indexResponse.activityList[index].actiNowEnroll+"/"+indexResponse.activityList[index].actiMaxEnroll+'</span>'+
+                            '<span class="num1">'+'</span>'+
+                            '<span class="tit" >'+indexResponse.activityList[index].actiStatusName+'</span>'+'<br/>'+
+                            '<span class="end">'+"报名截止时间:"+'</span>'+
+                            '<span class="time" >'+indexResponse.activityList[index].actiEndrollTime+'</span>'+
+                            '</div>'+
+                            '</div>'+
+                            '</a>'+
+                            '</li>'+
+                            '</ul>'+
+                            '</div>'
+                    });
+                    $("#myList").html(html);
+                    //alert("hdjhjsk"+indexResponse.activityList[0].actiDesc);
+                    // document.getElementById("myList").innerHTML = "";
+                    <!--依次删除一个好的-->
+                    //var elem=document.getElementById('myList'); // 按 id 获取要删除的元素
+                    //elem.parentNode.removeChild(elem);
+                    console.log('ajax返回结束');
+                },
+                error: function () {
+                    alert("失败了");
+                }
+            }
+        );
+    }
+   function  mysearch(){
+        var searchCondition=$("#searchCondition").val();
+       $.ajax(
+           {
+               url: "/indexSearch",
+               type: 'POST',
+               data : {
+                   searchCondition : searchCondition
+               },
+               //cache: false,
+               async: false,
+               dataType: 'json',
+               //processData: false,  //必须false才会避开jQuery对 formdata 的默认处理
+               //contentType: false,  //必须false才会自动加上正确的Content-Type
+               success: function (indexResponse) {
+                   console.log("返回的数据"+indexResponse.activityList.length);
+                   $("#myList").text("");
+                   var html ='';
+                   $.each(indexResponse.activityList,function(index){
+                       // html += '<input value="' + indexResponse.activityList[index].actiDesc + '"/>'
+                       html +='<div class="index-cont" >'+
+                           '<ul class="">'+
+                           '<li class="cont-item">'+
+                           '<a  style="color: inherit" href="publishActivityMessage?actiId='+indexResponse.activityList[index].actiId+'" >'+
+                           '<div class="fl">'+
+                           '<img  alt="" src="'+indexResponse.activityList[index].actiThemeImage +'" />'+'</div>'+
+                           '<div class="fr">'+
+                           '<div class="zt"  >'+indexResponse.activityList[index].actiTheme +'</div>'+
+                           '<div class="jj" >'+indexResponse.activityList[index].actiDesc +'</div>'+
+                           '<div class="bot">'+
+                           '<span class="num">'+"已报名/可报名:" +indexResponse.activityList[index].actiNowEnroll+"/"+indexResponse.activityList[index].actiMaxEnroll+'</span>'+
+                           '<span class="num1">'+'</span>'+
+                           '<span class="tit" >'+indexResponse.activityList[index].actiStatusName+'</span>'+'<br/>'+
+                           '<span class="end">'+"报名截止时间:"+'</span>'+
+                           '<span class="time" >'+indexResponse.activityList[index].actiEndrollTime+'</span>'+
+                           '</div>'+
+                           '</div>'+
+                           '</a>'+
+                           '</li>'+
+                           '</ul>'+
+                           '</div>'
+                   });
+                   $("#myList").html(html);
+               },
+               error: function () {
+                   alert("搜索失败了");
+               }
+           }
+       );
+   }
+</script>
+
+
+
+<script>
+    //刚进入页面时执行的初始化js函数
+    $(document).ready(function(){
+        $("#quanbu").addClass("active");
+    });
+</script>
+<!--导航栏active设置代码-->
+<script>
+   function quanbu() {
+       alert("quanbu方法执行了");
+        $("#recommend").removeClass("active");
+        $("#hot").removeClass("active");
+        $("#quanbu").addClass("active");
+       $.ajax(
+           {
+               url: "/indexAll",
+               type: 'get',
+               //cache: false,
+               async: false,
+               dataType: 'json',
+               //processData: false,  //必须false才会避开jQuery对 formdata 的默认处理
+               //contentType: false,  //必须false才会自动加上正确的Content-Type
+               success: function (indexResponse) {
+                   console.log("返回的数据"+indexResponse.activityList.length);
+                   $("#myList").text("");
+                   var html ='';
+                   $.each(indexResponse.activityList,function(index){
+                       // html += '<input value="' + indexResponse.activityList[index].actiDesc + '"/>'
+                       html +='<div class="index-cont" >'+
+                           '<ul class="">'+
+                           '<li class="cont-item">'+
+                           '<a  style="color: inherit" href="publishActivityMessage?actiId='+indexResponse.activityList[index].actiId+'" >'+
+                           '<div class="fl">'+
+                           '<img  alt="" src="'+indexResponse.activityList[index].actiThemeImage +'" />'+'</div>'+
+                           '<div class="fr">'+
+                           '<div class="zt"  >'+indexResponse.activityList[index].actiTheme +'</div>'+
+                           '<div class="jj" >'+indexResponse.activityList[index].actiDesc +'</div>'+
+                           '<div class="bot">'+
+                           '<span class="num">'+"已报名/可报名:" +indexResponse.activityList[index].actiNowEnroll+"/"+indexResponse.activityList[index].actiMaxEnroll+'</span>'+
+                           '<span class="num1">'+'</span>'+
+                           '<span class="tit" >'+indexResponse.activityList[index].actiStatusName+'</span>'+'<br/>'+
+                           '<span class="end">'+"报名截止时间:"+'</span>'+
+                           '<span class="time" >'+indexResponse.activityList[index].actiEndrollTime+'</span>'+
+                           '</div>'+
+                           '</div>'+
+                           '</a>'+
+                           '</li>'+
+                           '</ul>'+
+                           '</div>'
+                   });
+                   $("#myList").html(html);
+               },
+               error: function () {
+                   alert("首页全部搜索失败了");
+               }
+           }
+       );
+    }
+    function recommend() {
+       alert("recommend方法执行了");
+        $("#recommend").addClass("active");
+        $("#quanbu").removeClass("active");
+        $("#hot").removeClass("active");
+
+        $.ajax(
+            {
+                url: "/indexRecommend",
+                type: 'get',
+                //cache: false,
+                async: false,
+                dataType: 'json',
+                //processData: false,  //必须false才会避开jQuery对 formdata 的默认处理
+                //contentType: false,  //必须false才会自动加上正确的Content-Type
+                success: function (indexResponse) {
+                    console.log("返回的数据"+indexResponse.activityList.length);
+                    $("#myList").text("");
+                    var html ='';
+                    $.each(indexResponse.activityList,function(index){
+                        // html += '<input value="' + indexResponse.activityList[index].actiDesc + '"/>'
+                        html +='<div class="index-cont" >'+
+                            '<ul class="">'+
+                            '<li class="cont-item">'+
+                            '<a  style="color: inherit" href="publishActivityMessage?actiId='+indexResponse.activityList[index].actiId+'" >'+
+                            '<div class="fl">'+
+                            '<img  alt="" src="'+indexResponse.activityList[index].actiThemeImage +'" />'+'</div>'+
+                            '<div class="fr">'+
+                            '<div class="zt"  >'+indexResponse.activityList[index].actiTheme +'</div>'+
+                            '<div class="jj" >'+indexResponse.activityList[index].actiDesc +'</div>'+
+                            '<div class="bot">'+
+                            '<span class="num">'+"已报名/可报名:" +indexResponse.activityList[index].actiNowEnroll+"/"+indexResponse.activityList[index].actiMaxEnroll+'</span>'+
+                            '<span class="num1">'+'</span>'+
+                            '<span class="tit" >'+indexResponse.activityList[index].actiStatusName+'</span>'+'<br/>'+
+                            '<span class="end">'+"报名截止时间:"+'</span>'+
+                            '<span class="time" >'+indexResponse.activityList[index].actiEndrollTime+'</span>'+
+                            '</div>'+
+                            '</div>'+
+                            '</a>'+
+                            '</li>'+
+                            '</ul>'+
+                            '</div>'
+                    });
+                    $("#myList").html(html);
+                },
+                error: function () {
+                    alert("推荐活动搜索失败了");
+                }
+            }
+        );
+    }
+    function hot() {
+        alert("hot方法执行了");
+        $("#hot").addClass("active");
+        $("#recommend").removeClass("active");
+        $("#quanbu").removeClass("active");
+        $.ajax(
+            {
+                url: "/indexHot",
+                type: 'get',
+                //cache: false,
+                async: false,
+                dataType: 'json',
+                //processData: false,  //必须false才会避开jQuery对 formdata 的默认处理
+                //contentType: false,  //必须false才会自动加上正确的Content-Type
+                success: function (indexResponse) {
+                    console.log("返回的数据"+indexResponse.activityList.length);
+                    $("#myList").text("");
+                    var html ='';
+                    $.each(indexResponse.activityList,function(index){
+                        // html += '<input value="' + indexResponse.activityList[index].actiDesc + '"/>'
+                        html +='<div class="index-cont" >'+
+                            '<ul class="">'+
+                            '<li class="cont-item">'+
+                            '<a  style="color: inherit" href="publishActivityMessage?actiId='+indexResponse.activityList[index].actiId+'" >'+
+                            '<div class="fl">'+
+                            '<img  alt="" src="'+indexResponse.activityList[index].actiThemeImage +'" />'+'</div>'+
+                            '<div class="fr">'+
+                            '<div class="zt"  >'+indexResponse.activityList[index].actiTheme +'</div>'+
+                            '<div class="jj" >'+indexResponse.activityList[index].actiDesc +'</div>'+
+                            '<div class="bot">'+
+                            '<span class="num">'+"已报名/可报名:" +indexResponse.activityList[index].actiNowEnroll+"/"+indexResponse.activityList[index].actiMaxEnroll+'</span>'+
+                            '<span class="num1">'+'</span>'+
+                            '<span class="tit" >'+indexResponse.activityList[index].actiStatusName+'</span>'+'<br/>'+
+                            '<span class="end">'+"报名截止时间:"+'</span>'+
+                            '<span class="time" >'+indexResponse.activityList[index].actiEndrollTime+'</span>'+
+                            '</div>'+
+                            '</div>'+
+                            '</a>'+
+                            '</li>'+
+                            '</ul>'+
+                            '</div>'
+                    });
+                    $("#myList").html(html);
+                },
+                error: function () {
+                    alert("热门活动搜索失败了");
+                }
+            }
+        );
+    }
+</script>
+<script>
+    /*function actiMessage() {
+        var id= $("#actiId").val();
+        window.location.href="";
+
+    }*/
+
+</script>
+</body>
+<script>
+    $.fn.datetimepicker.defaults = {
+        minView: "month",//设置只显示到月份
+        //默认语言
+        language: 'zh-CN',
+        //默认选择格式
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        todayBtn: true,
+        //选择板所在输入框位置
+        pickerPosition: "bottom-left"
+    };
+</script>
+<script>
+    $(function () {
+
+        var picker1 = $('#startTime').datetimepicker();
+        var picker2 = $("#endTime").datetimepicker();
+
+        //动态设置最小值(选择前面一个日期后：后面一个日期不能小于前面一个)
+        picker1.on('changeDate', function (e) {
+            picker2.datetimepicker('setStartDate', e.date);
+        });
+        //动态设置最大值(选择后面一个日期后：前面一个日期不能大于前面一个）
+        picker2.on('changeDate', function (e) {
+            picker1.datetimepicker('setEndDate', e.date);
+        });
+
+    });
+
+</script>
+
+</html>

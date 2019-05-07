@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width,initical-scale=1"/>
+	<title>个人中心</title>
+	<link rel="stylesheet" href="front/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="front/css/style.css"/>
+	<script src="front/js/fontSize.js"></script>
+</head>
+
+<body>
+	<header class="shead">个人中心</header>
+	<div class="userbg">
+		<!--th:if="${userResponse.student.studImagePath!=null}" th:src="${userResponse.student.studImagePath}"   th:src="${userResponse.student.studImagePath!=null}? ${../front/img/face2.png}  src="../front/img/face2.png" -->
+		<div class="userimg"><img id="studImagePath" th:src="${userResponse.student.studImagePath}" alt="" onerror="this.src='../front/img/face2.png;this.onerror=null'"/></div>
+	</div>
+
+	<div class="usercont">
+		<ul class="userul">
+			<li class="item clearfix">
+				<span class="glyphicon glyphicon-user "></span>
+				个人信息
+				<a href="userInfo" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+			</li>
+			<li class="item clearfix">
+				<span class="glyphicon glyphicon-align-justify"></span>
+				已报名活动 <span class="badge" th:text="${userResponse.enrolledCount}">2</span>
+				<a th:href="@{/selectUserActivityListBySign(sign=0)}" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+			</li>
+			<li class="item clearfix">
+				<span class="glyphicon glyphicon-check"></span>
+				进行中活动 <span class="badge" th:text="${userResponse.duringCount}">6</span>
+				<a th:href="@{/selectUserActivityListBySign(sign=1)}" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+			</li>
+			<li class="item clearfix">
+				<span class="glyphicon glyphicon-ok"></span>
+				已结束活动 <span class="badge" th:text="${userResponse.endCount}" >7</span>
+				<a th:href="@{/selectUserActivityListBySign(sign=2)}" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+			</li>
+			<li class="item clearfix">
+				<span class="glyphicon glyphicon-heart"></span>
+				已关注 <span class="badge">9</span>
+				<a href="" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+			</li>
+			<li class="item clearfix" onclick="loginOut()">
+				<span class="glyphicon glyphicon-off"></span>
+				退出登录
+				<label class="fr" style="color: #337ab7;">
+				<span class=" glyphicon glyphicon-chevron-right"></span></label>
+			</li>
+		</ul>
+	</div>
+	<footer class="sfooter">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-3">
+					<a th:href="@{/toIndexPage}">
+						<span class="glyphicon glyphicon-home"></span>
+						<span class="">首页</span>
+					</a>
+				</div>
+				<div class="col-xs-3">
+					<a th:href="@{/toPublishPage}">
+						<span class="glyphicon glyphicon-edit"></span>
+						<span class="">发布</span>
+					</a>
+				</div>
+				<div class="col-xs-3">
+					<a th:href="@{/toMessagePage}">
+						<span class="glyphicon glyphicon-bell"></span>
+						<span class="">消息</span>
+					</a>
+				</div>
+				<div class="col-xs-3">
+					<a th:href="@{/toUserPage}" class="active">
+						<span class="glyphicon glyphicon-user"></span>
+						<span class="">我的</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="front/js/jquery-3.3.1.min.js"></script>
+	<script src="front/js/bootstrap.min.js"></script>
+	<script>
+		function loginOut() {
+		  var result=confirm("确定退出登录!");
+		  if(result==true){
+              window.location.href = ("/loginOut");
+		  }
+        }
+
+
+	</script>
+</body>
+
+</html>

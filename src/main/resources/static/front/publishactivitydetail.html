@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initical-scale=1"/>
+    <title>发布的活动</title>
+    <script src="front/js/fontSize.js"></script>
+    <link rel="stylesheet" href="front/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="front/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="front/css/style.css"/>
+</head>
+<body>
+<header class="shead">
+    <a href="javascript:history.go(-1)" class="fl"> <span class="glyphicon glyphicon-chevron-left"></span></a>发布的活动
+</header>
+<div class="releasediv pb1 container">
+    <!-- boot form表单 -->
+    <!-- onsubmit="return false" -->
+    <!-- 在form表单中设置 onsubmit =”return false”否则会出现提交之后，action也会跳转-->
+    <form method="post" class="mt04" role="form" enctype="multipart/form-data" id="myfrom">
+        <div class="hdimg" style="margin-top: 0">
+            <input type="file" accept="image/*" multiple="multiple" style="display: none" id="file" name="file"/>
+            <img src="front/img/25.jpg" alt="" class="imgUrl" style="width: 100%;height: 60%" id="actiThemeImage"
+                 name="actiThemeImage" th:src="${activity.actiThemeImage}"/>
+        </div>
+        <div class="form-group" style="margin-top: 0.3rem">
+            <label>活动主题</label>
+            <!--readonly有默认样式，为保持input标签的原有样式颜色故style="background-color: white"-->
+            <input type="text" class="form-control" id="actiTheme" name="actiTheme" readonly="ture"
+                   style="background-color: white" th:value="${activity.actiTheme}"/>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-6">
+                    <label>活动可报名人数</label>
+                    <input type="text" class="form-control" id="actiMaxEnroll" name="actiMaxEnroll"
+                           readonly="ture" style="background-color: white" th:value="${activity.actiMaxEnroll}"/>
+                </div>
+                <div class="col-xs-6">
+                    <label>活动类型</label>
+                    <input class="form-control" name="actiCategoryId" id="actiCategoryId" readonly="ture"
+                           style="background-color: white"
+                           th:value="${activity.actiCategoryName}"/>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top: 0.3rem">
+                <label>活动举办方</label>
+                <input type="text" class="form-control" name="actiHolder" id="actiHolder" readonly="ture"
+                       style="background-color: white"
+                       th:value="${activity.actiHolder}"/>
+            </div>
+            <div class="form-group clearfix">
+                <div class="row">
+                    <label class="col-xs-6" for="actiStartTime">活动开始时间</label>
+                    <label class="col-xs-6" for="actiStartTime">报名截止时间</label>
+                </div>
+                <!-- boot 日期插件 -->
+                <div class="row">
+                    <div class="col-xs-6 ">
+                        <div class="input-group date ">
+                            <input type="text" style="border-radius: 4px;background-color: white" class="form-control"
+                                   name="actiStartTime"
+                                   id="actiStartTime" readonly="ture" th:value="${activity.actiStartTime}"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="input-group date">
+                            <input type="text" style="border-radius: 4px;background-color: white" class="form-control"
+                                   name="actiEndrollTime"
+                                   id="actiEndrollTime" readonly="ture" th:value="${activity.actiEndrollTime}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>活动地点</label>
+                <input type="text" class="form-control" name="actiAddress" id="actiAddress"
+                       readonly="ture" style="background-color: white" th:value="${activity.actiAddress}"/>
+            </div>
+            <div class="form-group">
+                <label>联系电话</label>
+                <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" class="form-control"
+                       name="actiPhone" id="actiPhone" readonly="ture" style="background-color: white"
+                       th:value="${activity.actiPhone}"/>
+            </div>
+            <div class="form-group">
+                <label>备注</label>
+                <input type="text" class="form-control" name="actiComment" id="actiComment" readonly="ture"
+                       style="background-color: white"
+                       th:value="${activity.actiComment}"/>
+            </div>
+            <div class="form-group">
+                <label>简介</label>
+                <textarea cols="30" rows="7" class="form-control" name="actiDesc" id="actiDesc" readonly="ture"
+                          style="background-color: white"
+                          th:text="${activity.actiDesc}"></textarea>
+            </div>
+            <!--用来获取前端返回modelmap中活动状态和活动id的值使用，故无需显示-->
+            <input type="text" style="display: none" name="actiStatusId" id="actiStatusId"
+                   th:value="${activity.actiStatusId}"/>
+            <input type="text" style="display: none" name="actiId" id="actiId" th:value="${activity.actiId}"/>
+            <div class="form-group row" id="checking">
+                <a style="color: inherit" th:href="@{/toChangePublishActivity(actiId=${activity.actiId})}">
+                    <div class="col-xs-4">
+                        <button type="button" class=" col-xs-12 btn btn-warning">修改活动</button>
+                    </div>
+                </a>
+                <div class="col-xs-4">
+                    <button type="button" class=" col-xs-12 btn btn-danger" onclick="deletePublish()">取消发布</button>
+                </div>
+                <div class="col-xs-4">
+                    <button type="button" class=" col-xs-12 btn btn-success" onclick="sendremindMessage()">发送提醒</button>
+                </div>
+            </div>
+
+            <div class="form-group row" id="enrolling">
+                <a style="color: inherit" th:href="@{/toChangePublishActivity(actiId=${activity.actiId})}">
+                    <div class="col-xs-4">
+                        <button type="button" class=" col-xs-12 btn btn-warning">修改活动</button>
+                    </div>
+                </a>
+                <a style="color: inherit" th:href="@{/showEnrollStudent(actiId=${activity.actiId})}">
+                    <div class="col-xs-4">
+                        <button type="button" class=" col-xs-12 btn btn-info">报名信息</button>
+                    </div>
+                </a>
+                <div class="col-xs-4">
+                    <button type="button" class=" col-xs-12 btn btn-danger" onclick="endEnroll()">截止报名
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="form-group row" id="preparing">
+                <a style="color: inherit" th:href="@{/toChangePublishActivity(actiId=${activity.actiId})}">
+                    <div class="col-xs-4">
+                        <button type="button" class=" col-xs-12 btn btn-warning">修改活动</button>
+                    </div>
+                </a>
+                <a style="color: inherit" th:href="@{/showEnrollStudent(actiId=${activity.actiId})}">
+                    <div class="col-xs-4">
+                        <button type="button" class=" col-xs-12 btn btn-info">报名信息</button>
+                    </div>
+                </a>
+                <div class="col-xs-4">
+                    <button type="button" class="col-xs-12 btn btn-success" onclick="holdActivity()">举办活动
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="form-group row" id="holding">
+                <a style="color: inherit" th:href="@{/showEnrollStudent(actiId=${activity.actiId})}">
+                    <div class="col-xs-5 col-xs-offset-1">
+                        <button type="button" class=" col-xs-12 btn btn-info">报名信息</button>
+                    </div>
+                </a>
+                <div class="col-xs-5">
+                    <button type="button" class="col-xs-12 btn btn-warning" onclick="endActivity()">结束活动</button>
+                </div>
+            </div>
+
+            <div class="form-group row" id="end">
+                <a style="color: inherit" th:href="@{/showEnrollStudent(actiId=${activity.actiId})}">
+                    <div class="col-xs-5 col-xs-offset-1">
+                        <button type="button" class=" col-xs-12 btn btn-info">报名信息</button>
+                    </div>
+                </a>
+                <div class="col-xs-5">
+                    <button type="button" class="col-xs-12 btn btn-warning" onclick="deleteActivity()">删除活动</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script src="front/js/jquery-3.3.1.min.js"></script>
+<script src="front/js/bootstrap.min.js"></script>
+<script src="front/js/bootstrap-datetimepicker.min.js"></script>
+<script src="front/js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="layer/layer.js"></script>
+
+
+
+<script>
+    function sendremindMessage() {
+        var actiId = $("#actiId").val();
+        layer.prompt({title: '请输入您的提醒信息', formType: 3}, function (text, index) {
+            layer.close(index);
+            $.ajax({
+                url: "/sendremindMessage",
+                type: 'POST',
+                data: {actiId: actiId, remindComment: text},
+                dataType: 'json',
+                cathe: false,
+                success: function (result) {
+                    if (result == true) {
+                        layer.msg('发送信息成功', {icon: 1, time: 1000});
+                        window.location.reload();
+                    }
+                    if (result == false) {
+                        layer.msg('发送信息失败');
+                    }
+                },
+                error: function () {
+                    layer.msg('发送信息出错');
+                }
+            })
+            layer.msg('您输入的是' + text);
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    //刚进入页面时执行的初始化js函数
+    //根据用户与此活动的关系和活动的报名情况来在后台设置msg的值，前端使用hidden的input来获取modelMap中的msg的值，
+    //根据值来判断和提供给用户可执行的操作
+    $(document).ready(function () {
+        var actiStatusId = $("#actiStatusId").val();
+        //审核中
+        if (actiStatusId == 1) {
+            //$("#checking").hide();
+            $("#enrolling").hide();
+            $("#preparing").hide();
+            $("#holding").hide();
+            $("#end").hide();
+        }
+        //报名中
+        if (actiStatusId == 2) {
+            $("#checking").hide();
+            //$("#enrolling").hide();
+            $("#preparing").hide();
+            $("#holding").hide();
+            $("#end").hide();
+
+        }
+        //筹办中
+        if (actiStatusId == 3) {
+            $("#checking").hide();
+            $("#enrolling").hide();
+            //$("#preparing").hide();
+            $("#holding").hide();
+            $("#end").hide();
+        }
+        //举办中
+        if (actiStatusId == 4) {
+            $("#checking").hide();
+            $("#enrolling").hide();
+            $("#preparing").hide();
+            //$("#holding").hide();
+            $("#end").hide();
+        }
+        //已结束
+        if (actiStatusId == 5) {
+            $("#checking").hide();
+            $("#enrolling").hide();
+            $("#preparing").hide();
+            $("#holding").hide();
+           // $("#end").hide();
+        }
+
+    });
+</script>
+
+<script>
+    function deletePublish() {
+        var actiId = $("#actiId").val();
+        $.ajax({
+            url: "/deletePublish",
+            type: 'post',
+            data: {actiId: actiId},
+            dataType: 'json',
+            cathe: false,
+            success: function (publishResponse) {
+                if (publishResponse.success == true) {
+                    alert("取消发布成功,发布页面!");
+                    window.location.href = ("/toPublishPage");
+                }
+                if (publishResponse.success == false) {
+                    alert("取消发布失败,请检查");
+
+                }
+            },
+            error: function (publishResponse) {
+                alert("取消发布出错了");
+
+            }
+        })
+    }
+</script>
+<script>
+    function deleteActivity() {
+        var actiId = $("#actiId").val();
+        $.ajax({
+            url: "/deletePublish",
+            type: 'post',
+            data: {actiId: actiId},
+            dataType: 'json',
+            cathe: false,
+            success: function (publishResponse) {
+                if (publishResponse.success == true) {
+                    alert("删除成功!");
+                    window.location.href = ("/toPublishPage");
+                }
+                if (publishResponse.success == false) {
+                    alert("删除失败");
+
+                }
+            },
+            error: function (publishResponse) {
+                alert("删除出错了");
+
+            }
+        })
+    }
+</script>
+
+<script>
+    //截止报名
+    function endEnroll() {
+        var actiId = $("#actiId").val();
+        $.ajax({
+            url: "/endEnroll",
+            type: 'post',
+            data: {actiId: actiId},
+            dataType: 'json',
+            cathe: false,
+            success: function (data) {
+                if (data != 0) {
+                    alert("截止报名成功,回到发布页面!");
+                    window.location.href = ("/toPublishPage");
+                }
+            },
+            error: function (data) {
+                alert("截止报名出错了");
+            }
+        });
+    }
+</script>
+<script>
+    //举办活动
+    function holdActivity() {
+        var actiId = $("#actiId").val();
+        $.ajax({
+            url: "/holdActivity",
+            type: 'post',
+            data: {actiId: actiId},
+            dataType: 'json',
+            cathe: false,
+            success: function (data) {
+                if (data != 0) {
+                    alert("举办活动成功,回到发布页面!");
+                    window.location.href = ("/toPublishPage");
+                }
+            },
+            error: function (data) {
+                alert("举办活动出错了");
+            }
+        });
+    }
+</script>
+
+<script>
+    //活动结束
+    function endActivity() {
+        var actiId = $("#actiId").val();
+        $.ajax({
+            url: "/endActivity",
+            type: 'post',
+            data: {actiId: actiId},
+            dataType: 'json',
+            cathe: false,
+            success: function (data) {
+                if (data != 0) {
+                    alert("结束活动成功,回到发布页面!");
+                    window.location.href = ("/toPublishPage");
+                }
+            },
+            error: function (data) {
+                alert("结束活动出错了");
+            }
+        });
+    }
+</script>
+</body>
+</html>

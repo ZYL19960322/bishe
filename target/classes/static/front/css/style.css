@@ -1,0 +1,482 @@
+body {
+    font-family: Microsoft Yahei, tahoma, arial, sans-serif
+}
+
+.pd0 {
+    padding: 0;
+}
+
+.pb05 {
+    padding-bottom: .5rem
+}
+
+.pb1 {
+    padding-bottom: 1rem
+}
+
+.magin-auto {
+    margin: 0 auto
+}
+
+.mt2 {
+    margin-top: 2rem
+}
+
+.mt1 {
+    margin-top: 1rem
+}
+
+.mt02 {
+    margin-top: .2rem
+}
+
+.mt04 {
+    margin-top: .4rem;
+}
+
+.mr02 {
+    margin-right: 2px
+}
+
+.ta-r {
+    text-align: right
+}
+
+.ta-l {
+    text-align: left
+}
+
+.ta-c {
+    text-align: center
+}
+
+.color-r {
+    color: red
+}
+
+.fs-02 {
+    font-size: .2rem
+}
+
+.fs-04 {
+    font-size: .4rem
+}
+
+.img {
+    width: 100%
+}
+
+.fl {
+    float: left
+}
+
+.fr {
+    float: right
+}
+
+.lh1 {
+    line-height: 1rem
+}
+
+.shead {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    background: #43aef6;
+    color: #fff;
+    text-align: center;
+    font-size: .34rem;
+    padding: 0 .12rem;
+    z-index: 999
+}
+
+.shead a {
+    color: #fff
+}
+
+#loginForm {
+    line-height: 34px;
+    padding: .6rem 0 1rem 0;
+    border: 1px solid #999;
+    border-radius: 4px;
+    width: 90%;
+    margin: 2rem 5%
+}
+
+#loginForm .img {
+    width: 80%;
+    height: 30px;
+    margin-top: -2px
+}
+
+.sfooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1rem;
+    padding-top: .12rem;
+    border-top: 1px solid #e2e2e2;
+    z-index: 999;
+    background: #fff
+}
+
+.sfooter a {
+    display: inline-block;
+    color: #666;
+    width: 100%;
+    font-size: .2rem
+}
+
+.sfooter a.active {
+    color: #43aef6
+}
+
+.sfooter a span {
+    display: inline-block;
+    width: 100%;
+    text-align: center
+}
+
+.sfooter a span.glyphicon {
+    font-size: .4rem
+}
+
+.sfooter a span.messagespan1 {
+    position: absolute;
+    width:19%;left:53%;
+    background: #fa4561;
+    border-radius:50%;
+    color: #ffffff;
+    margin-left: 1px
+}
+
+
+
+
+.indexdiv {
+    margin-top: 1rem
+}
+
+.indexdiv .sxDiv {
+    position: fixed;
+    right: 0;
+    top: 0.8rem;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+    z-index: 99;
+    display: none
+}
+
+.indexdiv .sxDiv .cont {
+    float: right;
+    width: 74%;
+    height: 40%;
+    padding: .5rem .2rem;
+    background: #fff
+}
+
+.indexdiv .indexnav {
+    height: .8rem;
+    line-height: .8rem;
+    text-align: center;
+    font-size: .3rem;
+    border-bottom: 1px solid #43aef6
+}
+
+.indexdiv .indexnav .active {
+    color: #fff;
+    background: #43aef6
+}
+
+.index-cont {
+    width: 100%;
+    margin: .3rem 0 1.3rem 0
+}
+
+.index-cont ul {
+    padding: 0 8px
+}
+
+.index-cont ul .cont-item {
+    width: 100%;
+    height: 3.7rem;
+    margin: 0;
+    padding: 0;
+    margin-bottom: .3rem;
+    list-style: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden
+}
+
+.index-cont ul .cont-item .fl {
+    width: 46%;
+    padding: .1rem .1rem
+}
+
+.index-cont ul .cont-item .fl img {
+    width: 100%;
+    height: 3.7rem
+}
+
+.index-cont ul .cont-item .fr {
+    width: 54%;
+    height: 3.7rem;
+    border-left: 1px solid #ddd
+}
+
+.index-cont ul .cont-item .fr .zt {
+    height: 0.8rem;
+    line-height: 0.8rem;
+    background: #43aef6;
+    text-align: center;
+    color: #fff;
+    border-bottom: 1px solid #ddd
+}
+
+.index-cont ul .cont-item .fr .jj {
+    height: 2.1rem;
+    line-height: .4rem;
+    padding: .1rem 7px ;
+
+
+    text-indent: .48rem;
+    font-size: .24rem;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden
+}
+
+.index-cont ul .cont-item .fr .bot {
+    height: .9rem;
+    line-height: .4rem;
+    padding: 0 3px;
+    padding-top: 0.005rem;
+    text-align: center
+}
+
+.index-cont ul .cont-item .fr .bot .num {
+    margin-left: 2%;
+    float: left;
+    font-size: 12px
+
+}
+.index-cont ul .cont-item .fr .bot .num1 {
+    margin-left: 1%;
+    float: left;
+    font-size: 12px
+
+}
+
+.index-cont ul .cont-item .fr .bot .tit {
+    margin-right: 4%;
+    float: right;
+    font-size: 12px
+}
+
+.index-cont ul .cont-item .fr .bot .time {
+    margin-right: 4%;
+    float: right;
+    font-size: 12px;
+}
+
+.index-cont ul .cont-item .fr .bot .end {
+    margin-left: 2%;
+    float: left;
+    font-size: 12px
+}
+
+.userbg {
+    width: 100%;
+    height: 3rem;
+    margin-top: 1rem;
+    padding-top: .5rem;
+    background: url(../img/userbg.png) no-repeat;
+    background-size: cover;
+    background-position: center bottom
+}
+
+.userbg .userimg {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden
+}
+.userul {
+    width: 100%;
+    margin: .6rem auto;
+    padding: 0
+}
+
+/*原始代码
+.userul {
+    width: 100%;
+    margin: .6rem auto;
+    padding: 0
+}
+
+*/
+
+
+/*这是我修改过的*/
+.title-wrap{
+	width: 20%;
+	font-size:14px;
+	line-height: 14px;
+	color:#333;
+    margin-left: 2%;
+}
+label{
+	font-weight: normal;
+}
+.myinput1{
+	width: 80%;
+	outline: 0;
+    height: 0.98rem;
+    border: 0;
+    /*text-align: center;*/
+    margin-left: 0.1rem;
+}
+.userul .myinput2{
+    outline: 0;
+    height: 0.2rem;
+    border: 0;
+    text-align: center;
+    margin: 0;
+}
+.userul .item {
+    list-style: none;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    height: 1rem;
+    line-height: 1rem;
+    padding: 0 .2rem
+}
+/*修改个人信息*/
+.modifyInofs{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	text-decoration: none;
+	color:#333;
+}
+.modifyInofs>span:first-child{
+	font-size:14px;
+	color:#333;
+}
+.modifyInofs>span.glyphicon{
+	color: #999;
+    font-size: .3rem
+}
+/*.userul .item .glyphicon {
+    color: #43aef6;
+    font-size: .3rem
+}
+.userul .item a .glyphicon {
+    color: #999
+}*/
+
+
+
+
+.userul .item .num {
+    display: inline-block
+}
+.userul .item .badge {
+    background: #fa4561
+}
+
+.messagediv {
+    background: #eee
+}
+
+.messagediv .mess-nav {
+    height: 1rem;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 1rem;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    background: #fff
+}
+
+.messagediv .mess-nav .col-xs-4 {
+    position: relative;
+    text-align: center;
+    line-height: 1rem
+}
+
+.messagediv .mess-nav .col-xs-4 .badge {
+    position: absolute;
+    top: .2rem;
+    left: 60%;
+    background: #fa4561
+}
+
+.messagediv .mess-nav .col-xs-4.active {
+    color: #43aef6
+}
+
+.messagediv .mess-cont {
+    margin-top: 1rem
+}
+
+.messagediv .mess-cont .mess-item {
+    margin-top: .5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden
+}
+
+.releasediv {
+
+    margin-top: 0.8rem;
+    /* 原始数据margin-top: 1.4rem*/
+}
+
+.releasediv .hdimg {
+    width: 100%;
+    height: 60%;
+    position: relative;
+}
+
+
+.releasediv .hdimg .img {
+    width: 100%;
+    height: 4rem
+}
+
+.releasediv .hdimg .add {
+    position: absolute;
+    top: .3rem;
+    right: .4rem;
+    color: #ffffff;
+    font-size: .6rem
+}
+
+.releasediv .hdimg .change {
+    position: absolute;
+    top: 3rem;
+    right: .4rem;
+    color: #000000;
+    font-size: .6rem
+}
+
+.releasediv .hdimg .add:hover {
+    position: absolute;
+    top: .3rem;
+    right: .4rem;
+    color: #ff0000;
+    font-size: .6rem
+}

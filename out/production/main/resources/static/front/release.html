@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width,initical-scale=1"/>
+	<title>发布活动</title>
+	<script src="front/js/fontSize.js"></script>
+	<link rel="stylesheet" href="front/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="front/css/bootstrap-datetimepicker.min.css"/>
+	<link rel="stylesheet" href="front/css/style.css"/>
+
+</head>
+<body>
+
+	<header class="shead">
+		<a href="javascript:history.go(-1)" class="fl"> <span class="glyphicon glyphicon-chevron-left"></span></a>发布活动
+	</header>
+	<div class="releasediv pb1 container">
+
+		<!-- boot form表单 -->
+		<!-- onsubmit="return false"  -->
+		<!-- 在form表单中设置 onsubmit =”return false”否则会出现提交之后，action也会跳转-->
+		<form method="post" class="mt04"     role="form" enctype="multipart/form-data" id="myfrom" >
+			<div class="hdimg" style="margin-top: 0">
+				<input type="file"   accept="image/*"  multiple="multiple"  style="display: none" id="file" name="file" />
+				<img src="front/img/25.jpg" alt="" class="imgUrl" style="width: 100%;height: 60%" id="actiThemeImage" name="actiThemeImage" />
+				<label for="file" class="add glyphicon glyphicon-camera" ></label>
+			</div>
+
+			<div class="form-group" style="margin-top: 0.3rem">
+				<label >活动主题(必填)</label>
+				<input type="text" placeholder="请输入您的活动主题" class="form-control" id="actiTheme"  name="actiTheme" />
+			</div>
+			<div class="form-group">
+				<div class="row" >
+				<div class="col-xs-6">
+					<label >活动可报名人数(必填)</label>
+					<input type="number" placeholder="活动可报名人数" class="form-control" id="actiMaxEnroll"  name="actiMaxEnroll" />
+				</div>
+				<div class="col-xs-6" >
+					<label >活动类型(必填)</label>
+					<select class="form-control" name="actiCategoryId" id="actiCategoryId" >
+						<option th:value="0">选择类型</option>
+						<option   th:each="activityCategory:${activityCategoryList}"
+								  th:text="${activityCategory.actiCategoryName}"
+								  th:value="${activityCategory.actiCategoryId}">
+						</option>
+					</select>
+				</div>
+			</div>
+
+
+			<div class="form-group" style="margin-top: 0.3rem">
+				<label>活动举办方(必填)</label>
+				<input type="text" placeholder="活动举办方" class="form-control"  name="actiHolder" id="actiHolder" th:text="${msg}"/>
+			</div>
+			<div class="form-group clearfix">
+				<div class="row">
+				   <label class="col-xs-6" for="actiStartTime">活动开始时间(必填)</label>
+				   <label class="col-xs-6" for="actiStartTime">报名截止时间(必填)</label>
+				</div>
+				<!-- boot 日期插件 -->
+				<div class="row">
+					<div class="col-xs-6 ">
+						<div class="input-group date " >
+							<input type="text"  style="border-radius: 4px"  class="form-control" placeholder="活动开始日期"  name="actiStartTime" id="actiStartTime"/>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="input-group date">
+							<input type="text"  style="border-radius: 4px"  class="form-control" placeholder="活动结束日期"  name="actiEndrollTime" id="actiEndrollTime"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label>活动地点(必填)</label>
+				<input type="text" placeholder="请输入活动地点" class="form-control"   name="actiAddress" id="actiAddress" />
+			</div>
+			<div class="form-group">
+				<label>联系电话(必填)</label>
+				<input type="text"  onkeyup="this.value=this.value.replace(/\D/g,'')"  placeholder="活动负责人联系电话" class="form-control"  name="actiPhone" id="actiPhone" />
+			</div>
+			<div class="form-group">
+				<label>备注(选填)</label>
+				<input type="text" placeholder="请输入备注" class="form-control"  th:value="${meg}" name="actiComment" id="actiComment"/>
+			</div>
+			<div class="form-group">
+				<label>附加信息(选填)</label>
+				<input type="text" placeholder="请输入附加信息" class="form-control" th:text="${meg}" name="actiExtraInfo" id="actiExtraInfo"/>
+			</div>
+			<div class="form-group">
+				<label>简介(必填)</label>
+				<textarea  cols="30" rows="3" class="form-control" placeholder="简介（文字加图片）"   name="actiDesc" id="actiDesc" />
+			</div>
+			<div class="form-group row">
+				<div class="col-xs-4"><button type="reset" class=" col-xs-12 btn btn-info">重置</button></div>
+				<div class="col-xs-4"><button type="button"   class=" col-xs-12 btn btn-warning" onclick="preview()">预览</button></div>
+				<div class="col-xs-4"><button  type="button"  id="submit"  onclick="checkForm()" class=" col-xs-12 btn btn-success">申请发布</button></div>
+			</div>
+			</div>
+		</form>
+
+
+	</div>
+
+	<script src="front/js/jquery-3.3.1.min.js"></script>
+	<script src="front/js/bootstrap.min.js"></script>
+	<script src="front/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="front/js/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script>
+		$(function(){
+			$("#actiStartTime").datetimepicker({
+				//原始格式
+				format:'yyyy-mm-dd hh:ii',
+				minView:'hour',
+				language:'zh-CN',
+				autoclose:true,
+				startDate:new Date()-60*60
+			}).on("click",function(){
+				$("#actiStartTime").datetimepicker("setEndDate",$("#actiEndrollTime").val())
+			})
+            $("#actiEndrollTime").datetimepicker({
+                format:'yyyy-mm-dd hh:ii',
+                minView:'hour',
+                language:'zh-CN',
+                autoclose:true,
+                startDate:new Date()
+            }).on("click",function(){
+                $("#actiEndrollTime").datetimepicker("setEndDate",$("#actiStartTime").val())
+            })
+		})
+	</script>
+	<script>
+        // 头像预览
+        $("#file").change(function () {
+            // 获取上传文件对象
+            var file = $(this)[0].files[0];
+            // 读取文件URL
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            // 阅读文件完成后触发的事件
+            reader.onload = function () {
+                // 读取的URL结果：this.result
+                $("#actiThemeImage").attr("src", this.result);
+            }
+        });
+	</script>
+	<script >
+        function checkForm() {
+            var formData = new FormData($("#myfrom")[0]);
+            $.ajax({
+                url: "/studentPublish",
+                type: 'POST',
+                data: formData,
+                cache: false,
+                enctype: 'multipart/form-data',
+                //async: false,		 //默认为true即异步，设置为false时为同步
+                dataType: "json",    //改成text才能正确运行，为json时一直执行error,不执行success
+                processData: false,  //必须false才会避开jQuery对 formdata 的默认处理
+                contentType: false,  //必须false才会自动加上正确的Content-Type
+				//前端提交到后台的数据满足基本要求时则返回执行success:的函数
+                success: function (data) {
+                   //success是后台响应回来的json数据，它的值由后台设置，通过判断它的值执行不同的操作
+                    if(data.success===true){
+                        //success为true时，执行下面的程序
+						alert(data.msg);
+                        //提交成功，重定向到其他页面，避免用户重复提交申请
+                        window.location.href=("/toIndexPage");
+					}
+					if(data.success===false){
+                        alert(data.msg);
+					}
+                },
+                //前端提交到后台的数据不满足基本要求时则返回执行error:的函数
+                error: function (data) {
+                    alert("请检查是否上传了活动主题图片");
+                }
+            });
+        }
+	</script>
+<script>
+    function preview() {
+        var formData = new FormData($("#myfrom")[0]);
+        $.ajax({
+            url: "/preview",
+            type: 'POST',
+            data: formData,
+            cache: false,
+            enctype: 'multipart/form-data',
+            //async: false,		 //默认为true即异步，设置为false时为同步
+            dataType: "json",    //改成text才能正确运行，为json时一直执行error,不执行success
+            processData: false,  //必须false才会避开jQuery对 formdata 的默认处理
+            contentType: false,  //必须false才会自动加上正确的Content-Type
+            //前端提交到后台的数据满足基本要求时则返回执行success:的函数
+            success: function (data) {
+                //success是后台响应回来的json数据，它的值由后台设置，通过判断它的值执行不同的操作
+                if(data.success===true){
+                    //success为true时，执行下面的程序
+                    //提交成功，重定向到其他页面，避免用户重复提交申请
+                    window.location.href=("/toPreview");
+                }
+                if(data.success===false){
+                    alert(data.msg);
+                }
+            },
+            //前端提交到后台的数据不满足基本要求时则返回执行error:的函数
+            error: function (data) {
+                alert("请检查是否上传了活动主题图片");
+            }
+        });
+    }
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

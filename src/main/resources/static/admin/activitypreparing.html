@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>2019@ZYL.BS</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="admin/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="admin/css/styles.css"/>
+    <link rel="stylesheet" href="admin/css/styles-responsive.css"/>
+    <link rel="stylesheet" href="admin/css/plugins.css"/>
+    <link rel="stylesheet" href="admin/css/perfect-scrollbar.css"/>
+    <link rel="stylesheet" href="admin/css/theme-default.css" type="text/css" id="skin_color"/>
+    <link rel="stylesheet" href="admin/css/print.css" type="text/css" media="print"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<body>
+<!-- start: SLIDING BAR (SB) -->
+<div class="main-wrapper">
+    <!-- start: TOPBAR -->
+    <header class="topbar navbar navbar-inverse navbar-fixed-top inner">
+        <!-- start: TOPBAR CONTAINER -->
+        <div class="container">
+            <div class="navbar-header">
+                <a class="sb-toggle-left hidden-md hidden-lg" href="#main-navbar">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a class="navbar-brand" href="index.html">
+                    <img src="admin/images/logo.png" alt="Rapido"/>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="main-container inner">
+        <!-- start: PAGE -->
+        <div class="main-content">
+            <div class="container" style="position: relative">
+                <nav id="pageslide-left" class="pageslide inner">
+                    <div class="navbar-content">
+                        <!-- start: SIDEBAR -->
+                        <div class="main-navigation left-wrapper transition-left">
+                            <div class="user-profile border-top padding-horizontal-10 block">
+                                <div class="inline-block">
+                                    <img src="admin/images/avatar-1.jpg" style="width: 50px;height: 50px"/>
+                                </div>
+                                <div class="inline-block">
+                                    <h5 class="no-margin">欢迎您来到</h5>
+                                    <h4 class="no-margin">报名管理系统</h4>
+                                </div>
+                            </div>
+                            <!-- start: MAIN NAVIGATION MENU -->
+                            <ul class="main-navigation-menu">
+                                <li >
+                                    <a href="toAdminIndexPage"><i class="fa fa-home"></i> <span class="title">系统首页</span> </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><i class="fa fa-th-large"></i> <span class="title"> 学生管理 </span><i
+                                            class="icon-arrow"></i> </a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a href="adStudentInfo">
+                                                <span class="title">学生信息</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="cancelStudent">
+                                                <span class="title">注销学生</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="active open">
+                                    <a href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> <span
+                                            class="title">活动管理</span><i class="icon-arrow"></i> </a>
+                                    <ul class="sub-menu" >
+                                        <li>
+                                            <a href="selectActivityListByStatusId?statusId=2">
+                                                <span class="title">活动报名中</span>
+                                            </a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="selectActivityListByStatusId?statusId=3">
+                                                <span class="title">活动筹办中</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="selectActivityListByStatusId?statusId=4">
+                                                <span class="title">活动举办中</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="selectActivityListByStatusId?statusId=5">
+                                                <span class="title">活动已结束</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li >
+                                    <a href="javascript:void(0)"><i class="fa fa-cubes"></i> <span
+                                            class="title">消息管理</span><i class="icon-arrow"></i> </a>
+                                    <ul class="sub-menu">
+                                        <li  >
+                                            <a href="selectCheckingActivityByAdminId">
+                                                <span class="title">新审核消息</span>
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="selectCheckAgainActivityByAdminId">
+                                                <span class="title">再审核消息</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="selectAllRemindMessage">
+                                                <span class="title">提醒型消息</span>
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="selectUndealMessageByAdminId">
+                                                <span class="title">未处理消息</span>
+                                            </a>
+                                        </li>
+                                        <li >
+                                            <a href="selectFinishedMessageByAdminId">
+                                                <span class="title">已完成消息</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="slide-tools">
+                        <div class="col-xs-6 text-left no-padding">
+                        </div>
+                        <div class="col-xs-6 text-right no-padding">
+                            <a class="btn btn-sm log-out text-right" href="adminLoginOut">
+                                <i class="fa fa-power-off"></i> Log Out
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+                <div class="toolbar row">
+                    <div class="col-sm-6 hidden-xs">
+                        <div class="page-header" style="margin-top: 10px;margin-bottom: 5px">
+                            <h2>筹办中的活动</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 12px">
+                    <div class="col-md-12" style="padding-right: 10px;padding-left: 5px">
+                        <!-- start: EXPORT DATA TABLE PANEL  -->
+                        <div class="panel panel-white">
+                            <div class="panel-heading" style="padding-top: 0px">
+                                <div class="panel-tools">
+                                    <div class="dropdown">
+                                        <a data-toggle="dropdown"
+                                           class="btn btn-xs dropdown-toggle btn-transparent-grey">
+                                            <i class="fa fa-cog"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-light pull-right" role="menu">
+                                            <li>
+                                                <a class="panel-collapse collapses" href="#"><i
+                                                        class="fa fa-angle-up"></i> <span>Collapse</span> </a>
+                                            </li>
+                                            <li>
+                                                <a class="panel-refresh" href="#">
+                                                    <i class="fa fa-refresh"></i> <span>Refresh</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="panel-expand" href="#">
+                                                    <i class="fa fa-expand"></i> <span>Fullscreen</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover" id="sample-table-2">
+                                        <thead>
+                                        <tr>
+                                            <th>活动主题</th>
+                                            <th>活动类型</th>
+                                            <th>举办方</th>
+                                            <th>活动地址</th>
+                                            <th>活动开始时间</th>
+                                            <th>活动权重</th>
+                                            <th>报名情况</th>
+                                            <th>联系电话</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="activityInfo" name="activityInfo">
+                                        <tr th:each="activity:${pageInfo.list}">
+                                            <td th:text="${activity.actiTheme}">摄影大赛</td>
+                                            <td th:text="${activity.actiCategoryId}">学术讲座</td>
+                                            <input type="hidden" value="1"/>
+                                            <td th:text="${activity.actiHolder}">摄影协会</td>
+                                            <td th:text="${activity.actiAddress}">五号楼304</td>
+                                            <td th:text="${activity.actiStartTime}">2019-02-20 04:39</td>
+                                            <td th:text="${activity.actiLevel}">A</td>
+                                            <td th:text="${activity.actiNowEnroll}+'/'+${activity.actiMaxEnroll}">
+                                                39/100
+                                            </td>
+                                            <td th:text="${activity.actiPhone}">13794587900</td>
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs"  >
+                                                    <label href="#" class="btn btn-xs btn-blue tooltips"
+                                                       data-placement="top" onclick="my(this)" th:id="${activity.actiId}" th:value="${activity.actiId}"
+                                                       data-original-title="ChangeLevel"><i class="fa fa-edit"></i></label>
+                                                    <a th:href="@{/exportStudentDataByActivity(actiId=${activity.actiId})}" class="btn btn-xs btn-green tooltips"
+                                                       data-placement="top"
+                                                       data-original-title="Export"><i
+                                                            class="fa fa-file-excel-o"></i></a>
+                                                    <label href="#" onclick="deleteActivityById(this)" th:id="${activity.actiId}" th:value="${activity.actiId}" class="btn btn-xs btn-red tooltips" data-placement="top"
+                                                       data-original-title="DeleteActivity"><i
+                                                            class="fa fa-times fa fa-white"></i></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row" id="page" name="page">
+                                    <div class="col-md-4">
+                                        <ul class="pagination pagination-green margin-bottom-10">
+                                            <li th:id="${pageInfo.prePage}" onclick="pageShow(this)"  th:value="${pageInfo.prePage}">
+                                                <a href="#"><i class="fa fa-chevron-left"></i></a>
+                                            </li>
+                                        </ul>
+                                        <ul class="pagination pagination-green margin-bottom-10"
+                                            th:each="pageNum:${pageInfo.navigatepageNums}">
+                                            <li th:id="${pageNum}" th:class="${pageNum == pageInfo.pageNum}? 'active'"
+                                                th:value="${pageNum}" onclick="pageShow(this)">
+                                                <a href="#" th:text="${pageNum}">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <ul class="pagination pagination-green margin-bottom-10">
+                                            <li  th:id="${pageInfo.nextPage}" onclick="pageShow(this)" th:value="${pageInfo.nextPage}">
+                                                <a href="#"><i class="fa fa-chevron-right"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="show_page_info" class="col-md-4 col-md-offset-1">
+                                        <span th:text="'当前第'+${pageInfo.pageNum}+'页'"></span>
+                                        <span th:text="'总共'+${pageInfo.pages}+'页'"></span>
+                                        <span th:text="'总共'+${pageInfo.total}+'条记录'"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="my" id="myDiv" style="display: none;">
+                    <div>
+                        <div class="col-sm-12 panel panel-white">
+                            <div class="tabbable">
+
+                                <div class="tab-content">
+                                    <div id="panel_overview" class="tab-pane fade in active">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-5">
+                                                <div class="user-left">
+                                                    <div class="center">
+                                                        <div class="fileupload fileupload-new"
+                                                             data-provides="fileupload">
+                                                            <div class="user-image">
+                                                                <div class="fileupload-new thumbnail"><img src=""
+                                                                                                           style="width: 29rem;height: 19.5rem;border-bottom: 1px solid  #ddd"
+                                                                                                           id="themeImage"
+                                                                                                           name="themeImage"
+                                                                                                           alt=""/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <table class="table table-condensed table-hover">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>活动主题</td>
+                                                            <td id="theme"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>活动类型:</td>
+                                                            <td id="category"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>活动举办方:</td>
+                                                            <td id="holder"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>活动地点</td>
+                                                            <td id="address"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>联系电话</td>
+                                                            <td id="phone"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>报名情况</td>
+                                                            <td id="enroll"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>活动开始时间</td>
+                                                            <td id="startTime"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>报名截止时间</td>
+                                                            <td id="endEnrollTime"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>活动权重</td>
+                                                            <td id="level"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-7">
+                                                <h4>活动简介</h4>
+                                                <div class="row space20 content">
+                                                    <p style="margin-left: 5px;margin-right: 6px;" id="desc">
+                                                    </p>
+                                                </div>
+                                                <div class="form-group" style="margin-left: -1rem;">
+                                                    <label class="control-label">
+                                                        备注
+                                                    </label>
+                                                    <input type="text" class="form-control" id="comment"
+                                                           name="comment"/>
+                                                </div>
+                                                <div class="form-group" style="margin-left: -1rem;">
+                                                    <label class="control-label">
+                                                        附加信息
+                                                    </label>
+                                                    <input type="text" class="form-control" id="extra"
+                                                           name="firstname"/>
+
+                                                </div>
+                                                <div>
+                                                    <span>
+                                                        <select name="changeLevel" id="changeLevel"
+                                                                style="margin-left: 20%;width: 20%;text-align: center">
+                                                            <option th:text="权重更改" value=""
+                                                                    selected="selected">权重更改</option>
+                                                            <option value="A">A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                            <option value="D">D</option>
+                                                            <option value="E">E</option>
+                                                            <option value="F">F</option>
+                                                        </select>
+                                                    </span>
+                                                    <button type="button" style="margin-left: 10%;width: 25%;align-items: center"
+                                                            class="btn btn-green" onclick="clossMy(this)"
+                                                            id="activityId">
+                                                        close
+                                                    </button>
+                                                </div>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="inner" >
+        <div class="footer-inner">
+            <div class="pull-left">
+                2019 @ ZYL.BS
+            </div>
+        </div>
+    </footer>
+</div>
+<script type="text/javascript" src="admin/js/jquery-1.11.1.min.js"></script>
+<script src="admin/js/jquery-2.1.1.min.js"></script>
+<script src="admin/js/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="admin/js/bootstrap.min.js"></script>
+<!--有用的-->
+<script src="admin/js/perfect-scrollbar.js"></script>
+<script src="admin/js/jquery.scrollTo.min.js"></script>
+<script src="admin/js/main.js"></script>
+<script src="admin/js/index.js"></script>
+<script src="layer/layer.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        Main.init();
+        SVExamples.init();
+        TableExport.init();
+    });
+</script>
+<script>
+    function deleteActivityById(a) {
+        var actiId=a.id;
+        //alert("活动id"+actiId);
+        var result=confirm("确定删除此活动吗");
+        if(result==true){
+            $.ajax(
+                {
+                    url: "/deleteActivityById",
+                    type: 'POST',
+                    data: {actiId: actiId},
+                    cache: false,
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data==true){
+                            //刷新页面,将删除的活动立即删除掉,使页面的动态效果好看点
+                            window.location.reload();
+                        }
+                    },
+                }
+            )
+        }
+    }
+</script>
+<script>
+    function my(a) {
+        layer.open({
+            title:"活动详情",
+            type: 1,
+            area: ['900px', '540px'],
+            fixed: true, //固定
+            maxmin: true,
+            // content: "admin/text.html"
+            content: $('#myDiv')
+        });
+        var actiId = a.id;
+        $.ajax(
+            {
+                url: "/showActivityDetailByActiId",
+                type: 'POST',
+                data: {actiId: actiId},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (activity) {
+                    $("#themeImage").attr("src", activity.actiThemeImage);
+                    $("#theme").text(activity.actiTheme);
+                    $("#category").text(activity.actiCategoryName);
+                    $("#holder").text(activity.actiHolder);
+                    $("#address").text(activity.actiAddress);
+                    $("#phone").text(activity.actiPhone);
+                    $("#enroll").text(activity.actiNowEnroll + "/" + activity.actiMaxEnroll);
+                    $("#startTime").text(activity.actiStartTime);
+                    $("#endEnrollTime").text(activity.actiEndrollTime);
+                    $("#level").text(activity.actiLevel);
+                    $("#desc").text(activity.actiDesc);
+                    //$("#comment").text(activity.actiComment);
+                    // $("#extra").text(activity.actiExtraInfo);
+                    $("#comment").val(activity.actiComment);
+                    $("#extra").val(activity.actiExtraInfo);
+                    $("#activityId").val(activity.actiId);
+
+                },
+            }
+        )
+    }
+</script>
+<script>
+    function clossMy(a) {
+        var actiId=a.value;
+        var level= $("#level").text();
+        var changeLevel= $("#changeLevel").val();
+        if(level===changeLevel || changeLevel=="" || changeLevel==null){
+            $(".my").hide();
+         }else {
+            var result = confirm("活动权重由"+level+"改成"+changeLevel);
+            if(result){
+                $.ajax(
+                    {
+                        url: "/changeLevelByActivityId",
+                        type: 'POST',
+                        data: {actiId: actiId,changeLevel:changeLevel},
+                        cache: false,
+                        async: false,
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data==true){
+                                alert("权重修改成功");
+                               // $("#level").text(activity.actiLevel);
+
+                            }else {
+                                alert("权重修改失败");
+                            }
+                        }
+                    })};
+
+        };
+        $(".my").hide();
+        //将select标签清除选中状态恢复成默认状态
+        document.getElementById("changeLevel").options.selectedIndex = 0;
+        //刷新页面
+        window.location.reload();
+        }
+</script>
+<script>
+    function pageShow(a) {
+        var pageNum = a.value;
+        //alert(a.value);获取当前标签的值
+        var pageId=a.id;//获取当前标签的id值
+        $.ajax(
+            {
+                url: "/pageShowByStatusId",
+                type: 'POST',
+                data: {pageNum: pageNum, statusId: 3},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (pageInfo) {
+                    var html = '';
+                    var html1 = '';
+                    $("#activityInfo").empty(); //先将之前的数据清空，然后用返回的数据拼接新的html
+                    $.each(pageInfo.list, function (index) {
+                        html += '<tr id="activityInfo" name="activityInfo">' +
+                            '<td value="' + pageInfo.list[index].actiTheme + '" >' + pageInfo.list[index].actiTheme + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiCategoryId + '">' + pageInfo.list[index].actiCategoryId + '</td>' +
+                            '<input  type="hidden" value="' + pageInfo.list[index].actiId + '"/>' +
+                            '<td value="' + pageInfo.list[index].actiHolder + '">' + pageInfo.list[index].actiHolder + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiAddress + '">' + pageInfo.list[index].actiAddress + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiStartTime + '">' + pageInfo.list[index].actiStartTime + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiLevel + '">' + pageInfo.list[index].actiLevel + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiNowEnroll + '+ ' / '+' + pageInfo.list[index].actiMaxEnroll + '" >' + pageInfo.list[index].actiNowEnroll + '/' + pageInfo.list[index].actiMaxEnroll + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiPhone + '">' + pageInfo.list[index].actiPhone + '</td>' +
+                            '<td >' + '<div class="visible-md visible-lg hidden-sm hidden-xs">' +
+                            '<a href="#" style="margin-right: 4px" class="btn btn-xs btn-blue tooltips" data-placement="top" onclick="my(this)" id="' + pageInfo.list[index].actiId + '" value="' + pageInfo.list[index].actiId + '" data-original-title="ChangeLevel">' + '<i class="fa fa-edit">' + '</i>' + '</a>' +
+                            '<a href="exportStudentDataByActivity?actiId='+pageInfo.list[index].actiId+'"    style="margin-right: 4px" class="btn btn-xs btn-green tooltips" data-placement="top" data-original-title="Export">' + '<i class="fa fa-file-excel-o">' + '</i>' + '</a>' +
+                            '<a href="#" class="btn btn-xs btn-red tooltips"   onclick="deleteActivityById(this)"   id="' + pageInfo.list[index].actiId + '" value="' + pageInfo.list[index].actiId + '"  data-placement="top" data-original-title="DeleteActivity">' + '<i class="fa fa-times fa fa-white">' + '</i>' + '</a>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>'
+                    }),
+                        $("#activityInfo").html(html); //将拼接好的html显示在指定的id上
+
+                    //拼接分页的页码和数据，将id设置为当前的value值，目的是为了根据id将其页码标签的class设置active;每个标签的onclick都为同一个方法，目的是精简高效使用代码
+                    $("#page").empty();
+                    html1 += '<div class="row"  name="page">'+
+                        '<div id="show_page_nav" class="col-md-4" style="margin-left: 15px">'+
+                        '<ul  class="pagination pagination-green margin-bottom-10">'+
+                        '<li   id="'+pageInfo.prePage+'" onclick="pageShow(this)" value="'+pageInfo.prePage+'">'+
+                        '<a   style="margin-right: 4px"  href="#"><i class="fa fa-chevron-left">'+'</i>'+'</a>'+'</li>'+
+                        '</ul>'
+
+                        $.each(pageInfo.navigatepageNums, function (index) {
+                            html1+='<ul  class="pagination pagination-green margin-bottom-10" >'+
+                                '<li id="'+pageInfo.navigatepageNums[index]+'" value="'+pageInfo.navigatepageNums[index]+'"  text="'+pageInfo.navigatepageNums[index]+'" onclick="pageShow(this)">'+
+                            '<a href="#"  value="'+pageInfo.navigatepageNums[index]+'" style="margin-right: 4px"> '+pageInfo.navigatepageNums[index]+'</a>'+
+                            '</li>'+
+                            '</ul>'
+                        }),
+
+                    html1 += '<ul  class="pagination pagination-green margin-bottom-10">' +
+                        '<li id="'+pageInfo.nextPage+'" onclick="pageShow(this)" value="'+pageInfo.nextPage+'" >'+
+                        '<a href="#"><i class="fa fa-chevron-right">' + '</i>' + '</a>' +
+                        '</li>'+
+                        '</ul>'+
+                        '</div>'+
+                        '<div id="show_page_info" class="col-md-4 col-md-offset-1">'+
+                        '<span>当前第'+pageInfo.pageNum+'页</span>'+
+                        '<span>总共'+pageInfo.pages +'页</span>'+
+                        '<span>总共'+pageInfo.total+'条记录</span>'+
+                        '</div>'+
+                        '</div>'
+                    $("#page").html(html1);
+                    //当到了最后一页时，如果点击下一页，页码pageNum会为0,但实际情况是pageHelper插件会当到了最后一页时，再点击下一页，会显示第一页的数据
+                    if(pageId!=0){
+                        document.getElementById(pageId).className="active"
+                    }else {
+                        document.getElementById(1).className="active"
+                    }
+                },
+            }
+        );
+    }
+</script>
+</body>
+</html>

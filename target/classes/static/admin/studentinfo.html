@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>2019@ZYL.BS</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="admin/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="admin/css/styles.css"/>
+    <link rel="stylesheet" href="admin/css/styles-responsive.css"/>
+    <link rel="stylesheet" href="admin/css/plugins.css"/>
+    <link rel="stylesheet" href="admin/css/perfect-scrollbar.css"/>
+    <link rel="stylesheet" href="admin/css/theme-default.css" type="text/css" id="skin_color"/>
+    <link rel="stylesheet" href="admin/css/print.css" type="text/css" media="print"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<body>
+<div class="main-wrapper">
+    <header class="topbar navbar navbar-inverse navbar-fixed-top inner">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="sb-toggle-left hidden-md hidden-lg" href="#main-navbar">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a class="navbar-brand" href="index.html">
+                    <img src="admin/images/logo.png" alt="Rapido"/>
+                </a>
+            </div>
+        </div>
+    </header>
+    <a class="closedbar inner hidden-sm hidden-xs" href="#">
+    </a>
+    <nav id="pageslide-left" class="pageslide inner">
+        <div class="navbar-content">
+            <!-- start: SIDEBAR -->
+            <div class="main-navigation left-wrapper transition-left">
+                <div class="user-profile border-top padding-horizontal-10 block">
+                    <div class="inline-block">
+                        <img src="admin/images/avatar-1.jpg" style="width: 50px;height: 50px"/>
+                    </div>
+                    <div class="inline-block">
+                        <h5 class="no-margin">欢迎您来到</h5>
+                        <h4 class="no-margin">报名管理系统</h4>
+                    </div>
+                </div>
+                <!-- start: MAIN NAVIGATION MENU -->
+                <ul class="main-navigation-menu">
+                    <li >
+                        <a href="toAdminIndexPage"><i class="fa fa-home"></i> <span class="title">系统首页</span> </a>
+                    </li>
+                    <li class="active open">
+                        <a href="javascript:void(0)"><i class="fa fa-th-large"></i> <span class="title"> 学生管理 </span><i
+                                class="icon-arrow"></i> </a>
+                        <ul class="sub-menu">
+                            <li class="active">
+                                <a href="adStudentInfo">
+                                    <span class="title">学生信息</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="cancelStudent">
+                                    <span class="title">注销学生</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> <span
+                                class="title">活动管理</span><i class="icon-arrow"></i> </a>
+                        <ul class="sub-menu" >
+                            <li>
+                                <a href="selectActivityListByStatusId?statusId=2">
+                                    <span class="title">活动报名中</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="selectActivityListByStatusId?statusId=3">
+                                    <span class="title">活动筹办中</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="selectActivityListByStatusId?statusId=4">
+                                    <span class="title">活动举办中</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="selectActivityListByStatusId?statusId=5">
+                                    <span class="title">活动已结束</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="javascript:void(0)"><i class="fa fa-cubes"></i> <span
+                                class="title">消息管理</span><i class="icon-arrow"></i> </a>
+                        <ul class="sub-menu">
+                            <li  >
+                                <a href="selectCheckingActivityByAdminId">
+                                    <span class="title">新审核消息</span>
+                                </a>
+                            </li>
+                            <li  >
+                                <a href="selectCheckAgainActivityByAdminId">
+                                    <span class="title">再审核消息</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="selectAllRemindMessage">
+                                    <span class="title">提醒型消息</span>
+                                </a>
+                            </li>
+                            <li  >
+                                <a href="selectUndealMessageByAdminId">
+                                    <span class="title">未处理消息</span>
+                                </a>
+                            </li>
+                            <li >
+                                <a href="selectFinishedMessageByAdminId">
+                                    <span class="title">已完成消息</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-tools">
+            <div class="col-xs-6 text-left no-padding">
+            </div>
+            <div class="col-xs-6 text-right no-padding">
+                <a class="btn btn-sm log-out text-right" href="adminLoginOut">
+                    <i class="fa fa-power-off"></i> Log Out
+                </a>
+            </div>
+        </div>
+    </nav>
+        <div class="main-container inner">
+        <div class="main-content">
+            <div class="container">
+                <div class="toolbar row">
+                    <div class="col-sm-6 hidden-xs">
+                        <div class="page-header" style="margin-top: 10px;margin-bottom: 5px">
+                            <h2>学生信息</h2>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12" style="margin-top: 25px;margin-bottom: 5px;text-align: center">
+                        <div class="item" style="text-align: center">
+                            <select name="grade" id="grade"
+                                    style="border-radius: 0.1rem;margin-left: 0.8rem;padding: 0.06rem 0"
+                                    onchange="selectDepartmentByGradeId()">
+                                <option value="">年级筛选</option>
+                                <!--<option   th:value="${studentClassInfo.studGradeId}" th:text="${studentClassInfo.studGradeName}"></option>-->
+                                <option th:each="grade:${gradeList}"
+                                        th:text="${grade.className}"
+                                        th:value="${grade.classId}">
+                                </option>
+                            </select>
+
+                            <select name="department" id="department" style="border-radius: 0.1rem;padding: 0.06rem 0"
+                                    onchange="selectClassDepartmentByGradeId()">
+                                <option value="">院系筛选</option>
+                            </select>
+                            <select name="studClassID" id="classId" style="border-radius: 0.1rem;padding: 0.06rem 0"
+                                    onchange="selectStudentListByClassId()">
+                                <option value="">专业班级筛选</option>
+                            </select>
+                            <span>共有<label style="color:crimson" id="count" name="count" th:text="${count}"></label>条数据</span>
+                        </div>
+
+                    </div>
+                </div>
+                <!---自己定义-->
+                <div class="row" style="margin-top: 12px">
+                    <div class="col-md-12" style="padding-right: 10px;padding-left: 5px">
+                        <div class="panel panel-white">
+                            <div class="panel-body">
+                                <table class="table table-hover" id="sample-table-1">
+                                    <thead>
+                                    <tr class="row">
+                                        <th class=" col-md-2">班级</th>
+                                        <th class="col-md-2">报名姓名</th>
+
+                                        <th class="col-md-2">学号</th>
+
+                                        <th class="col-md-2">电话</th>
+                                        <th class=" col-md-1">用户名</th>
+                                        <th class=" col-md-2">最近登录时间</th>
+                                        <th class="col-md-1">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="studentInfo" name="studentInfo">
+                                    <tr class="row" th:each="student:${studentList}">
+                                        <!--th:value="${student.studentClassInfo.studGradeName} '&eq;' null '?' ${student.studentClassInfo.studGradeName}+${student.studentClassInfo.studClassName} ':' 无"-->
+                                        <!--<td class="col-md-2" disabled="true" th:text="${student?.studentClassInfo?.studGradeName}+${student?.studentClassInfo?.studClassName}" ></td>-->
+                                        <td class="col-md-2"
+                                            th:text="${student.studentClassInfo.studGradeName}+${student.studentClassInfo.studClassName}"></td>
+                                        <td class="col-md-2" th:text="${student.studEnrollName}">钟玉林</td>
+
+                                        <td class="col-md-2" th:text="${student.studNumber}">jerry</td>
+
+                                        <td class="col-md-2" th:text="${student.studPhone}">
+                                            13794587900
+                                        </td>
+                                        <td class="col-md-1" th:text="${student.studName}">jerry</td>
+                                        <td class="col-md-2" th:text="${student.studLoginTime}" >2019-02-14 15:30</td>
+                                        <td class="col-md-1">
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                <label href="#" onclick="cancelStudentByStudId(this)" th:id="${student.studId}" th:value="${student.studId}" class="btn btn-xs btn-red tooltips" data-placement="top"
+                                                       data-original-title="Remove"><i
+                                                        class="fa fa-times fa fa-white"></i></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <ul class="pagination pagination-green margin-bottom-10" id="page" name="page">
+                                        <li  onclick="pageBefore()" id="before" value="0">
+                                            <a href="#"><i class="fa fa-chevron-left"></i></a>
+                                        </li>
+                                        <li class="active" id="first" value="1" onclick="pageFirst()">
+                                            <a>
+                                                1
+                                            </a>
+                                        </li>
+                                        <li value="2" id="sec" onclick="pageSecond()">
+                                            <a href="#">
+                                                2
+                                            </a>
+                                        </li>
+                                        <li id="third" value="3" onclick="pageThird()">
+                                            <a href="#">
+                                                3
+                                            </a>
+                                        </li>
+                                        <li id="four" value="4" onclick="pageFourth()">
+                                            <a href="#">
+                                                4
+                                            </a>
+                                        </li>
+                                        <li id="forward" value="5" onclick="pageForward()">
+                                            <a href="#"><i class="fa fa-chevron-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="inner">
+    <div class="footer-inner">
+        <div class="pull-left">
+            2019 @ ZYL.BS
+        </div>
+        <div class="pull-right">
+            <span class="go-top"><i class="fa fa-chevron-up"></i></span>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript" src="admin/js/jquery-1.11.1.min.js"></script>
+<script src="admin/js/jquery-2.1.1.min.js"></script>
+<script src="admin/js/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="admin/js/bootstrap.min.js"></script>
+<!--有用的-->
+<script src="admin/js/perfect-scrollbar.js"></script>
+<script src="admin/js/jquery.scrollTo.min.js"></script>
+<script src="admin/js/main.js"></script>
+<script src="admin/js/index.js"></script>
+<script>
+    function cancelStudentByStudId(a) {
+        var studId=a.id;
+        //alert("活动id"+actiId);
+        var result=confirm("确定注销此学生吗");
+        if(result==true){
+            $.ajax(
+                {
+                    url: "/cancelStudentByStudId",
+                    type: 'POST',
+                    data: {studId: studId},
+                    cache: false,
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data==true){
+                            //刷新页面,将删除的活动立即删除掉,使页面的动态效果好看点
+                            window.location.reload();
+                        }
+                    },
+                }
+            )
+        }
+    }
+</script>
+
+<script>
+    function pageBefore() {
+        var before= $("#before").val();
+        var departmentId = $("#department").val();
+        var gradeId = $("#grade").val();
+        var classId = $("#classId").val();
+
+        var pageFour=$("#four").val();
+        var pageThree=$("#third").val();
+        var pageTwo=$("#sec").val();
+        var pageOne=$("#first").val();
+
+        $("#four").removeClass("active");
+        $("#third").removeClass("active");
+        $("#sec").removeClass("active");
+        $("#first").removeClass("active");
+        $.ajax(
+            {
+                url: "/pageBeforeAndAfter",
+                type: 'POST',
+                data: {gradeId:gradeId,departmentId:departmentId,classId:classId,pageNum: before},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (adminStudentAndClassList) {
+                    $("#studentInfo").empty();
+                    var html = '';
+                    $.each(adminStudentAndClassList.studentList, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studentClassInfo.studGradeName + adminStudentAndClassList.studentList[index].studentClassInfo.studClassName + '">' + adminStudentAndClassList.studentList[index].studentClassInfo.studGradeName + adminStudentAndClassList.studentList[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + adminStudentAndClassList.studentList[index].studEnrollName + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studNumber + '">' + adminStudentAndClassList.studentList[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studPhone + '">' + adminStudentAndClassList.studentList[index].studPhone + '</td>' +
+                            '<td class="col-md-1" value="' + adminStudentAndClassList.studentList[index].studName + '">' + adminStudentAndClassList.studentList[index].studName + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studLoginTime + '">' + adminStudentAndClassList.studentList[index].studLoginTime + '</td>' +
+                            '<td class="col-md-1">' +
+                            '<div class="visible-md visible-lg hidden-sm hidden-xs">' +
+                            '<a href="#" class="btn btn-xs btn-red tooltips"   onclick="cancelStudentByStudId(this)"   id="' + adminStudentAndClassList.studentList[index].studId + '" value="' + adminStudentAndClassList.studentList[index].studId + '"  data-placement="top" data-original-title="Remove">' + '<i class="fa fa-times fa fa-white">' + '</i>' + '</a>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").html(html);
+                   var pageNumber=adminStudentAndClassList.count;
+                   if (pageNumber==pageOne || pageNumber==0){
+                       $("#first").addClass("active");
+                   }
+                    if (pageNumber==pageTwo){
+                        $("#sec").addClass("active");
+                    }
+                    if (pageNumber==pageThree){
+                        $("#third").addClass("active");
+                    }
+                    if (pageNumber==pageFour){
+                        $("#four").addClass("active");
+                    }
+                },
+            }
+        );
+    }
+</script>
+<script>
+    function pageForward() {
+        var forward= $("#forward").val();
+        var departmentId = $("#department").val();
+        var gradeId = $("#grade").val();
+        var classId = $("#classId").val();
+
+        var pageFour=$("#four").val();
+        var pageThree=$("#third").val();
+        var pageTwo=$("#sec").val();
+        var pageOne=$("#first").val();
+
+        $("#four").removeClass("active");
+        $("#third").removeClass("active");
+        $("#sec").removeClass("active");
+        $("#first").removeClass("active");
+        $.ajax(
+            {
+                url: "/pageBeforeAndAfter",
+                type: 'POST',
+                data: {gradeId:gradeId,departmentId:departmentId,classId:classId,pageNum:forward},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (adminStudentAndClassList) {
+                    $("#studentInfo").empty();
+                    var html = '';
+                    $.each(adminStudentAndClassList.studentList, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studentClassInfo.studGradeName + adminStudentAndClassList.studentList[index].studentClassInfo.studClassName + '">' + adminStudentAndClassList.studentList[index].studentClassInfo.studGradeName + adminStudentAndClassList.studentList[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + adminStudentAndClassList.studentList[index].studEnrollName + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studNumber + '">' + adminStudentAndClassList.studentList[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studPhone + '">' + adminStudentAndClassList.studentList[index].studPhone + '</td>' +
+                            '<td class="col-md-1" value="' + adminStudentAndClassList.studentList[index].studName + '">' + adminStudentAndClassList.studentList[index].studName + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studLoginTime + '">' + adminStudentAndClassList.studentList[index].studLoginTime + '</td>' +
+                            '<td class="col-md-1">' +
+                            '<div class="visible-md visible-lg hidden-sm hidden-xs">' +
+                            '<a href="#" class="btn btn-xs btn-red tooltips"   onclick="cancelStudentByStudId(this)"   id="' + adminStudentAndClassList.studentList[index].studId + '" value="' + adminStudentAndClassList.studentList[index].studId + '"  data-placement="top" data-original-title="Remove">' + '<i class="fa fa-times fa fa-white">' + '</i>' + '</a>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").html(html);
+
+                    var pageNumber=adminStudentAndClassList.count;
+                    if (pageNumber==pageOne || pageNumber==0){
+                        $("#first").addClass("active");
+                    }
+                    if (pageNumber==pageTwo){
+                        $("#sec").addClass("active");
+                    }
+                    if (pageNumber==pageThree){
+                        $("#third").addClass("active");
+                    }
+                    if (pageNumber==pageFour){
+                        $("#four").addClass("active");
+                    }
+                },
+            }
+        );
+    }
+</script>
+<script>
+    function pageFourth() {
+        var pageNum = $("#four").val();
+        var departmentId = $("#department").val();
+        var gradeId = $("#grade").val();
+        var classId = $("#classId").val();
+
+        $("#four").addClass("active");
+        $("#third").removeClass("active");
+        $("#sec").removeClass("active");
+        $("#first").removeClass("active");
+        $.ajax(
+            {
+                url: "/pageShow",
+                type: 'POST',
+                data: {gradeId:gradeId,departmentId:departmentId,classId:classId,pageNum: pageNum},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (studentList) {
+                    $("#studentInfo").empty();
+                    var html = '';
+                    $.each(studentList, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-2" value="' + studentList[index].studentClassInfo.studGradeName + studentList[index].studentClassInfo.studClassName + '">' + studentList[index].studentClassInfo.studGradeName + studentList[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + studentList[index].studEnrollName + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studNumber + '">' + studentList[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studPhone + '">' + studentList[index].studPhone + '</td>' +
+                            '<td class="col-md-1" value="' + studentList[index].studName + '">' + studentList[index].studName + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studLoginTime + '">' + studentList[index].studLoginTime + '</td>' +
+                            '<td class="col-md-1">' +
+                            '<div class="visible-md visible-lg hidden-sm hidden-xs">' +
+                            '<a href="#" class="btn btn-xs btn-red tooltips"   onclick="cancelStudentByStudId(this)"   id="' + adminStudentAndClassList.studentList[index].studId + '" value="' + adminStudentAndClassList.studentList[index].studId + '"  data-placement="top" data-original-title="Remove">' + '<i class="fa fa-times fa fa-white">' + '</i>' + '</a>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").html(html);
+                },}
+        );
+    }
+</script>
+<script>
+    function pageThird() {
+        var pageNum = $("#third").val();
+        var departmentId = $("#department").val();
+        var gradeId = $("#grade").val();
+        var classId = $("#classId").val();
+
+        $("#four").removeClass("active");
+        $("#third").addClass("active");
+        $("#sec").removeClass("active");
+        $("#first").removeClass("active");
+        $.ajax(
+            {
+                url: "/pageShow",
+                type: 'POST',
+                data: {gradeId:gradeId,departmentId:departmentId,classId:classId,pageNum: pageNum},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (studentList) {
+                    $("#studentInfo").empty();
+                    var html = '';
+                    $.each(studentList, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-2" value="' + studentList[index].studentClassInfo.studGradeName + studentList[index].studentClassInfo.studClassName + '">' + studentList[index].studentClassInfo.studGradeName + studentList[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + studentList[index].studEnrollName + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studNumber + '">' + studentList[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studPhone + '">' + studentList[index].studPhone + '</td>' +
+                            '<td class="col-md-1" value="' + studentList[index].studName + '">' + studentList[index].studName + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studLoginTime + '">' + studentList[index].studLoginTime + '</td>' +
+                            '<td class="col-md-1">' +
+                            '<div class="visible-md visible-lg hidden-sm hidden-xs">' +
+                            '<a href="#" class="btn btn-xs btn-red tooltips"   onclick="cancelStudentByStudId(this)"   id="' + adminStudentAndClassList.studentList[index].studId + '" value="' + adminStudentAndClassList.studentList[index].studId + '"  data-placement="top" data-original-title="Remove">' + '<i class="fa fa-times fa fa-white">' + '</i>' + '</a>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").html(html);
+                },
+            }
+        );
+    }
+</script>
+<script>
+    function pageSecond() {
+        var pageNum = $("#sec").val();
+        var departmentId = $("#department").val();
+        var gradeId = $("#grade").val();
+        var classId = $("#classId").val();
+
+        $("#four").removeClass("active");
+        $("#third").removeClass("active");
+        $("#sec").addClass("active");
+        $("#first").removeClass("active");
+        $.ajax(
+            {
+                url: "/pageShow",
+                type: 'POST',
+                data: {gradeId:gradeId,departmentId:departmentId,classId:classId,pageNum: pageNum},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (studentList) {
+                    $("#studentInfo").empty();
+                    var html = '';
+                    $.each(studentList, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-2" value="' + studentList[index].studentClassInfo.studGradeName + studentList[index].studentClassInfo.studClassName + '">' + studentList[index].studentClassInfo.studGradeName + studentList[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + studentList[index].studEnrollName + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studNumber + '">' + studentList[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studPhone + '">' + studentList[index].studPhone + '</td>' +
+                            '<td class="col-md-1" value="' + studentList[index].studName + '">' + studentList[index].studName + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studLoginTime + '">' + studentList[index].studLoginTime + '</td>' +
+                            '<td class="col-md-1">' +
+                            '<div class="visible-md visible-lg hidden-sm hidden-xs">' +
+                            '<a href="#" class="btn btn-xs btn-red tooltips"   onclick="cancelStudentByStudId(this)"   id="' + adminStudentAndClassList.studentList[index].studId + '" value="' + adminStudentAndClassList.studentList[index].studId + '"  data-placement="top" data-original-title="Remove">' + '<i class="fa fa-times fa fa-white">' + '</i>' + '</a>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").html(html);
+                },
+            }
+        );
+    }
+</script>
+<script>
+    function pageFirst() {
+        var pageNum = $("#first").val();
+        var departmentId = $("#department").val();
+        var gradeId = $("#grade").val();
+        var classId = $("#classId").val();
+
+        $("#four").removeClass("active");
+        $("#third").removeClass("active");
+        $("#sec").removeClass("active");
+        $("#first").addClass("active");
+        $.ajax(
+            {
+                url: "/pageShow",
+                type: 'POST',
+                data: {gradeId:gradeId,departmentId:departmentId,classId:classId,pageNum: pageNum},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (studentList) {
+                    $("#studentInfo").empty();
+                    var html = '';
+                    $.each(studentList, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-2" value="' + studentList[index].studentClassInfo.studGradeName + studentList[index].studentClassInfo.studClassName + '">' + studentList[index].studentClassInfo.studGradeName + studentList[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + studentList[index].studEnrollName + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studNumber + '">' + studentList[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studPhone + '">' + studentList[index].studPhone + '</td>' +
+                            '<td class="col-md-1" value="' + studentList[index].studName + '">' + studentList[index].studName + '</td>' +
+                            '<td class="col-md-2" value="' + studentList[index].studLoginTime + '">' + studentList[index].studLoginTime + '</td>' +
+                            '<td class="col-md-1">' +
+                            '<div class="visible-md visible-lg hidden-sm hidden-xs">' +
+                            '<a href="#" class="btn btn-xs btn-red tooltips"   onclick="cancelStudentByStudId(this)"   id="' + adminStudentAndClassList.studentList[index].studId + '" value="' + adminStudentAndClassList.studentList[index].studId + '"  data-placement="top" data-original-title="Remove">' + '<i class="fa fa-times fa fa-white">' + '</i>' + '</a>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").html(html);
+                },
+            }
+        );
+    }
+</script>
+<script>
+    jQuery(document).ready(function () {
+        Main.init();
+        SVExamples.init();
+    });
+</script>
+<script>
+    function selectDepartmentByGradeId() {
+        var gradeId = $("#grade").val();
+        $("#department").empty();
+        $("#department").html('<option  value="' + '' + '">' + '院系筛选' + '</option>');
+
+        $("#classId").empty();
+        $("#classId").html('<option value="' + '' + '">' + '专业班级筛选' + '</option>');
+        $.ajax(
+            {
+                url: "/selectDepartmentByGradeId",
+                type: 'GET',
+                data: {gradeId: gradeId},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (adminStudentAndClassList) {
+                    // alert("院系搜查成功");
+                    var html = '';
+                    $.each(adminStudentAndClassList.studentClassList, function (index) {
+                        html += '<option value="' + adminStudentAndClassList.studentClassList[index].classId + '">' + adminStudentAndClassList.studentClassList[index].className + '</option>'
+                    })
+                    $("#department").append(html);
+                    $("#studentInfo").empty();
+                    var html = '';
+                    $.each(adminStudentAndClassList.studentList, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studentClassInfo.studGradeName + adminStudentAndClassList.studentList[index].studentClassInfo.studClassName + '">' + adminStudentAndClassList.studentList[index].studentClassInfo.studGradeName + adminStudentAndClassList.studentList[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + adminStudentAndClassList.studentList[index].studEnrollName + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studNumber + '">' + adminStudentAndClassList.studentList[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studPhone + '">' + adminStudentAndClassList.studentList[index].studPhone + '</td>' +
+                            '<td class="col-md-1" value="' + adminStudentAndClassList.studentList[index].studName + '">' + adminStudentAndClassList.studentList[index].studName + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studLoginTime + '">' + adminStudentAndClassList.studentList[index].studLoginTime + '</td>' +
+                            '<td class="col-md-1">' +
+                            '<div class="visible-md visible-lg hidden-sm hidden-xs">' +
+                            '<a href="#" class="btn btn-xs btn-red tooltips"   onclick="cancelStudentByStudId(this)"   id="' + adminStudentAndClassList.studentList[index].studId + '" value="' + adminStudentAndClassList.studentList[index].studId + '"  data-placement="top" data-original-title="Remove">' + '<i class="fa fa-times fa fa-white">' + '</i>' + '</a>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").html(html);
+                    $("#count").text(adminStudentAndClassList.count);
+                },
+            }
+        );
+    }
+</script>
+<script>
+    <!--专业班级查询与学院查询的原理是一样的故用重用后台的方法-->
+    function selectClassDepartmentByGradeId() {
+        var studClassId = $("#studClassId").val();
+        var studClassName = $("#studClassName").val();
+        //alert("ID="+studClassId+"===名字=="+studClassName);
+        var departmentId = $("#department").val();
+        var gradeId = $("#grade").val();
+        $("#classId").empty();
+        //$("#classId").html('<option value="'+studClassId+'">' + studClassName + '</option>');
+        $("#classId").html('<option value="' + '' + '">' + "专业班级筛选" + '</option>');
+        // alert("前端班级父级Id" + parentId);
+        $.ajax(
+            {
+                url: "/selectClassByDepartmentId",
+                type: 'GET',
+                data: {departmentId: departmentId, gradeId: gradeId},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (adminStudentAndClassList) {
+                    var html = '';
+                    $.each(adminStudentAndClassList.studentClassList, function (index) {
+                        html += '<option value="' + adminStudentAndClassList.studentClassList[index].classId + '">' + adminStudentAndClassList.studentClassList[index].className + '</option>'
+                    })
+                    $("#classId").append(html);
+                    $("#studentInfo").empty();
+                    var html = '';
+                    $.each(adminStudentAndClassList.studentList, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studentClassInfo.studGradeName + adminStudentAndClassList.studentList[index].studentClassInfo.studClassName + '">' + adminStudentAndClassList.studentList[index].studentClassInfo.studGradeName + adminStudentAndClassList.studentList[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + adminStudentAndClassList.studentList[index].studEnrollName + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studNumber + '">' + adminStudentAndClassList.studentList[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studPhone + '">' + adminStudentAndClassList.studentList[index].studPhone + '</td>' +
+                            '<td class="col-md-1" value="' + adminStudentAndClassList.studentList[index].studName + '">' + adminStudentAndClassList.studentList[index].studName + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studLoginTime + '">' + adminStudentAndClassList.studentList[index].studLoginTime + '</td>' +
+                            '<td class="col-md-1">' +
+                            '<div class="visible-md visible-lg hidden-sm hidden-xs">' +
+                            '<a href="#" class="btn btn-xs btn-red tooltips"   onclick="cancelStudentByStudId(this)"   id="' + adminStudentAndClassList.studentList[index].studId + '" value="' + adminStudentAndClassList.studentList[index].studId + '"  data-placement="top" data-original-title="Remove">' + '<i class="fa fa-times fa fa-white">' + '</i>' + '</a>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").html(html);
+                    $("#count").text(adminStudentAndClassList.count);
+                },
+            }
+        );
+    }
+</script>
+<script>
+    <!--专业班级查询与学院查询的原理是一样的故用重用后台的方法-->
+    function selectStudentListByClassId() {
+        //var departmentId = $("#department").val();
+        // var gradeId = $("#grade").val();
+        var classId = $("#classId").val();
+        $.ajax(
+            {
+                url: "/selectStudentListByClassId",
+                type: 'GET',
+                data: {classId: classId},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (adminStudentAndClassList) {
+                    $("#studentInfo").empty();
+                    var html = '';
+                    $.each(adminStudentAndClassList.studentList, function (index) {
+                        html += '<tr class="row"  id="studentInfo" name="studentInfo" >' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studentClassInfo.studGradeName + adminStudentAndClassList.studentList[index].studentClassInfo.studClassName + '">' + adminStudentAndClassList.studentList[index].studentClassInfo.studGradeName + adminStudentAndClassList.studentList[index].studentClassInfo.studClassName + '</td>' +
+                            '<td class="col-md-2" >' + adminStudentAndClassList.studentList[index].studEnrollName + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studNumber + '">' + adminStudentAndClassList.studentList[index].studNumber + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studPhone + '">' + adminStudentAndClassList.studentList[index].studPhone + '</td>' +
+                            '<td class="col-md-1" value="' + adminStudentAndClassList.studentList[index].studName + '">' + adminStudentAndClassList.studentList[index].studName + '</td>' +
+                            '<td class="col-md-2" value="' + adminStudentAndClassList.studentList[index].studLoginTime + '">' + adminStudentAndClassList.studentList[index].studLoginTime + '</td>' +
+                            '<td class="col-md-1">' +
+                            '<div class="visible-md visible-lg hidden-sm hidden-xs">' +
+                            '<a href="#" class="btn btn-xs btn-red tooltips"   onclick="cancelStudentByStudId(this)"   id="' + adminStudentAndClassList.studentList[index].studId + '" value="' + adminStudentAndClassList.studentList[index].studId + '"  data-placement="top" data-original-title="Remove">' + '<i class="fa fa-times fa fa-white">' + '</i>' + '</a>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>'
+                    })
+                    $("#studentInfo").html(html);
+                    $("#count").text(adminStudentAndClassList.count);
+                },
+            }
+        );
+    }
+</script>
+</body>
+</html>

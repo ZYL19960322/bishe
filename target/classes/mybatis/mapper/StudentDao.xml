@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.dao.StudentDao">
+    <select id="selectStudentByNameAndPassword" resultType="com.bishe.pojo.Student" parameterType="String">
+        SELECT * FROM student
+        where stud_name=#{studName}
+        AND
+        stud_password=#{studPassword}
+    </select>
+
+    <select id="selectAllStudent" resultType="com.bishe.pojo.Student">
+        SELECT * FROM student ORDER BY stud_class_id DESC
+    </select>
+    <select id="selectAllNormalStudent" resultType="com.bishe.pojo.Student">
+        SELECT * FROM student WHERE stud_status=1 ORDER BY stud_class_id DESC
+    </select>
+
+    <insert id="addStudentWithNameAndPassword" parameterType="String" useGeneratedKeys="true" keyProperty="studId"
+            keyColumn="stud_id">
+
+        <!-- 使用myBatis +mysql自动生成uuid主键-->
+
+        <selectKey keyProperty="studId" resultType="String" order="BEFORE">
+            SELECT replace(uuid(),'-','') FROM dual
+        </selectKey>
+        insert INTO student (stud_id,stud_name,stud_password) VALUES (#{studId},#{studName},#{studPassword})
+    </insert>
+
+    <update id="changeStudentInfo" parameterType="com.bishe.pojo.Student">
+        UPDATE student
+        <set>
+            stud_class_id=#{studClassID},
+            stud_number=#{studNumber},
+            stud_phone=#{studPhone},
+            stud_enroll_name=#{studEnrollName},
+            stud_image_path=#{studImagePath},
+            stud_login_time=#{studLoginTime}
+        </set>
+        WHERE stud_id =#{studId};
+    </update>
+
+    <update id="changeStudentPassword" parameterType="com.bishe.pojo.Student">
+        UPDATE student
+        <set>
+            stud_name=#{studName},
+            stud_password=#{studPassword}
+        </set>
+        WHERE stud_id =#{studId};
+    </update>
+
+
+    <select id="selectStudentListByClassId" resultType="com.bishe.pojo.Student" parameterType="String">
+        SELECT * FROM student
+        where stud_class_id=#{classId} AND stud_status=1
+    </select>
+
+    <select id="selectStudentListByActivityId" resultType="com.bishe.pojo.Student" parameterType="String">
+        SELECT * FROM student t1
+        where t1.stud_id IN (SELECT t2.data_stud_id FROM data_info t2  WHERE t2.data_acti_id=#{actiId})
+    </select>
+    <select id="selectEnrollStudentByActiId" parameterType="java.lang.String" resultType="com.bishe.dto.EnrollStudent">
+        select stud_id,stud_enroll_name,stud_number,stud_class_id FROM student WHERE stud_id IN (SELECT data_stud_id FROM data_info where data_acti_id=#{actiId})  ORDER BY stud_class_id DESC
+    </select>
+    <select id="selectStudentByStudentId" resultType="com.bishe.pojo.Student" parameterType="java.lang.String">
+        SELECT * from student WHERE stud_id=#{studId}
+    </select>
+    <update id="cancelStudentByStudId" parameterType="java.lang.String">
+        UPDATE student
+        <set>
+            stud_status=0
+        </set>
+        WHERE stud_id=#{studId}
+    </update>
+
+    <select id="selectCancelStudentList" resultType="com.bishe.pojo.Student">
+        SELECT * FROM student WHERE stud_status=0
+    </select>
+    <delete id="deleteStudentBystudId" parameterType="java.lang.String">
+        DELETE FROM student WHERE stud_id=#{studId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initical-scale=1" />
+    <title>登录注册</title>
+    <link rel="stylesheet" href="front/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="front/css/style.css" />
+    <script src="front/js/fontSize.js"></script>
+</head>
+
+<body>
+<header class="shead">
+    <a href="javascript:history.go(-1)" class="fl"> <span class="glyphicon glyphicon-chevron-left"></span></a>用户登录
+</header>
+<div class="mt1">
+    <form id="loginForm" method="post">
+        <div class="ta-c fs-04">用户登录</div>
+
+        <!-- 使用boot栅格 -->
+        <div class="container">
+            <div class="row " style="margin-top: 0.1rem">
+                <div class="col-xs-6 col-xs-offset-3 pd0 color-r fs-02 ta-c"><label style="font-size: 0.1rem" id="loginInfo"></label></div>
+            </div>
+
+            <div class="row " style="margin-top: 0.1rem">
+                <div class="col-xs-3 col-xs-offset-1 pd0 ta-r"><label for="name">用户名：</label></div>
+                <div class="col-xs-5 pd0"><input type="text" onclick="clearInfo()" class="form-control" id="studName" name="studName" /></div>
+                <div class="col-xs-3 pd0 color-r fs-02 ta-c" id="name"></div>
+            </div>
+            <div class="row mt04">
+                <div class="col-xs-3 col-xs-offset-1 pd0 ta-r"><label for="name">密码：</label></div>
+                <div class="col-xs-5 pd0"><input type="text" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="12"  onclick="clearInfo()" class="form-control" id="studPassword" name="studPassword" />
+                </div>
+                <div class="col-xs-3 pd0 color-r fs-02 ta-c" id="password"></div>
+            </div>
+            <div class="row mt04">
+                <div class="col-xs-3 col-xs-offset-1 pd0 ta-r"><label for="name">验证码：</label></div>
+                <div class="col-xs-2 pd0"><input type="text" onclick="clearInfo()" id="myCheckCode"   class="form-control" /></div>
+                <div class="col-xs-3 pd0 ta-r"><img id="checkCode"  title="点击更换" alt="点击更换" class="img"   onclick="changeVerifyCode(this)" src="../getKaptchaImage"  /></div>
+                <div class="col-xs-3 pd0 color-r fs-02 ta-c" id="check"></div>
+            </div>
+            <div class="col-xs-12 mt04">
+                <button type="button" class="btn btn-info btn-block" onclick="login()">登录</button>
+            </div>
+            <div class="ta-r"><a href="register" class="fs-02">没有账号？去注册</a></div>
+        </div>
+    </form>
+</div>
+<script src="front/js/jquery-3.3.1.min.js"></script>
+<script src="front/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {     //移动终端浏览器版本信息
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+        if (browser.versions.mobile) {
+            //如果是移动设备（手机）打开
+
+            window.location.href = "/student/come";
+        }
+        else {
+            //否则就是pc端(电脑端)
+            //window.location.href = "/admin/come";
+            window.location.href = "/student/come";
+        }
+    })
+</script>
+<!--原版本--->
+<script type="text/javascript">
+    var browser = {
+        versions: function () {
+            var u = navigator.userAgent, app = navigator.appVersion;
+            return {     //移动终端浏览器版本信息
+                trident: u.indexOf('Trident') > -1, //IE内核
+                presto: u.indexOf('Presto') > -1, //opera内核
+                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf('iPad') > -1, //是否iPad
+                webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+            };
+        }(),
+        language: (navigator.browserLanguage || navigator.language).toLowerCase()
+    }
+    if (browser.versions.mobile) {//判断是否是移动设备打开。browser代码在下面
+        /* var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+         if (ua.match(/MicroMessenger/i) == "micromessenger") {
+         //在微信中打开
+         setInterval(WeixinJSBridge.call('closeWindow'),2000);
+         }
+         if (ua.match(/WeiBo/i) == "weibo") {
+         //在新浪微博客户端打开
+         }
+         if (ua.match(/QQ/i) == "qq") {
+         //在QQ空间打开
+         }
+         if (browser.versions.ios) {
+         //是否在IOS浏览器打开
+         }
+         if(browser.versions.android){
+         //是否在安卓浏览器打开
+         }*/
+        // alert("这是手机");
+        // console.log("这是手机");
+        window.location.href = "student/come";
+    }
+    else {
+        //否则就是PC浏览器打开
+        // alert("这是电脑");
+        //  console.log("这是电脑");
+      //  window.location.href = "isAdminComing";
+        window.location.href = "admin/come";
+    }
+</script>
+
+
+<script>
+    function changeVerifyCode(img) {
+        img.src = "../getKaptchaImage?" + Math.floor(Math.random() * 100);}
+
+</script>
+<script>
+    function login() {
+        var studName = $("#studName").val();
+        var studPassword = $("#studPassword").val();
+        var checkCode =$("#myCheckCode").val();
+        $.ajax({
+            url: "/studLogin",
+            type: 'POST',
+            data: {studName: studName, studPassword: studPassword,checkCode:checkCode},
+            dataType: 'JSON',
+            cathe: false,
+            success: function (studentInfoResponse) {
+                //根据返回数据来给用户显示错误信息或登录成功
+                if (studentInfoResponse.status == 10) {
+                    $("#check").text(studentInfoResponse.statusDesc);
+                }
+                if (studentInfoResponse.status == 19) {
+                    alert("登录成功");
+                    window.location.href = ("/toIndexPage");
+                }
+                if (studentInfoResponse.status == 11 || studentInfoResponse.status == 12 || studentInfoResponse.status == 17) {
+                    $("#loginInfo").text(studentInfoResponse.statusDesc);
+                }
+            }
+        });
+    }
+</script>
+<script>
+    function clearInfo() {
+        $("#check").text("");
+        $("#loginInfo").text("")
+    }
+</script>
+</body>
+
+</html>

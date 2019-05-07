@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bishe.dao.AdminMessageDao">
+    <insert id="addAMessageToAdmin" parameterType="com.bishe.pojo.AdminMessage">
+        insert INTO admin_message (admin_message_id,admin_id,message_id,admin_message_status,admin_message_create_time,admin_message_deal_again) VALUES (#{adminMessageId},#{adminId},#{messageId},#{adminMessageStatus},#{adminMessageCreateTime},#{adminMessageDealAgain})
+    </insert>
+    <select id="selectAllUnreadMessageByAdminId" parameterType="java.lang.String"
+            resultType="com.bishe.pojo.AdminMessage">
+        SELECT * FROM admin_message WHERE  admin_id=#{adminId} AND admin_message_status=0 AND admin_message_if_deal=0 AND admin_message_deal_again=0;
+
+    </select>
+
+    <select id="selectCheckingActivityByAdminId" resultType="com.bishe.dto.CheckAgainActivity"
+            parameterType="java.lang.String">
+
+        SELECT t1.acti_id,t1.acti_builder_id,t1.acti_level,t1.acti_theme,t1.acti_desc,t1.acti_address,t1.acti_extra_info,t1.acti_comment,
+        t1.acti_category_id,t1.acti_status_id,t1.acti_phone,t1.acti_theme_image,t1.acti_holder,t1.acti_end_time,t1.acti_start_time,
+        t1.acti_build_time,t1.acti_endroll_time,t1.acti_max_enroll,t1.acti_now_enroll,t1.acti_change_time,t4.acti_category_name,t3.admin_message_id
+        FROM activity AS t1
+        LEFT JOIN message AS t2 ON t2.message_acti_id = t1.acti_id
+        LEFT JOIN admin_message AS t3 ON t3.message_id = t2.message_id
+        LEFT JOIN activity_category AS t4 ON t4.acti_category_id=t1.acti_category_id
+        WHERE t3.admin_id=#{adminId} AND t3.admin_message_status=0 and t3.admin_message_if_deal=0 AND t3.admin_message_deal_again=0 ORDER BY t1.acti_build_time DESC
+</select>
+
+    <select id="selectMessageByActiIdAndAdminId" parameterType="java.lang.String"
+            resultType="com.bishe.pojo.AdminMessage">
+        SELECT t2.admin_message_id,t2.admin_id,t2.message_id,t2.admin_message_status,t2.admin_message_create_time,t2.admin_message_if_deal,t2.admin_message_deal_again FROM message AS t1
+        LEFT JOIN admin_message AS t2 ON t1.message_id=t2.message_id  WHERE  t1.message_acti_id=#{actiId} AND t2.admin_id=#{adminId};
+    </select>
+
+    <update id="changeMessageStatusByAdminId">
+        UPDATE admin_message <set>admin_message_status=1</set> WHERE admin_message_deal_again=0 AND admin_id=#{adminId}
+    </update>
+
+
+    <update id="updateAllAdminMessageByAdminMessage" parameterType="com.bishe.pojo.AdminMessage">
+        UPDATE admin_message
+        <set>
+            admin_message_if_deal=#{adminMessageIfDeal},
+            admin_message_dealer_id=#{adminMessageDealerId},
+            admin_message_deal_time=#{adminMessageDealTime},
+        </set>
+        WHERE message_id=#{messageId}
+    </update>
+
+    <delete id="deleteMessageByActiId" parameterType="java.lang.String">
+        DELETE FROM admin_message WHERE admin_id=#{adminId} and message_id = (SELECT message_id FROM message  WHERE message_acti_id=#{actiId})
+    </delete>
+    <select id="selectAllCheckAgainMessageByAdminId" parameterType="java.lang.String"
+            resultType="com.bishe.pojo.AdminMessage">
+        SELECT * FROM admin_message WHERE  admin_id=#{adminId} AND admin_message_if_deal=0 AND admin_message_deal_again=1;
+
+    </select>
+
+
+    <select id="selectCheckAgainActivityByAdminId" resultType="com.bishe.dto.CheckAgainActivity"
+            parameterType="java.lang.String">
+
+        SELECT t1.acti_id,t1.acti_builder_id,t1.acti_level,t1.acti_theme,t1.acti_desc,t1.acti_address,t1.acti_extra_info,t1.acti_comment,
+        t1.acti_category_id,t1.acti_status_id,t1.acti_phone,t1.acti_theme_image,t1.acti_holder,t1.acti_end_time,t1.acti_start_time,
+        t1.acti_build_time,t1.acti_endroll_time,t1.acti_max_enroll,t1.acti_now_enroll,t1.acti_change_time,t4.acti_category_name,t3.admin_message_id
+        FROM activity AS t1
+        LEFT JOIN message AS t2 ON t2.message_acti_id = t1.acti_id
+        LEFT JOIN admin_message AS t3 ON t3.message_id = t2.message_id
+        LEFT JOIN activity_category AS t4 ON t4.acti_category_id=t1.acti_category_id
+        WHERE t3.admin_id=#{adminId} AND t3.admin_message_if_deal=0 AND t3.admin_message_deal_again=1 ORDER BY t1.acti_build_time DESC
+    </select>
+
+    <delete id="deleteMessageByAdminMessageId" parameterType="java.lang.String">
+        DELETE FROM admin_message WHERE admin_message_id=#{adminMessageId}
+    </delete>
+    <select id="selectAdminMessageByAdminMessageId" resultType="com.bishe.pojo.AdminMessage"
+            parameterType="java.lang.String">
+        select * FROM admin_message WHERE admin_message_id=#{adminMessageId}
+    </select>
+    <select id="selectMessageByAdminMessageId" resultType="com.bishe.pojo.Message" parameterType="java.lang.String">
+        SELECT t2.message_id,t2.message_id,t2.message_acti_id,t2.message_builder_id,t2.message_create_time,t2.message_acti_status FROM admin_message as t1 LEFT JOIN message as t2 ON t1.message_id=t2.message_id WHERE t1.admin_message_id=#{adminMessageId}
+    </select>
+
+    <select id="selectUndealMessageByAdminId" resultType="com.bishe.dto.CheckAgainActivity"
+            parameterType="java.lang.String">
+
+        SELECT t1.acti_id,t1.acti_builder_id,t1.acti_level,t1.acti_theme,t1.acti_desc,t1.acti_address,t1.acti_extra_info,t1.acti_comment,
+        t1.acti_category_id,t1.acti_status_id,t1.acti_phone,t1.acti_theme_image,t1.acti_holder,t1.acti_end_time,t1.acti_start_time,
+        t1.acti_build_time,t1.acti_endroll_time,t1.acti_max_enroll,t1.acti_now_enroll,t1.acti_change_time,t4.acti_category_name,t3.admin_message_id
+        FROM activity AS t1
+        LEFT JOIN message AS t2 ON t2.message_acti_id = t1.acti_id
+        LEFT JOIN admin_message AS t3 ON t3.message_id = t2.message_id
+        LEFT JOIN activity_category AS t4 ON t4.acti_category_id=t1.acti_category_id
+        WHERE t3.admin_id=#{adminId} AND t3.admin_message_if_deal=0 AND t3.admin_message_status=1 AND t3.admin_message_deal_again=0 ORDER BY t1.acti_build_time DESC
+    </select>
+
+    <select id="selectFinishedMessageByAdminId" resultType="com.bishe.dto.CheckAgainActivity"
+            parameterType="java.lang.String">
+
+        SELECT t1.acti_id,t1.acti_builder_id,t1.acti_level,t1.acti_theme,t1.acti_desc,t1.acti_address,t1.acti_extra_info,t1.acti_comment,
+        t1.acti_category_id,t1.acti_status_id,t1.acti_phone,t1.acti_theme_image,t1.acti_holder,t1.acti_end_time,t1.acti_start_time,
+        t1.acti_build_time,t1.acti_endroll_time,t1.acti_max_enroll,t1.acti_now_enroll,t1.acti_change_time,t4.acti_category_name,t3.admin_message_id
+        FROM activity AS t1
+        LEFT JOIN message AS t2 ON t2.message_acti_id = t1.acti_id
+        LEFT JOIN admin_message AS t3 ON t3.message_id = t2.message_id
+        LEFT JOIN activity_category AS t4 ON t4.acti_category_id=t1.acti_category_id
+        WHERE t3.admin_id=#{adminId} AND t3.admin_message_if_deal=1  ORDER BY t1.acti_build_time DESC
+    </select>
+
+    <update id="setMessageHasReaded" parameterType="java.lang.String">
+        UPDATE admin_message<set>
+        admin_message_status=1
+    </set> WHERE admin_message_id=#{adminMessageId}
+    </update>
+    <select id="selectAdminMessageByMessageId" parameterType="java.lang.String" resultType="com.bishe.pojo.AdminMessage">
+        SELECT * FROM admin_message  WHERE message_id=#{messageId} Limit 0,1;
+    </select>
+    <delete id="deleteAdminMessageByMessageId" parameterType="java.lang.String">
+        DELETE FROM admin_message WHERE message_id=#{messageId}
+    </delete>
+</mapper>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width,initical-scale=1"/>
+	<title>我的发布</title>
+	<link rel="stylesheet" href="front/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="front/css/style.css"/>
+	<script src="front/js/fontSize.js"></script>
+</head>
+
+<body>
+<header class="shead">我的发布</header>
+
+	<div class="usercont" style="margin-top: 1.5rem">
+		<ul class="userul">
+			<li class="item clearfix">
+				<span class="glyphicon glyphicon glyphicon-plus"></span>
+				发布活动
+				<a th:href="@{/toReleaseActivity}" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+			</li>
+			<li class="item clearfix">
+				<span class="glyphicon glyphicon-align-justify"></span>
+				审核中 <span class="badge" th:text="${userResponse.checkingCount}">2</span>
+				<a th:href="@{/selectPublishActivityListBySign(sign=3)}" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+			</li>
+			<li class="item clearfix">
+				<span class="glyphicon glyphicon-check "></span>
+				报名中 <span class="badge" th:text="${userResponse.enrollingCount}">6</span>
+				<a th:href="@{/selectPublishActivityListBySign(sign=4)}" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+			</li>
+			<li class="item clearfix">
+				<span class="glyphicon glyphicon-th-large"></span>
+				筹办中 <span class="badge" th:text="${userResponse.preparingCount}" >7</span>
+				<a th:href="@{/selectPublishActivityListBySign(sign=5)}" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+			</li>
+			<li class="item clearfix">
+				<span class="glyphicon glyphicon-send"></span>
+				举办中 <span class="badge" th:text="${userResponse.holdingCount}" >7</span>
+				<a th:href="@{/selectPublishActivityListBySign(sign=6)}" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+			</li>
+			<li class="item clearfix">
+				<span class="glyphicon glyphicon-tag"></span>
+				已结束 <span class="badge" th:text="${userResponse.hasEndedCount}" >7</span>
+				<a th:href="@{/selectPublishActivityListBySign(sign=7)}" class="fr"><span class="glyphicon glyphicon-chevron-right "></span></a>
+			</li>
+		</ul>
+	</div>
+<footer class="sfooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3">
+				<a th:href="@{/toIndexPage}" >
+					<span class="glyphicon glyphicon-home"></span>
+					<span class="">首页</span>
+				</a>
+			</div>
+			<div class="col-xs-3">
+				<a th:href="@{/toPublishPage}" class="active">
+					<span class="glyphicon glyphicon-edit"></span>
+					<span class="">发布</span>
+				</a>
+			</div>
+			<div class="col-xs-3">
+				<a th:href="@{/toMessagePage}">
+					<span class="glyphicon glyphicon-bell"></span>
+					<span class="">消息</span>
+				</a>
+			</div>
+			<div class="col-xs-3">
+				<a th:href="@{/toUserPage}">
+					<span class="glyphicon glyphicon-user"></span>
+					<span class="">我的</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</footer>
+	<script src="front/js/jquery-3.3.1.min.js"></script>
+	<script src="front/js/bootstrap.min.js"></script>
+	<script>
+		/*
+        //刚进入页面时执行的初始化js函数
+        $(document).ready(function(){
+            //var imagepath=${student.studImagePath};
+            //alert(imagepath);
+            //$("#studImagePath").val('@modelmap.userResponse.student.studImagePath');
+
+        });*/
+	</script>
+</body>
+
+</html>

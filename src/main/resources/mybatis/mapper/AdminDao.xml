@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bishe.dao.AdminDao">
+    <select id="selectAllAdmin" resultType="com.bishe.pojo.Admin" >
+        SELECT * FROM admin;
+
+    </select>
+    <insert id="addAdmin" parameterType="String">
+        insert INTO admin (admin_id,admin_name,admin_password) VALUES (#{adminId},#{adminName},#{adminPassword})
+    </insert>
+
+    <select id="selectAdminByNameAndPassword" resultType="com.bishe.pojo.Admin" parameterType="java.lang.String" >
+        SELECT * FROM admin WHERE admin_name=#{adminName} AND admin_password=#{adminPassword};
+
+    </select>
+</mapper>

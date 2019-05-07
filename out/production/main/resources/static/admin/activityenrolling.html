@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rapido - Responsive Admin Template</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="admin/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="admin/css/styles.css"/>
+    <link rel="stylesheet" href="admin/css/styles-responsive.css"/>
+    <link rel="stylesheet" href="admin/css/plugins.css"/>
+    <link rel="stylesheet" href="admin/css/theme-default.css" type="text/css" id="skin_color"/>
+    <link rel="stylesheet" href="admin/css/print.css" type="text/css" media="print"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<body>
+<!-- start: SLIDING BAR (SB) -->
+<div class="main-wrapper">
+    <!-- start: TOPBAR -->
+    <header class="topbar navbar navbar-inverse navbar-fixed-top inner">
+        <!-- start: TOPBAR CONTAINER -->
+        <div class="container">
+            <div class="navbar-header">
+                <a class="sb-toggle-left hidden-md hidden-lg" href="#main-navbar">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a class="navbar-brand" href="index.html">
+                    <img src="admin/images/logo.png" alt="Rapido"/>
+                </a>
+            </div>
+        </div>
+    </header>
+    <a class="closedbar inner hidden-sm hidden-xs" href="#">
+    </a>
+
+
+    <div class="main-container inner">
+        <!-- start: PAGE -->
+        <div class="main-content">
+            <div class="container" style="position: relative">
+
+
+                <nav id="pageslide-left" class="pageslide inner">
+                    <div class="navbar-content">
+                        <!-- start: SIDEBAR -->
+                        <div class="main-navigation left-wrapper transition-left">
+                            <div class="user-profile border-top padding-horizontal-10 block">
+                                <div class="inline-block">
+                                    <img src="admin/images/avatar-1.jpg"/>
+                                </div>
+                                <div class="inline-block">
+                                    <h5 class="no-margin"> Welcome </h5>
+                                    <h4 class="no-margin"> Peter Clark </h4>
+                                </div>
+                            </div>
+                            <!-- start: MAIN NAVIGATION MENU -->
+                            <ul class="main-navigation-menu">
+                                <li>
+                                    <a href="index.html"><i class="fa fa-home"></i> <span class="title"> Dashboard </span><span
+                                            class="label label-default pull-right ">LABEL</span> </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><i class="fa fa-th-large"></i> <span class="title"> 学生管理 </span><i
+                                            class="icon-arrow"></i> </a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a href="adStudentInfo">
+                                                <span class="title">学生信息</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="table_responsive.html">
+                                                <span class="title">注销学生</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="active open">
+                                    <a href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> <span
+                                            class="title">活动管理</span><i class="icon-arrow"></i> </a>
+                                    <ul class="sub-menu">
+                                        <li class="active">
+                                            <a href="activityEnrolling">
+                                                <span class="title">活动报名中</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="form_wizard.html">
+                                                <span class="title">活动筹办中</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="form_validation.html">
+                                                <span class="title">活动举办中</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="form_inline.html">
+                                                <span class="title">活动已结束</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> <span
+                                            class="title">消息管理</span><i class="icon-arrow"></i> </a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a href="form_elements.html">
+                                                <span class="title">新消息</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="form_wizard.html">
+                                                <span class="title">待处理消息</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="form_validation.html">
+                                                <span class="title">等等等</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="form_inline.html">
+                                                <span class="title">等等等</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <!-- end: MAIN NAVIGATION MENU -->
+                        </div>
+                        <!-- end: SIDEBAR -->
+                    </div>
+                    <div class="slide-tools">
+                        <div class="col-xs-6 text-left no-padding">
+                            <a class="btn btn-sm status" href="#">
+                                Status <i class="fa fa-dot-circle-o text-green"></i> <span>Online</span>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 text-right no-padding">
+                            <a class="btn btn-sm log-out text-right" href="login_login.html">
+                                <i class="fa fa-power-off"></i> Log Out
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="toolbar row">
+                    <div class="col-sm-6 hidden-xs">
+                        <div class="page-header" style="margin-top: 10px;margin-bottom: 5px">
+                            <h2>报名中的活动</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 12px">
+                    <div class="col-md-12" style="padding-right: 10px;padding-left: 5px">
+                        <!-- start: EXPORT DATA TABLE PANEL  -->
+                        <div class="panel panel-white">
+                            <div class="panel-heading" style="padding-top: 0px">
+                                <div class="panel-tools">
+                                    <div class="dropdown">
+                                        <a data-toggle="dropdown"
+                                           class="btn btn-xs dropdown-toggle btn-transparent-grey">
+                                            <i class="fa fa-cog"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-light pull-right" role="menu">
+                                            <li>
+                                                <a class="panel-collapse collapses" href="#"><i
+                                                        class="fa fa-angle-up"></i> <span>Collapse</span> </a>
+                                            </li>
+                                            <li>
+                                                <a class="panel-refresh" href="#">
+                                                    <i class="fa fa-refresh"></i> <span>Refresh</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="panel-expand" href="#">
+                                                    <i class="fa fa-expand"></i> <span>Fullscreen</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <a class="btn btn-xs btn-link panel-close" href="#">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover" id="sample-table-2">
+                                        <thead>
+                                        <tr>
+                                            <th>活动主题</th>
+                                            <th>活动类型</th>
+                                            <th>举办方</th>
+                                            <th>活动地址</th>
+                                            <th>活动开始时间</th>
+                                            <th>活动权重</th>
+                                            <th>报名情况</th>
+                                            <th>联系电话</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="activityInfo" name="activityInfo">
+                                        <tr th:each="activity:${pageInfo.list}">
+                                            <td th:text="${activity.actiTheme}">摄影大赛</td>
+                                            <td th:text="${activity.actiCategoryId}">学术讲座</td>
+                                            <input type="hidden" value="1"/>
+                                            <td th:text="${activity.actiHolder}">摄影协会</td>
+                                            <td th:text="${activity.actiAddress}">五号楼304</td>
+                                            <td th:text="${activity.actiStartTime}">2019-02-20 04:39</td>
+                                            <td th:text="${activity.actiLevel}">A</td>
+                                            <td th:text="${activity.actiNowEnroll}+'/'+${activity.actiMaxEnroll}">
+                                                39/100
+                                            </td>
+                                            <td th:text="${activity.actiPhone}">13794587900</td>
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                    <a href="#" class="btn btn-xs btn-blue tooltips"
+                                                       data-placement="top"
+                                                       data-original-title="ChangeLevel"><i class="fa fa-edit"></i></a>
+                                                    <a th:href="@{/exportStudentDataByActivity(actiId=${activity.actiId})}" class="btn btn-xs btn-green tooltips"
+                                                       data-placement="top"
+                                                       data-original-title="Export"><i
+                                                            class="fa fa-file-excel-o"></i></a>
+                                                    <a href="#" class="btn btn-xs btn-red tooltips" data-placement="top"
+                                                       data-original-title="DeleteActivity"><i
+                                                            class="fa fa-times fa fa-white"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row" id="page" name="page">
+                                    <div class="col-md-4">
+                                        <ul class="pagination pagination-green margin-bottom-10">
+                                            <li th:id="${pageInfo.prePage}" onclick="pageShow(this)"  th:value="${pageInfo.prePage}">
+                                                <a href="#"><i class="fa fa-chevron-left"></i></a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="pagination pagination-green margin-bottom-10"
+                                            th:each="pageNum:${pageInfo.navigatepageNums}">
+                                            <li th:id="${pageNum}" th:class="${pageNum == pageInfo.pageNum}? 'active'"
+                                                th:value="${pageNum}" onclick="pageShow(this)">
+                                                <a href="#" th:text="${pageNum}">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <ul class="pagination pagination-green margin-bottom-10">
+                                            <li  th:id="${pageInfo.nextPage}" onclick="pageShow(this)" th:value="${pageInfo.nextPage}">
+                                                <a href="#"><i class="fa fa-chevron-right"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="show_page_info" class="col-md-4 col-md-offset-1">
+                                        <span th:text="'当前第'+${pageInfo.pageNum}+'页'"></span>
+                                        <span th:text="'总共'+${pageInfo.pages}+'页'"></span>
+                                        <span th:text="'总共'+${pageInfo.total}+'条记录'"></span>
+                                    </div>
+                                </div>
+                                <button onclick="my()">点我就十分骄傲附近 </button>
+                                <button onclick="clossMy()">关闭 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my" style="display: none;z-index: 99;float: right;position: absolute;top: 2px;right: 0px;left:0px; bottom: 0px;background-color: red;margin-right: 10%;margin-top: 5%;margin-left: 10%;margin-bottom: 10%;overflow:scroll">
+                    <div>
+                        <div class="col-sm-12 panel panel-white">
+                            <div class="tabbable">
+                                <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#panel_overview">
+                                            Overview
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#panel_edit_account">
+                                            Edit Account
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#panel_projects">F
+                                            Projects
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="panel_overview" class="tab-pane fade in active">
+                                        <div class="row">
+                                            <div class="col-sm-5 col-md-4">
+                                                <div class="user-left">
+                                                    <div class="center">
+                                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                            <div class="user-image">
+                                                                <div class="fileupload-new thumbnail"><img src="assets/images/avatar-1-xl.jpg" alt=""/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <table class="table table-condensed table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th colspan="3">Contact Information</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>url</td>
+                                                            <td>
+                                                                <a href="#">
+                                                                    www.example.com
+                                                                </a></td>
+                                                            <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>email:</td>
+                                                            <td>
+                                                                <a href="">
+                                                                    peter@example.com
+                                                                </a></td>
+                                                            <td><a href="#panel_projects" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>phone:</td>
+                                                            <td>(641)-734-4763</td>
+                                                            <td><a href="#panel_projects" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>skye</td>
+                                                            <td>
+                                                                <a href="">
+                                                                    peterclark82
+                                                                </a></td>
+                                                            <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table table-condensed table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th colspan="3">General information</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>Position</td>
+                                                            <td>UI Designer</td>
+                                                            <td><a href="#panel_projects" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Last Logged In</td>
+                                                            <td>56 min</td>
+                                                            <td><a href="#panel_projects" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Position</td>
+                                                            <td>Senior Marketing Manager</td>
+                                                            <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Supervisor</td>
+                                                            <td>
+                                                                <a href="#">
+                                                                    Kenneth Ross
+                                                                </a></td>
+                                                            <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Status</td>
+                                                            <td><span class="label label-sm label-info">Administrator</span></td>
+                                                            <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table table-condensed table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th colspan="3">Additional information</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>Birth</td>
+                                                            <td>21 October 1982</td>
+                                                            <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Groups</td>
+                                                            <td>New company web site development, HR Management</td>
+                                                            <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-7 col-md-8">
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas convallis porta purus, pulvinar mattis nulla tempus ut. Curabitur quis dui orci. Ut nisi dolor, dignissim a aliquet quis, vulputate id dui. Proin ultrices ultrices ligula, dictum varius turpis faucibus non. Curabitur faucibus ultrices nunc, nec aliquet leo tempor cursus.
+                                                </p>
+                                                <div class="row space20">
+                                                    <div class="col-sm-3">
+                                                        <button class="btn btn-icon btn-block">
+                                                            <i class="clip-clip"></i>
+                                                            Projects <span class="badge badge-info"> 4 </span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <button class="btn btn-icon btn-block pulsate">
+                                                            <i class="clip-bubble-2"></i>
+                                                            Messages <span class="badge badge-info"> 23 </span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <button class="btn btn-icon btn-block">
+                                                            <i class="clip-calendar"></i>
+                                                            Calendar <span class="badge badge-info"> 5 </span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <button class="btn btn-icon btn-block">
+                                                            <i class="clip-list-3"></i>
+                                                            Notifications <span class="badge badge-info"> 9 </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-white space20">
+                                                    <div class="panel-heading">
+                                                        <i class="clip-menu"></i>
+                                                        Recent Activities
+                                                        <div class="panel-tools">
+                                                            <a class="btn btn-xs btn-link panel-close" href="#">
+                                                                <i class="fa fa-times"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body panel-scroll height-300">
+                                                        <ul class="activities">
+                                                            <li>
+                                                                <a class="activity" href="javascript:void(0)">
+                                                                    <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-blue"></i> <i class="fa fa-code fa-stack-1x fa-inverse"></i> </span> <span class="desc">You uploaded a new release.</span>
+                                                                    <div class="time">
+                                                                        <i class="fa fa-clock-o"></i>
+                                                                        2 hours ago
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="activity" href="javascript:void(0)">
+                                                                    <img alt="image" src="assets/images/avatar-2.jpg"/> <span class="desc">Nicole Bell sent you a message.</span>
+                                                                    <div class="time">
+                                                                        <i class="fa fa-clock-o"></i>
+                                                                        3 hours ago
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="activity" href="javascript:void(0)">
+                                                                    <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-orange"></i> <i class="fa fa-database fa-stack-1x fa-inverse"></i> </span> <span class="desc">DataBase Migration.</span>
+                                                                    <div class="time">
+                                                                        <i class="fa fa-clock-o"></i>
+                                                                        5 hours ago
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="activity" href="javascript:void(0)">
+                                                                    <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-yellow"></i> <i class="fa fa-calendar-o fa-stack-1x fa-inverse"></i> </span> <span class="desc">You added a new event to the calendar.</span>
+                                                                    <div class="time">
+                                                                        <i class="fa fa-clock-o"></i>
+                                                                        8 hours ago
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="activity" href="javascript:void(0)">
+                                                                    <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-green"></i> <i class="fa fa-file-image-o fa-stack-1x fa-inverse"></i> </span> <span class="desc">Kenneth Ross uploaded new images.</span>
+                                                                    <div class="time">
+                                                                        <i class="fa fa-clock-o"></i>
+                                                                        9 hours ago
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="activity" href="javascript:void(0)">
+                                                                    <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-green"></i> <i class="fa fa-file-image-o fa-stack-1x fa-inverse"></i> </span> <span class="desc">Peter Clark uploaded a new image.</span>
+                                                                    <div class="time">
+                                                                        <i class="fa fa-clock-o"></i>
+                                                                        12 hours ago
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-white space20">
+                                                    <div class="panel-heading">
+                                                        <i class="clip-checkmark-2"></i>
+                                                        To Do
+                                                        <div class="panel-tools">
+                                                            <a class="btn btn-xs btn-link panel-close" href="#">
+                                                                <i class="fa fa-times"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body panel-scroll height-300">
+                                                        <ul class="todo">
+                                                            <li>
+                                                                <a class="todo-actions" href="javascript:void(0)">
+                                                                    <i class="fa fa-square-o"></i> <span class="desc">Staff Meeting</span> <span class="label label-danger"> today</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="todo-actions" href="javascript:void(0)">
+                                                                    <i class="fa fa-square-o"></i> <span class="desc"> New frontend layout</span> <span class="label label-danger"> today</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="todo-actions" href="javascript:void(0)">
+                                                                    <i class="fa fa-square-o"></i> <span class="desc"> Hire developers</span> <span class="label label-warning"> tommorow</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="todo-actions" href="javascript:void(0)">
+                                                                    <i class="fa fa-square-o"></i> <span class="desc">Staff Meeting</span> <span class="label label-warning"> tommorow</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="todo-actions" href="javascript:void(0)">
+                                                                    <i class="fa fa-square-o"></i> <span class="desc"> New frontend layout</span> <span class="label label-success"> this week</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="todo-actions" href="javascript:void(0)">
+                                                                    <i class="fa fa-square-o"></i> <span class="desc"> Hire developers</span> <span class="label label-success"> this week</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="todo-actions" href="javascript:void(0)">
+                                                                    <i class="fa fa-square-o"></i> <span class="desc"> New frontend layout</span> <span class="label label-info"> this month</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="todo-actions" href="javascript:void(0)">
+                                                                    <i class="fa fa-square-o"></i> <span class="desc"> Hire developers</span> <span class="label label-info"> this month</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="todo-actions" href="javascript:void(0)">
+                                                                    <i class="fa fa-square-o"></i> <span class="desc">Staff Meeting</span> <span class="label label-danger"> today</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="todo-actions" href="javascript:void(0)">
+                                                                    <i class="fa fa-square-o"></i> <span class="desc"> New frontend layout</span> <span class="label label-danger"> today</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="todo-actions" href="javascript:void(0)">
+                                                                    <i class="fa fa-square-o"></i> <span class="desc"> Hire developers</span> <span class="label label-warning"> tommorow</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="panel_edit_account" class="tab-pane fade">
+                                        <form action="#" role="form" id="form">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3>Account Info</h3>
+                                                    
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            First Name
+                                                        </label>
+                                                        <input type="text" placeholder="Peter" class="form-control" id="firstname" name="firstname"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Last Name
+                                                        </label>
+                                                        <input type="text" placeholder="Clark" class="form-control" id="lastname" name="lastname"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Email Address
+                                                        </label>
+                                                        <input type="email" placeholder="peter@example.com" class="form-control" id="email" name="email"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Phone
+                                                        </label>
+                                                        <input type="email" placeholder="(641)-734-4763" class="form-control" id="phone" name="email"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Password
+                                                        </label>
+                                                        <input type="password" placeholder="password" class="form-control" name="password" id="password"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Confirm Password
+                                                        </label>
+                                                        <input type="password"  placeholder="password" class="form-control" id="password_again" name="password_again"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group connected-group">
+                                                        <label class="control-label">
+                                                            Date of Birth
+                                                        </label>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <select name="dd" id="dd" class="form-control" >
+                                                                    <option value="">DD</option>
+                                                                    <option value="01">1</option>
+                                                                    <option value="02">2</option>
+                                                                    <option value="03">3</option>
+
+                                                                    <option value="18">18</option>
+                                                                    <option value="19">19</option>
+                                                                    <option value="20">20</option>
+                                                                    <option value="21" selected="selected">21</option>
+
+                                                                    <option value="30">30</option>
+                                                                    <option value="31">31</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <select name="mm" id="mm" class="form-control" >
+                                                                    <option value="">MM</option>
+
+                                                                    <option value="09">9</option>
+                                                                    <option value="10" selected="selected">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input type="text" placeholder="1982" id="yyyy" name="yyyy" class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Gender
+                                                        </label>
+                                                        <div>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" class="grey" value="" name="gender" id="gender_female"/>
+                                                                Female
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" class="grey" value="" name="gender"  id="gender_male" checked="checked"/>
+                                                                Male
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="control-label">
+                                                                    Zip Code
+                                                                </label>
+                                                                <input class="form-control" placeholder="12345" type="text" name="zipcode" id="zipcode"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="form-group">
+                                                                <label class="control-label">
+                                                                    City
+                                                                </label>
+                                                                <input class="form-control tooltips" placeholder="London (UK)" type="text" data-original-title="We'll display it when you write reviews" data-rel="tooltip"  title="" data-placement="top" name="city" id="city"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Image Upload
+                                                        </label>
+                                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                            <div class="fileupload-new thumbnail"><img src="assets/images/avatar-1-xl.jpg" alt=""/>
+                                                            </div>
+                                                            <div class="fileupload-preview fileupload-exists thumbnail"></div>
+                                                            <div class="user-edit-image-buttons">
+																	<span class="btn btn-azure btn-file"><span class="fileupload-new"><i class="fa fa-picture"></i> Select image</span><span class="fileupload-exists"><i class="fa fa-picture"></i> Change</span>
+																		<input type="file"/>
+																	</span>
+                                                                <a href="#" class="btn fileupload-exists btn-red" data-dismiss="fileupload">
+                                                                    <i class="fa fa-times"></i> Remove
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3>Additional Info</h3>
+                                                    
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Twitter
+                                                        </label>
+                                                        <span class="input-icon">
+																<input class="form-control" type="text" placeholder="Text Field"/>
+																<i class="fa fa-twitter"></i> </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Facebook
+                                                        </label>
+                                                        <span class="input-icon">
+																<input class="form-control" type="text" placeholder="Text Field"/>
+																<i class="fa fa-facebook"></i> </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Google Plus
+                                                        </label>
+                                                        <span class="input-icon">
+																<input class="form-control" type="text" placeholder="Text Field"/>
+																<i class="fa fa-google-plus"></i> </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Github
+                                                        </label>
+                                                        <span class="input-icon">
+																<input class="form-control" type="text" placeholder="Text Field"/>
+																<i class="fa fa-github"></i> </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Linkedin
+                                                        </label>
+                                                        <span class="input-icon">
+																<input class="form-control" type="text" placeholder="Text Field"/>
+																<i class="fa fa-linkedin"></i> </span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Skype
+                                                        </label>
+                                                        <span class="input-icon">
+																<input class="form-control" type="text" placeholder="Text Field"/>
+																<i class="fa fa-skype"></i> </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div>
+                                                        Required Fields
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <p>
+                                                        By clicking UPDATE, you are agreeing to the Policy and Terms &amp; Conditions.
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-green btn-block" type="submit">
+                                                        Update <i class="fa fa-arrow-circle-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div id="panel_projects" class="tab-pane fade">
+                                        <table class="table table-striped table-bordered table-hover" id="projects">
+                                            <thead>
+                                            <tr>
+                                                <th class="center">
+                                                    <div class="checkbox-table">
+                                                        <label>
+                                                            <input type="checkbox" class="flat-grey selectall"/>
+                                                        </label>
+                                                    </div></th>
+                                                <th>Project Name</th>
+                                                <th class="hidden-xs">Client</th>
+                                                <th>Proj Comp</th>
+                                                <th class="hidden-xs">%Comp</th>
+                                                <th class="hidden-xs center">Priority</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td class="center">
+                                                    <div class="checkbox-table">
+                                                        <label>
+                                                            <input type="checkbox" class="flat-grey foocheck"/>
+                                                        </label>
+                                                    </div></td>
+                                                <td>IT Help Desk</td>
+                                                <td class="hidden-xs">Master Company</td>
+                                                <td>11 november 2014</td>
+                                                <td class="hidden-xs">
+                                                    <div class="progress active progress-xs">
+                                                        <div style="width: 70%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" role="progressbar" class="progress-bar progress-bar-warning">
+                                                            <span class="sr-only"> 70% Complete (danger)</span>
+                                                        </div>
+                                                    </div></td>
+                                                <td class="center hidden-xs"><span class="label label-danger">Critical</span></td>
+                                                <td class="center">
+                                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                        <a href="#" class="btn btn-light-blue tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <a href="#" class="btn btn-green tooltips" data-placement="top" data-original-title="Share"><i class="fa fa-share"></i></a>
+                                                        <a href="#" class="btn btn-red tooltips" data-placement="top" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                                    </div>
+                                                    <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                        <div class="btn-group">
+                                                            <a class="btn btn-green dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                                <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                            </a>
+                                                            <ul role="menu" class="dropdown-menu dropdown-dark pull-right">
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-edit"></i> Edit
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-share"></i> Share
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-times"></i> Remove
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="center">
+                                                    <div class="checkbox-table">
+                                                        <label>
+                                                            <input type="checkbox" class="flat-grey foocheck"/>
+                                                        </label>
+                                                    </div></td>
+                                                <td>PM New Product Dev</td>
+                                                <td class="hidden-xs">Brand Company</td>
+                                                <td>12 june 2014</td>
+                                                <td class="hidden-xs">
+                                                    <div class="progress active progress-xs">
+                                                        <div style="width: 40%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-info">
+                                                            <span class="sr-only"> 40% Complete</span>
+                                                        </div>
+                                                    </div></td>
+                                                <td class="center hidden-xs"><span class="label label-warning">High</span></td>
+                                                <td class="center">
+                                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                        <a href="#" class="btn btn-light-blue tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <a href="#" class="btn btn-green tooltips" data-placement="top" data-original-title="Share"><i class="fa fa-share"></i></a>
+                                                        <a href="#" class="btn btn-red tooltips" data-placement="top" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                                    </div>
+                                                    <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                        <div class="btn-group">
+                                                            <a class="btn btn-green dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                                <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                            </a>
+                                                            <ul role="menu" class="dropdown-menu dropdown-dark pull-right">
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-edit"></i> Edit
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-share"></i> Share
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-times"></i> Remove
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="center">
+                                                    <div class="checkbox-table">
+                                                        <label>
+                                                            <input type="checkbox" class="flat-grey foocheck"/>
+                                                        </label>
+                                                    </div></td>
+                                                <td>ClipTheme Web Site</td>
+                                                <td class="hidden-xs">Internal</td>
+                                                <td>11 november 2014</td>
+                                                <td class="hidden-xs">
+                                                    <div class="progress active progress-xs">
+                                                        <div style="width: 90%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" role="progressbar" class="progress-bar progress-bar-success">
+                                                            <span class="sr-only"> 90% Complete</span>
+                                                        </div>
+                                                    </div></td>
+                                                <td class="center hidden-xs"><span class="label label-success">Normal</span></td>
+                                                <td class="center">
+                                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                        <a href="#" class="btn btn-light-blue tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <a href="#" class="btn btn-green tooltips" data-placement="top" data-original-title="Share"><i class="fa fa-share"></i></a>
+                                                        <a href="#" class="btn btn-red tooltips" data-placement="top" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                                    </div>
+                                                    <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                        <div class="btn-group">
+                                                            <a class="btn btn-green dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                                <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                            </a>
+                                                            <ul role="menu" class="dropdown-menu dropdown-dark pull-right">
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-edit"></i> Edit
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-share"></i> Share
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-times"></i> Remove
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="center">
+                                                    <div class="checkbox-table">
+                                                        <label>
+                                                            <input type="checkbox" class="flat-grey foocheck"/>
+                                                        </label>
+                                                    </div></td>
+                                                <td>Local Ad</td>
+                                                <td class="hidden-xs">UI Fab</td>
+                                                <td>15 april 2014</td>
+                                                <td class="hidden-xs">
+                                                    <div class="progress active progress-xs">
+                                                        <div style="width: 50%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar" class="progress-bar progress-bar-warning">
+                                                            <span class="sr-only"> 50% Complete</span>
+                                                        </div>
+                                                    </div></td>
+                                                <td class="center hidden-xs"><span class="label label-success">Normal</span></td>
+                                                <td class="center">
+                                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                        <a href="#" class="btn btn-light-blue tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <a href="#" class="btn btn-green tooltips" data-placement="top" data-original-title="Share"><i class="fa fa-share"></i></a>
+                                                        <a href="#" class="btn btn-red tooltips" data-placement="top" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                                    </div>
+                                                    <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                        <div class="btn-group">
+                                                            <a class="btn btn-green dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                                <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                            </a>
+                                                            <ul role="menu" class="dropdown-menu dropdown-dark pull-right">
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-edit"></i> Edit
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-share"></i> Share
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-times"></i> Remove
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="center">
+                                                    <div class="checkbox-table">
+                                                        <label>
+                                                            <input type="checkbox" class="flat-grey foocheck"/>
+                                                        </label>
+                                                    </div></td>
+                                                <td>Design new theme</td>
+                                                <td class="hidden-xs">Internal</td>
+                                                <td>2 october 2014</td>
+                                                <td class="hidden-xs">
+                                                    <div class="progress active progress-xs">
+                                                        <div style="width: 20%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-success">
+                                                            <span class="sr-only"> 20% Complete (warning)</span>
+                                                        </div>
+                                                    </div></td>
+                                                <td class="center hidden-xs"><span class="label label-danger">Critical</span></td>
+                                                <td class="center">
+                                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                        <a href="#" class="btn btn-light-blue tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <a href="#" class="btn btn-green tooltips" data-placement="top" data-original-title="Share"><i class="fa fa-share"></i></a>
+                                                        <a href="#" class="btn btn-red tooltips" data-placement="top" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                                    </div>
+                                                    <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                        <div class="btn-group">
+                                                            <a class="btn btn-green dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                                <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                            </a>
+                                                            <ul role="menu" class="dropdown-menu dropdown-dark pull-right">
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-edit"></i> Edit
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-share"></i> Share
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-times"></i> Remove
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="center">
+                                                    <div class="checkbox-table">
+                                                        <label>
+                                                            <input type="checkbox" class="flat-grey foocheck"/>
+                                                        </label>
+                                                    </div></td>
+                                                <td>IT Help Desk</td>
+                                                <td class="hidden-xs">Designer TM</td>
+                                                <td>6 december 2014</td>
+                                                <td class="hidden-xs">
+                                                    <div class="progress active progress-xs">
+                                                        <div style="width: 40%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
+                                                            <span class="sr-only"> 40% Complete (warning)</span>
+                                                        </div>
+                                                    </div></td>
+                                                <td class="center hidden-xs"><span class="label label-warning">High</span></td>
+                                                <td class="center">
+                                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                        <a href="#" class="btn btn-light-blue tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <a href="#" class="btn btn-green tooltips" data-placement="top" data-original-title="Share"><i class="fa fa-share"></i></a>
+                                                        <a href="#" class="btn btn-red tooltips" data-placement="top" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                                    </div>
+                                                    <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                        <div class="btn-group">
+                                                            <a class="btn btn-green dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                                                <i class="fa fa-cog"></i> <span class="caret"></span>
+                                                            </a>
+                                                            <ul role="menu" class="dropdown-menu dropdown-dark pull-right">
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-edit"></i> Edit
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-share"></i> Share
+                                                                    </a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a role="menuitem" tabindex="-1" href="#">
+                                                                        <i class="fa fa-times"></i> Remove
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: PAGE CONTENT-->
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <footer class="inner" >
+        <div class="footer-inner">
+            <div class="pull-left">
+                2019 @ bs BY ZYL.
+            </div>
+        </div>
+    </footer>
+
+</div>
+<script type="text/javascript" src="admin/js/jquery-1.11.1.min.js"></script>
+<script src="admin/js/jquery-2.1.1.min.js"></script>
+<script src="admin/js/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="admin/js/bootstrap.min.js"></script>
+<!--有用的-->
+<script src="admin/js/perfect-scrollbar.js"></script>
+<script src="admin/js/jquery.scrollTo.min.js"></script>
+<script src="admin/js/main.js"></script>
+<script src="admin/js/index.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        Main.init();
+        SVExamples.init();
+        TableExport.init();
+    });
+</script>
+<script>
+    function my() {
+        $(".my").show();
+    }
+
+    function clossMy() {
+        $(".my").hide();
+    }
+</script>
+<script>
+    function pageShow(a) {
+        var pageNum = a.value;
+        //alert(a.value);获取当前标签的值
+        var pageId=a.id;//获取当前标签的id值
+        $.ajax(
+            {
+                url: "/pageShowEnrollingActivity",
+                type: 'POST',
+                data: {pageNum: pageNum, pageSize: 10},
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (pageInfo) {
+                    var html = '';
+                    var html1 = '';
+                    $("#activityInfo").empty(); //先将之前的数据清空，然后用返回的数据拼接新的html
+                    $.each(pageInfo.list, function (index) {
+                        html += '<tr id="activityInfo" name="activityInfo">' +
+                            '<td value="' + pageInfo.list[index].actiTheme + '" >' + pageInfo.list[index].actiTheme + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiCategoryId + '">' + pageInfo.list[index].actiCategoryId + '</td>' +
+                            '<input  type="hidden" value="' + pageInfo.list[index].actiId + '"/>' +
+                            '<td value="' + pageInfo.list[index].actiHolder + '">' + pageInfo.list[index].actiHolder + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiAddress + '">' + pageInfo.list[index].actiAddress + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiStartTime + '">' + pageInfo.list[index].actiStartTime + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiLevel + '">' + pageInfo.list[index].actiLevel + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiNowEnroll + '+ ' / '+' + pageInfo.list[index].actiMaxEnroll + '" >' + pageInfo.list[index].actiNowEnroll + '/' + pageInfo.list[index].actiMaxEnroll + '</td>' +
+                            '<td value="' + pageInfo.list[index].actiPhone + '">' + pageInfo.list[index].actiPhone + '</td>' +
+                            '<td >' + '<div class="visible-md visible-lg hidden-sm hidden-xs">' +
+                            '<a href="#" style="margin-right: 4px" class="btn btn-xs btn-blue tooltips" data-placement="top" data-original-title="ChangeLevel">' + '<i class="fa fa-edit">' + '</i>' + '</a>' +
+                            '<a href="exportStudentDataByActivity?actiId='+pageInfo.list[index].actiId+'" style="margin-right: 4px" class="btn btn-xs btn-green tooltips" data-placement="top" data-original-title="Export">' + '<i class="fa fa-file-excel-o">' + '</i>' + '</a>' +
+                            '<a href="#" class="btn btn-xs btn-red tooltips" data-placement="top" data-original-title="DeleteActivity">' + '<i class="fa fa-times fa fa-white">' + '</i>' + '</a>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>'
+                    }),
+                        $("#activityInfo").html(html); //将拼接好的html显示在指定的id上
+
+                    //拼接分页的页码和数据，将id设置为当前的value值，目的是为了根据id将其页码标签的class设置active;每个标签的onclick都为同一个方法，目的是精简高效使用代码
+                    $("#page").empty();
+                    html1 += '<div class="row"  name="page">'+
+                        '<div id="show_page_nav" class="col-md-4" style="margin-left: 15px">'+
+                        '<ul  class="pagination pagination-green margin-bottom-10">'+
+                        '<li   id="'+pageInfo.prePage+'" onclick="pageShow(this)" value="'+pageInfo.prePage+'">'+
+                        '<a   style="margin-right: 4px"  href="#"><i class="fa fa-chevron-left">'+'</i>'+'</a>'+'</li>'+
+                        '</ul>'
+
+                        $.each(pageInfo.navigatepageNums, function (index) {
+                            html1+='<ul  class="pagination pagination-green margin-bottom-10" >'+
+                                '<li id="'+pageInfo.navigatepageNums[index]+'" value="'+pageInfo.navigatepageNums[index]+'"  text="'+pageInfo.navigatepageNums[index]+'" onclick="pageShow(this)">'+
+                            '<a href="#"  value="'+pageInfo.navigatepageNums[index]+'" style="margin-right: 4px"> '+pageInfo.navigatepageNums[index]+'</a>'+
+                            '</li>'+
+                            '</ul>'
+                        }),
+
+                    html1 += '<ul  class="pagination pagination-green margin-bottom-10">' +
+                        '<li id="'+pageInfo.nextPage+'" onclick="pageShow(this)" value="'+pageInfo.nextPage+'" >'+
+                        '<a href="#"><i class="fa fa-chevron-right">' + '</i>' + '</a>' +
+                        '</li>'+
+                        '</ul>'+
+                        '</div>'+
+                        '<div id="show_page_info" class="col-md-4 col-md-offset-1">'+
+                        '<span>当前第'+pageInfo.pageNum+'页</span>'+
+                        '<span>总共'+pageInfo.pages +'页</span>'+
+                        '<span>总共'+pageInfo.total+'条记录</span>'+
+                        '</div>'+
+                        '</div>'
+                    $("#page").html(html1);
+                    //当到了最后一页时，如果点击下一页，页码pageNum会为0,但实际情况是pageHelper插件会当到了最后一页时，再点击下一页，会显示第一页的数据
+                    if(pageId!=0){
+                        document.getElementById(pageId).className="active"
+                    }else {
+                        document.getElementById(1).className="active"
+                    }
+                },
+            }
+        );
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bishe.dao.StudentMessageDao">
+    <insert id="addAMessageToStudent" parameterType="com.bishe.pojo.StudentMessage">
+        insert INTO student_message (stud_message_id,stud_id,message_id,stud_message_status,stud_message_create_time,stud_message_comment) VALUES (#{studMessageId},#{studId},#{messageId},#{studMessageStatus},#{studMessageCreateTime},#{studMessageComment})
+    </insert>
+
+
+    <select id="selectAllUnreadMessageByStudId" parameterType="java.lang.String" resultType="com.bishe.pojo.StudentMessage">
+        SELECT * FROM student_message WHERE  stud_id=#{studId} AND stud_message_status=0;
+    </select>
+
+
+
+    <select id="selectAllMessageByStudId" parameterType="java.lang.String" resultType="com.bishe.dto.StudentMessageResult">
+        SELECT t1.stud_message_id,t1.stud_message_create_time,t1.stud_message_comment,t3.acti_id,t3.acti_theme,t3.acti_theme_image FROM student_message AS t1
+        LEFT JOIN message as t2 ON t1.message_id=t2.message_id
+        LEFT JOIN activity as t3 ON  t2.message_acti_id=t3.acti_id
+        <where> stud_id=#{studId}  </where>  ORDER BY stud_message_create_time DESC ;
+    </select>
+
+    <update id="changeMessageStatusByStudId" parameterType="java.lang.String">
+        UPDATE student_message SET stud_message_status=1 WHERE stud_id=#{studId} AND stud_message_status=0;
+    </update>
+
+    <delete id="deleteMessageByMessageId">
+        DELETE FROM student_message WHERE stud_message_id=#{studMessageId};
+    </delete>
+
+    <select id="selectActivityByStudMessageId" resultType="com.bishe.pojo.Activity" parameterType="java.lang.String">
+        SELECT t3.acti_id,t3.acti_builder_id,t3.acti_level,t3.acti_theme,t3.acti_desc,t3.acti_address,t3.acti_extra_info,t3.acti_comment,
+         t3.acti_category_id,t3.acti_status_id,t3.acti_phone,t3.acti_theme_image,t3.acti_holder,t3.acti_end_time,t3.acti_start_time,
+         t3.acti_build_time,t3.acti_endroll_time,t3.acti_max_enroll,t3.acti_now_enroll,t3.acti_change_time ,t4.acti_status_name
+        FROM student_message as t1
+        LEFT JOIN message as t2  ON t1.message_id=t2.message_id
+        LEFT JOIN activity as t3 ON t2.message_acti_id=t3.acti_id
+        LEFT JOIN activity_status as t4 ON t3.acti_status_id=t4.acti_status_id WHERE t1.stud_message_id=#{studMessageId};
+
+    </select>
+
+
+</mapper>

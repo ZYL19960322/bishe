@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initical-scale=1"/>
+    <title>消息</title>
+    <link rel="stylesheet" href="front/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="front/css/style.css"/>
+    <script src="front/js/fontSize.js"></script>
+</head>
+<body>
+<header class="shead">消息</header>
+<div class="messagediv">
+    <div class="container mess-cont pb1" id="a">
+        <!-- 使用boot面板 panel panel-primary-->
+        <ul style="margin: 0;padding: 0;list-style: none" id="MyUl">
+            <li class="touch" style="margin: 0;padding: 0;list-style: none"
+                th:each="studentMessage:${studentMessageResultList}" th:id="${studentMessage.studMessageId}">
+                <div class="mess-item panel panel-primary">
+                    <div class="panel-heading ta-c" style="padding: 5px 10px" th:text="${studentMessage.actiTheme}">主题
+                    </div>
+                    <div class="panel-body"
+                         style="padding-bottom: 10px;padding-left: 10px;padding-right: 10px;padding-top: 2px">
+                        <p class="pb05" style="padding-bottom: 0.3rem"><span class="fl" style="height: 0.1rem;"
+                                                                             th:text="${studentMessage.studMessageComment}">您申请发布的活动已经通过了审核</span>
+                            <time class="fr" style="height: 0.1rem" th:text="${studentMessage.studMessageCreateTime}">
+                                01/02 13:45
+                            </time>
+                        </p>
+                        <div class="mess-img"><img src="front/img/25.jpg" alt="" class="img" style="height: 3.5rem"
+                                                   th:src="${studentMessage.actiThemeImage}"/></div>
+                    </div>
+                    <div class="panel-footer" style="padding: 5px 10px"><a href="">查看详情</a></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<footer class="sfooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3">
+                <a th:href="@{/toIndexPage}">
+                    <span class="glyphicon glyphicon-home"></span>
+                    <span class="">首页</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a th:href="@{/toPublishPage}">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    <span class="">发布</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a th:href="@{/toMessagePage}" class="active">
+                    <span class="glyphicon glyphicon-bell"></span>
+                    <span class="messagespan1" id="msg"></span>
+                    <span class="">消息</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a th:href="@{/toUserPage}">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span class="">我的</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="front/js/jquery-3.3.1.min.js"></script>
+<script src="front/js/bootstrap.min.js"></script>
+<script src="layer/layer.js"></script>
+<script>
+    var timeOutEvent = 0;
+    $(function () {
+        var liarr = document.getElementById("MyUl").getElementsByTagName("li");
+        var timeOutEvent = 0;
+        $.each(liarr, function (index) {
+                actiId = liarr[index].id;
+                //这是基础，
+                $("#" + actiId).on({
+                    touchstart: function (e) {
+                        messageId = this.id
+                        timeOutEvent = setTimeout("longPress(messageId)", 500);
+
+                        e.preventDefault();
+                    },
+                    touchmove: function () {
+                        clearTimeout(timeOutEvent);
+                        timeOutEvent = 0;
+                    },
+                    touchend: function () {
+                        clearTimeout(timeOutEvent);
+                        if (timeOutEvent != 0) {
+                            window.location.href = ("/selectActivityByStudMessageId?studMessageId=") + messageId;
+                        }
+                        return false;
+                    }
+                })
+            }
+        )
+    });
+    function longPress(messageId) {
+        timeOutEvent = 0;
+        alert("这是执行删除操作，请谨慎");
+        console.log(messageId);
+        layer.confirm('你确定删除消息吗？', {
+            title: false,
+            btn: ['是的', '取消'] //按钮
+        }, function () {
+            $.ajax({
+                url: "/deleteMessageByMessageId",
+                type: 'POST',
+                data: {studMessageId: messageId},
+                dataType: 'json',
+                cathe: false,
+                success: function (result) {
+                    if (result == true) {
+                        layer.msg('删除消息成功', {icon: 1, time: 500});
+                        window.location.reload();
+                    }
+                    if (result == false) {
+                        layer.msg('删除消息失败');
+                    }
+                },
+                error: function (data) {
+                    layer.msg('删除消息出错');
+                }
+            })
+        });
+    }
+</script>
+<script type="text/javascript">
+    var websocket = null;
+    //判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+        //这个url只能是window.location.host不能是localhost：8080或127.0.0.1:8080,详细原因参看https://blog.csdn.net/csu_passer/article/details/78536060(超级大坑)
+        var host = window.location.host;
+        websocket = new WebSocket("ws://" + host + "/student/webSocket");
+    }
+    else {
+        alert("对不起！你的浏览器不支持webSocket")
+    }
+    //连接发生错误的回调方法
+    websocket.onerror = function () {
+        setMessageInnerHTML();
+    };
+    //连接成功建立的回调方法
+    websocket.onopen = function (event) {
+        // setMessageInnerHTML(event.data);
+    };
+    //接收到消息的回调方法
+    websocket.onmessage = function (event) {
+        setMessageInnerHTML(event.data);
+    };
+    //连接关闭的回调方法
+    websocket.onclose = function () {
+        setMessageInnerHTML();
+    };
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，
+    // 防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function () {
+        var is = confirm("确定关闭窗口？");
+        if (is) {
+            websocket.close();
+        }
+    };
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+        $("#msg").text(innerHTML)
+    };
+    //关闭连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+    //发送消息
+    function send() {
+        var message = $("#text").val();
+        websocket.send(message);
+        $("#text").val("");
+    }
+</script>
+</body>
+
+</html>
